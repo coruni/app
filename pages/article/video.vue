@@ -707,7 +707,7 @@
 						this.upload(res.tempFilePaths);
 					}
 				})
-			
+
 			},
 			upload(files) {
 				const processedFiles = files.map((item, index) => ({

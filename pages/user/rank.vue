@@ -24,7 +24,8 @@
 						<i class="mgc_lock_fill"
 							style="position: absolute;bottom: 0;right: 0;color: white;padding: 10rpx;"></i>
 					</view>
-					<view class="equie" v-if="$store.state.userInfo.opt.rank.id == item.id">
+					<view class="equie"
+						v-if="$store.state.userInfo.opt&& $store.state.userInfo.opt.rank && $store.state.userInfo.opt.rank.id == item.id">
 						<text>佩戴中</text>
 					</view>
 				</u-grid-item>
