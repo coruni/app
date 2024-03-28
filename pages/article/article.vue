@@ -542,9 +542,14 @@
 					uni.$u.toast('至多可添加6张图片')
 					return;
 				}
-				this.upload(res.tempFilePaths);
+				uni.chooseImage({
+					success: (res) => {
+						this.upload(res.tempFilePaths);
+					}
+				})
+
 			},
-			upload(filePath) {
+			upload(files) {
 				const processedFiles = files.map((item, index) => ({
 					name: `file${index+1}`,
 					uri: item // 文件路径

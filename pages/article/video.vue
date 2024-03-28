@@ -697,6 +697,48 @@
 					}
 				})
 			},
+			async chooseImage() {
+				if (this.images.length >= 6) {
+					uni.$u.toast('至多可添加6张图片')
+					return;
+				}
+				uni.chooseImage({
+					success: (res) => {
+						this.upload(res.tempFilePaths);
+					}
+				})
+			
+			},
+			upload(files) {
+				const processedFiles = files.map((item, index) => ({
+					name: `file${index+1}`,
+					uri: item // 文件路径
+				}));
+				this.$http.upload('/upload/full', {
+					files: processedFiles,
+					getTask: (task) => {
+						task.onProgressUpdate((res) => {
+							this.percentage = res.progress
+						})
+					}
+				}).then(res => {
+					if (res.data.code == 200) {
+						const data = res.data.data;
+						if (data.hasOwnProperty('urls')) {
+							this.images = data.urls
+						} else {
+							this.images.push(data.url)
+						}
+						this.$refs.upload.close()
+					} else {
+						this.uploadErr.status = true
+						this.uploadErr.msg = res.data.msg
+					}
+				}).catch(err => {
+					this.uploadErr.status = true
+					this.uploadErr.msg = '网络错误'
+				})
+			},
 			back() {
 				if (this.play.fullscreen) this.$refs.video.switchFullscreen()
 				else this.$Router.back()
