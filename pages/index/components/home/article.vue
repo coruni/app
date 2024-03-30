@@ -12,7 +12,7 @@
 			<u-gap height="6" bg-color="#f7f7f7" class="article-gap"></u-gap>
 		</block>
 		<!-- 底部占位高度-->
-		<template #bottom style="opacity: 0;">
+		<template #bottom style="background:transparent;">
 			<view style="background: transparent !important;height: 80rpx;"></view>
 		</template>
 	</z-paging>

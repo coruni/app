@@ -5,7 +5,7 @@
 				mode="aspectFill"></image>
 			<view class="photo-content-num">
 				<i class="mgc_photo_album_line" style="color: white;"></i>
-				<text style="font-size: 24rpx;">{{data.images.length}}</text>
+				<text style="font-size: 24rpx;">{{data.images_size}}</text>
 			</view>
 		</view>
 		<view class="photo-content-title">

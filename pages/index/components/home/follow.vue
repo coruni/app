@@ -12,15 +12,16 @@
 				</view>
 				<u-gap height="6" bg-color="#f7f7f7" class="article-gap"></u-gap>
 			</block>
-			<template #bottom>
-				<view class="tabbar-placeholder"></view>
+			<template #bottom style="background:transparent;">
+				<view style="background: transparent !important;height: 80rpx;"></view>
 			</template>
 		</z-paging>
 		<view v-else style="width: 100%; display: flex; align-items: center;justify-content: center;flex: 1;">
 			<text>你还没有登录哦</text>
 		</view>
+
 	</view>
-	
+
 </template>
 
 <script>

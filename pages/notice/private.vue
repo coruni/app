@@ -1,6 +1,5 @@
 <template>
-	<z-paging ref="paging" @query="getData" v-model="messages" use-chat-record-mode auto-hide-keyboard-when-chat
-		use-page-scroll>
+	<z-paging ref="paging" @query="getData" v-model="messages" use-chat-record-mode auto-hide-keyboard-when-chat>
 		<template #top>
 			<u-navbar placeholder autoBack :title="nickname">
 				<view slot="left">
@@ -8,8 +7,7 @@
 				</view>
 			</u-navbar>
 		</template>
-		<view style="margin: 30rpx;"
-			:style="{transform: `translateY(${keyboardHeight+'px'})`,transition:'transform 0.3s ease'}">
+		<view style="margin: 30rpx;">
 			<block v-for="(item,index) in messages" :key="index">
 				<u-row v-if="item.sender_id != userInfo.uid" align="top"
 					style="margin-bottom: 20rpx;transform: scaleY(-1)">
@@ -68,20 +66,19 @@
 				this.$refs.paging.doChatRecordLoadMore()
 			}
 		},
-		onReady() {
+		async onLoad(params) {
 			uni.onKeyboardHeightChange((data) => {
 				this.keyboardHeight = data.height
 			})
-		},
-		created() {
-			let SystemInfo = uni.getSystemInfoSync()
-			this.windowHeight = SystemInfo.windowHeight - SystemInfo.statusBarHeight
-		},
-		onLoad(params) {
 			if (params.id != null) this.id = params.id;
 			if (params.receiver_id != null) this.receiver_id = params.receiver_id;
+			if (!this.id) {
+				this.id = await this.getChatId();
+				this.$refs.paging.reload()
+			}
 			this.nickname = params.nickname
-
+			let SystemInfo = uni.getSystemInfoSync()
+			this.windowHeight = SystemInfo.windowHeight - SystemInfo.statusBarHeight
 		},
 		onUnload() {
 			uni.offKeyboardHeightChange()
@@ -108,22 +105,19 @@
 			},
 
 			getData(page, limit) {
-				this.getChatId().then(chatId => {
-					this.$http.post('/chat/chatRecord', {
+				this.$http.get('/chat/chatRecord', {
+					params: {
 						page,
-						limit: 30,
-						id: chatId,
+						limit: 20,
+						id: this.id,
 						type: 0,
-						order: 'created asc'
-					}).then(res => {
-						
-						if (res.data.code === 200) {
-							this.$refs.paging.complete(res.data.data.data);
-						}
-					}).catch(err => {
+						order: 'created desc'
+					}
 
-						this.$refs.paging.complete(false);
-					});
+				}).then(res => {
+					if (res.data.code === 200) {
+						this.$refs.paging.complete(res.data.data.data);
+					}
 				}).catch(err => {
 
 					this.$refs.paging.complete(false);

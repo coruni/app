@@ -20,18 +20,17 @@
 
 		<!-- 视频布局 -->
 		<view v-if="data.type=='video'" class="video">
-			<u-image :src="data.images[0]" mode="aspectFill" radius="5" width="100%" height="200"
-				bgColor="#f7f7f7"></u-image>
+			<image :src="data.images[0]" mode="aspectFill" style="border-radius: 10rpx;width: 100%;height: 400rpx;"></image>
 			<i class="mgc_play_circle_fill video-icon"></i>
 		</view>
 		<!-- 一张图片 -->
-		<view v-if="data.images.length == 1&&data.type!='video'">
+		<view v-if="data.images_size == 1&&data.type!='video'">
 			<image :src="data.images[0]" mode="heightFix"
 				style="max-width: 680rpx; max-height: 400rpx;border-radius: 10rpx;background-color: #f7f7f7;"
 				@tap.stop.prevent="picPreview(data.images,0)"></image>
 		</view>
 		<!-- 两张图片 -->
-		<view v-if="data.images.length==2&&data.type!='video'">
+		<view v-if="data.images_size==2&&data.type!='video'">
 			<u-row justify="space-between">
 				<u-col :span="5.92">
 					<image mode="aspectFill" style="width: 100%;height: 300rpx;border-radius: 10rpx 0 0 10rpx;"

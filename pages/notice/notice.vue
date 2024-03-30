@@ -98,7 +98,7 @@
 					query: {
 						id: data.id,
 						receiver_id: data.userInfo.uid,
-						nickname: data.userInfo.screenName ? data.userInfo.screenName : data.userInfo.name
+						nickname: data.userInfo.screenName ? data.userInfo.screenName : data.userInfo.name,
 					}
 				})
 			},

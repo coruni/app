@@ -435,10 +435,6 @@
 					{
 						name: '插入链接',
 						type: 'link'
-					},
-					{
-						name: '插入隐藏内容',
-						type: 'hide'
 					}
 
 				],
