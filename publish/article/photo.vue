@@ -16,8 +16,7 @@
 			<editor id="editor" :adjust-position="false" placeholder="请上传图片" style="padding: 30rpx;height: 100%;"
 				@ready="onEditorReady"></editor>
 			<!-- 工具栏 -->
-			<view style="padding: 30rpx;flex-shrink: 0;transition: all 0.3s ease;"
-				:style="{transform:`translateY(${-keyboardHeight}px)`}" id="toolbar">
+			<view class="toolbar" :style="{transform:`translateY(${-keyboardHeight}px)`}" id="toolbar">
 				<u-row style="font-size: 30rpx;" @click="showCategory = true">
 					<text>选择分类：{{article.category.name}}</text>
 					<i class="mgc_right_line"></i>
@@ -448,6 +447,9 @@
 			border-radius: 20rpx;
 			padding: 30rpx;
 		}
+		.toolbar{
+			background-color: #292929 !important;
+		}
 
 		.category {
 			background: #525252 !important;
@@ -502,6 +504,13 @@
 		padding: 15rpx !important;
 		border-radius: 10rpx;
 		background: #f7f7f7;
+	}
+
+	.toolbar {
+		padding: 30rpx;
+		flex-shrink: 0;
+		transition: all 0.3s ease;
+		background: #fff;
 	}
 
 	.toolbar-button {

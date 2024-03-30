@@ -59,11 +59,12 @@
 				<u-row justify="space-between">
 					<u-row justify="space-between" customStyle="flex:1">
 						<i class="ess mgc_photo_album_fill toolbar-button" @click="chooseImage()"></i>
+						<i class="ess mgc_play_fill toolbar-button" @click="chooseVideo()"></i>
 						<i class="ess mgc_emoji_fill toolbar-button" :class="{'button-color':itemName=='emoji'}"
 							@click="showItem('emoji')"></i>
 						<i class="ess mgc_palette_fill toolbar-button" :class="{'button-color':itemName=='format'}"
 							@click="showItem('format')"></i>
-						<i class="ess mgc_play_fill toolbar-button" @click="chooseVideo()"></i>
+
 						<i class="ess mgc_folder_3_fill toolbar-button" :class="{'button-color':itemName=='more'}"
 							@click="showItem('more')"></i>
 						<i class="ess mgc_add_fill toolbar-button" @click="showAddMore= true"></i>
@@ -75,7 +76,7 @@
 			</view>
 			<view v-if="showPanel" :style="{height:panelHeight+'px'}" :class="{'showPanel':showPanel}">
 				<!-- 表情 -->
-				<view v-show="itemName =='emoji'" style="height: 100%;">
+				<view v-show="itemName =='emoji'">
 					<block v-for="(one,oneIndex) in emojiData" :key="oneIndex">
 						<swiper :style="{height:panelHeight-30+'px'}" v-show="emojiIndex == oneIndex">
 							<swiper-item v-for="(two,twoIndex) in one.list" :key="twoIndex">
@@ -94,22 +95,29 @@
 						style="position: static;"></u-tabs>
 				</view>
 				<!-- 颜色 -->
-				<view v-show="itemName=='format'" style="height: 100%;">
-					<u-row justify="space-between">
-						<u-row justify="start" v-for="(color,index) in format.color" :key="index"
-							customStyle="flex-direction:column">
-							<text :style="{background:color,padding:25+'rpx',borderRadius:50+'rpx'}"
-								@click="formatTool('color',color)"></text>
-							<u-icon name="arrow-up-fill" color="#999"
-								v-if="formatStatus && formatStatus.color&&formatStatus.color.toLowerCase() == color"></u-icon>
-						</u-row>
+				<view v-show="itemName=='format'">
+					<u-row justify="space-between" style="margin-top: 40rpx;">
+						<view v-for="(color,index) in format.color" :key="index" :style="{background:color}"
+							class="color" :class="{'mgc_ice_cream_2_line':formatStatus&& formatStatus.color==color}"
+							@click="formatTool('color',color)">
+						</view>
 					</u-row>
-					<u-row customStyle="padding-top:40rpx" justify="space-between">
-						<text v-for="(method,index) in format.method" :key="index"
-							@click="formatTool(method.tool)">{{method.name}}</text>
-						<text @click="editorCtx.removeFormat()">清除选区</text>
-						<text @click="editorCtx.undo()">撤销</text>
+					<u-row style="margin-top: 40rpx;" justify="space-between">
+						<view class="tool" v-for="(method,index) in format.method" :key="index"
+							@click="formatTool(method.tool)">
+							<i :class="method.icon" style="font-size: 45rpx;"></i>
+							<text style="font-size: 24rpx;margin-top: 20rpx;">{{method.name}}</text>
+						</view>
+						<view class="tool" @click="editorCtx.removeFormat()">
+							<i class="mgc_eraser_line" style="font-size: 45rpx;"></i>
+							<text style="font-size: 24rpx;margin-top: 20rpx;">清除选区</text>
+						</view>
+						<view class="tool" @click="editorCtx.undo()">
+							<i class="mgc_back_line" style="font-size: 45rpx;"></i>
+							<text style="font-size: 24rpx;margin-top: 20rpx;">撤销</text>
+						</view>
 					</u-row>
+
 				</view>
 
 				<!-- 更多 -->
@@ -353,13 +361,17 @@
 					color: ['#aa96da', '#5bd784', '#ffa600', '#0dd0f2', '#fb4f14', '#000000'],
 					method: [{
 						name: '粗体',
-						tool: 'bold'
+						tool: 'bold',
+						icon: 'mgc_bold_line'
 					}, {
 						name: '斜体',
-						tool: 'italic'
+						tool: 'italic',
+						icon: 'mgc_italic_line'
 					}, {
 						name: '下划线',
-						tool: 'underline'
+						tool: 'underline',
+						icon: 'mgc_underline_line'
+
 					}],
 					header: ['H3', 'H4']
 				},
@@ -423,6 +435,10 @@
 					{
 						name: '插入链接',
 						type: 'link'
+					},
+					{
+						name: '插入隐藏内容',
+						type: 'hide'
 					}
 
 				],
@@ -893,6 +909,7 @@
 			},
 			statuschange(event) {
 				this.formatStatus = event.detail
+				console.log(this.formatStatus)
 			},
 			addFile(index) {
 				if (this.article.opt.files.length < 2) {
@@ -1046,6 +1063,8 @@
 					case 'video':
 						this.showInsertVideo = true;
 						this.$refs.insertVideo.open();
+					case 'hide':
+						break;
 					default:
 						break;
 				}
@@ -1215,5 +1234,22 @@
 		padding: 10rpx;
 		background-color: #aa96da1e;
 		color: #aa96da;
+	}
+
+	.color {
+		height: 40rpx;
+		width: 40rpx;
+		border-radius: 50rpx;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.tool {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

@@ -460,7 +460,7 @@
 				}
 			},
 			checkUp() {
-				if (this.tasks.isSign) return;
+				if (this.$store.state.tasks.isSign) return;
 				this.$http.post('/user/sign').then(res => {
 					if (res.data.code == 200) {
 						uni.$u.toast(res.data.msg)
