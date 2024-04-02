@@ -109,13 +109,22 @@
 			},
 
 			swiperTap(index) {
-				uni.setStorageSync(`article_${this.$store.state.swiper[index].cid}`, this.$store.state.swiper[index])
-				this.$Router.push({
-					path: '/pages/article/article',
-					query: {
-						id: this.$store.state.swiper[index].cid
-					}
-				})
+				let swiper = this.$store.state.swiper[index]
+				if (!swiper.type) {
+					// #ifdef APP
+					plus.runtime.openURL(swiper.url)
+					// #endif
+					// #ifdef H5
+					window.open(swiper.url)
+					// #endif
+				} else {
+					this.$Router.push({
+						path: '/pages/article/article',
+						query: {
+							id: swiper.article_id
+						}
+					})
+				}
 			},
 			goArticle(data) {
 				let path

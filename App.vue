@@ -59,23 +59,15 @@
 				})
 			},
 			getSwiper() {
-				http.get('/article/articleList', {
+				http.get('/swiper/list', {
 					params: {
-						params:{
-							isswiper: 1
-						},
-						newArticle:1
+						page: 1,
+						limit: 10,
 					}
 				}).then(res => {
 					const data = res.data.data.data
-					let list = [];
-					data.forEach(item => {
-						item.image = item.images[0]
-						list.push({
-							...item
-						});
-					});
-					this.$store.commit('setSwiper', list)
+
+					this.$store.commit('setSwiper', data)
 				})
 			},
 			login() {
@@ -209,7 +201,6 @@
 </script>
 
 <style lang="scss">
-
 	@import 'animate.css';
 	@import "@/uni_modules/uview-ui/index.scss";
 	/*每个页面公共css */
@@ -218,16 +209,19 @@
 	/*引入基础图标*/
 	@import './static/font/ess/ess.css';
 
-	body,html {
+	body,
+	html {
 		font-family: 'HarmonyOS_Sans';
 		font-size: 32rpx;
 		line-height: 1.3;
 	}
+
 	@font-face {
 		font-family: 'HarmonyOS_Sans';
 		src: url('/static/font/HarmonyOS_Sans_SC_Regular.ttf');
-	
+
 	}
+
 	@media (prefers-color-scheme: dark) {
 
 		html,
