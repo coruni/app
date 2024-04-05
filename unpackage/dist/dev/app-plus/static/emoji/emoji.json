@@ -1,0 +1,36 @@
+{
+	"name": "表情列表",
+	"data": [{
+		"name": "猫蕾",
+		"slug": "Nyaru",
+		"base": "/static/emoji/nyaru/",
+		"format": "webp",
+		"list": {
+			"加油": "addoil",
+			"升天": "angel",
+			"玻璃挡": "block",
+			"哒咩": "damie",
+			"寄": "dead",
+			"无语": "eee",
+			"无语": "foo",
+			"正确": "good",
+			"牛b": "goodjob",
+			"晚安": "goodnight",
+			"探头": "head",
+			"流汗": "hehe",
+			"吃汉堡": "hunbger",
+			"冻结": "icer",
+			"喜欢": "like",
+			"失去高光": "loser",
+			"爱你": "love",
+			"亲亲": "mua",
+			"生气": "ponpon",
+			"问号": "question",
+			"是的哦": "sodayo",
+			"对不起": "sorry",
+			"谢谢": "thank",
+			"哈哈": "www",
+			"yeah": "yeah"
+		}
+	}]
+}

@@ -1,0 +1,99 @@
+@font-face {
+  font-family: "lv"; /* Project id 4231723 */
+  src: url('./static/font/level/iconfont.woff2?t=1701687245876') format('woff2'),
+       url('./static/font/level/iconfont.woff?t=1701687245876') format('woff'),
+       url('./static/font/level/iconfont.ttf?t=1701687245876') format('truetype');
+}
+
+.level {
+  font-family: "lv" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lv-1:before {
+  content: "\e691";
+}
+
+.icon-lv-2:before {
+  content: "\e692";
+}
+
+.icon-lv-3:before {
+  content: "\e693";
+}
+
+.icon-lv-4:before {
+  content: "\e694";
+}
+
+.icon-lv-5:before {
+  content: "\e695";
+}
+
+.icon-lv-6:before {
+  content: "\e696";
+}
+
+.icon-lv-7:before {
+  content: "\e697";
+}
+
+.icon-lv-8:before {
+  content: "\e698";
+}
+
+.icon-lv-9:before {
+  content: "\e699";
+}
+
+.icon-lv-11:before {
+  content: "\e69a";
+}
+
+.icon-lv-13:before {
+  content: "\e69b";
+}
+
+.icon-lv-12:before {
+  content: "\e69c";
+}
+
+.icon-lv-10:before {
+  content: "\e69d";
+}
+
+.icon-lv-14:before {
+  content: "\e69e";
+}
+
+.icon-lv-15:before {
+  content: "\e69f";
+}
+
+.icon-lv-16:before {
+  content: "\e6a0";
+}
+
+.icon-lv-17:before {
+  content: "\e6a1";
+}
+
+.icon-lv-18:before {
+  content: "\e6a2";
+}
+
+.icon-lv-19:before {
+  content: "\e6a3";
+}
+
+.icon-lv-20:before {
+  content: "\e6a4";
+}
+
+.icon-lv-0:before {
+  content: "\e6a5";
+}
+

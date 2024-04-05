@@ -11,12 +11,7 @@
 							@click="avatarTap()"></u-avatar>
 						<uv-search :showAction="false" placeholder="看你想看" :disabled="true" :animation="true"
 							@click="goSearch()"  class="search"></uv-search>
-						<view style="position: relative;top: 0;">
-							<i class="ess mgc_notification_line" style="margin-left:20rpx;font-size: 40rpx;"
-								@tap.stop="goNotice()"></i>
-							<i class="ess mgc_round_fill" v-if="$store.state.noticeNum.total"
-								style="position: absolute;top:0;right: 0;color: red;font-size: 18rpx;"></i>
-						</view>
+						
 					</u-row>
 				</view>
 			</u-navbar>

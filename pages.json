@@ -208,15 +208,6 @@
 				"enablePullDownRefresh": false
 			}
 		},
-
-		{
-			"path": "pages/notice/notice",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			},
-			"perm": "login"
-		},
 		{
 			"path": "pages/shop/addProduct",
 			"style": {

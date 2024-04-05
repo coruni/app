@@ -2,9 +2,9 @@
 	<z-paging-swiper>
 		<home @avatarTap="avatarTap()" v-show="tabbarIndex == 0" @edit="showMoreMenu = true;data=$event" ref="home">
 		</home>
-		<discovery v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex" @edit="showMoreMenu = true;data=$event">
-		</discovery>
-		<category v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex"></category>
+		<category v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex"></category>
+		<message v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex" @edit="showMoreMenu = true;data=$event">
+		</message>
 		<user v-show="tabbarIndex == 4" :index="4" :current="tabbarIndex" style="height: 100%;margin-bottom: 190rpx;">
 		</user>
 
@@ -24,8 +24,8 @@
 					<i class="mgc_add_line"></i>
 				</view>
 				<view class="content" :class="{'btn-active':tabbarIndex==3}" @tap.stop="tabbarIndex=3">
-					<i class="mgc_cube_line"></i>
-					<text>小圈</text>
+					<i class="mgc_message_2_line"></i>
+					<text>消息</text>
 				</view>
 				<view @tap.stop="tabbarIndex=4">
 					<u-avatar :src="$store.state.userInfo.avatar || null" size="30"></u-avatar>
@@ -139,6 +139,7 @@
 	} from '@/common/common.js';
 	import home from './components/home.vue';
 	import discovery from './components/discovery.vue';
+	import message from './components/message/message.vue'
 	import user from './components/user.vue';
 	import category from './components/category.vue';
 	export default {
@@ -147,6 +148,7 @@
 			user,
 			discovery,
 			category,
+			message
 		},
 		data() {
 			return {
@@ -365,6 +367,7 @@
 				}).then(res => {
 					if (res.data.code == 200) {
 						this.showDelete = false
+						this.showMoreMenu = false
 						uni.$u.toast(res.data.msg)
 						this.$refs.home.reload()
 					}
