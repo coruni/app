@@ -14,7 +14,7 @@
 				</view>
 
 			</view>
-			<u-button style="height: 60rpx;color: black;" color="#f7f7f7"  shape="square" @click="clear()">取消佩戴</u-button>
+			<u-button style="color: black;" color="#f7f7f7" shape="square" @click="clear()">取消佩戴</u-button>
 		</view>
 		<z-paging @query="getData" ref="paging" v-model="headPicture" :fixed="false" :refresher-enabled="false"
 			use-page-scroll>
@@ -30,46 +30,6 @@
 			</u-grid>
 			<view slot="loadingMoreNoMore"></view>
 		</z-paging>
-		<!-- 自定义头像框 -->
-		<u-popup mode="center" round="10" :show="showHeadUpload" @close="showHeadUpload = false">
-			<view style="padding: 30rpx;width: 500rpx;">
-				<view style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
-					<text>自定义头像框</text>
-					<view style="position: relative;margin: 50rpx 0;" @click="chooseHead()">
-						<u-avatar :src="userInfo.avatar" :size="85"></u-avatar>
-						<image :src="uploadHeadPic" class="avatar_head" mode="aspectFill"></image>
-					</view>
-					<view
-						style="margin-top: 20rpx;color: #999;font-size: 24rpx;display: flex;align-items:  flex-start;">
-						<u-icon name="question-circle" color="#999"></u-icon>
-						<text style="margin-left:10rpx;">头像框标准大小为318*318请勿使用其他规格的头像框，在上传之前请先预览头像框是否正常</text>
-					</view>
-				</view>
-				<view style="margin-top: 20rpx;">
-					<u-button color="#aa96da" shape="circle" @click="addHead()">确认上传</u-button>
-				</view>
-			</view>
-		</u-popup>
-		<!-- 我的头像框 -->
-		<u-popup round="10" :show="showMyHead" @close="showMyHead=false" :closeable="true">
-			<view style="padding: 30rpx;height: 60vh;">
-				<view style="margin-top: 20rpx;">
-					<text>我的头像框</text>
-				</view>
-				<z-paging :fixed="false" use-page-scroll ref="myhead" v-model="myHead" @query="getMyHead">
-					<u-grid col="4">
-						<u-grid-item v-for="(item,index) in myHead" :key="index"
-							customStyle="flex-wrap:wrap;height:180rpx;width:180rpx"
-							@click="$u.throttle(setHeadPicture(item),1000,true)">
-							<view style="position: relative;top: 0;margin:30rpx;padding-left: 10rpx">
-								<u-avatar :src="userInfo.avatar" size="55"></u-avatar>
-								<image :src="item.link" class="avatar_head" mode="aspectFit"></image>
-							</view>
-						</u-grid-item>
-					</u-grid>
-				</z-paging>
-			</view>
-		</u-popup>
 	</view>
 </template>
 

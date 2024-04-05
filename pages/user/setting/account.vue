@@ -45,9 +45,9 @@
 
 				<view style="margin-top: 20rpx;">
 					<u-row justify="space-between">
-						<u-button plain shape="square" style="height: 60rpx;margin-right: 20rpx;"
+						<u-button plain shape="circle" style="margin-right: 20rpx;"
 							@click="showChangePassword =false">取消</u-button>
-						<u-button color="#aa96da" shape="square" style="height: 60rpx;margin-left: 20rpx;"
+						<u-button color="#aa96da" shape="circle" style="margin-left: 20rpx;"
 							@click="savePassword()">确定</u-button>
 					</u-row>
 

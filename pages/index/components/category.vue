@@ -1,23 +1,22 @@
 <template>
-	<view class="page-container">
-		<!-- 状态栏占位 --> <!-- 搜索 -->
-		<u-navbar placeholder bgColor="transparent">
-			<view slot="left"></view>
-			<view slot="center" style="flex: 1;display: flex;padding: 10rpx 30rpx;">
-				<view style="flex: 1;">
-					<uv-search placeholder="搜索你感兴趣的圈子" :showAction="false" ></uv-search>
+	<z-paging-swiper>
+		<template #top>
+			<u-navbar placeholder>
+				<view slot="left"></view>
+				<view slot="center" style="flex: 1;display: flex;padding: 10rpx 30rpx;">
+					<view style="flex: 1;">
+						<uv-search placeholder="搜索你感兴趣的圈子" :showAction="false"></uv-search>
+					</view>
+					<u-row style="margin-left: 20rpx;font-size: 28rpx;">
+						<i class="mgc_add_line"></i>
+						<text>创建圈子</text>
+					</u-row>
 				</view>
-				<u-row style="margin-left: 20rpx;font-size: 28rpx;">
-					<i class="mgc_add_line"></i>
-					<text>创建圈子</text>
-				</u-row>
-			</view>
-		</u-navbar>
-		<u-sticky>
+			</u-navbar>
 			<view style="padding: 30rpx;padding-bottom: 10rpx;">
 				<text class="myPage">我的</text>
 			</view>
-		</u-sticky>
+		</template>
 		<u-gap height="6" class="article-gap" bgColor="#f7f7f7"></u-gap>
 		<!-- 我的关注 -->
 		<view style="padding: 20rpx 30rpx;min-height: 300rpx;display: flex;flex-direction: column;">
@@ -71,9 +70,57 @@
 					</u-col>
 				</block>
 			</u-row>
-
 		</view>
-	</view>
+		<u-gap bgColor="#f7f7f7" height="6" class="article-gap"></u-gap>
+		<view style="padding: 20rpx 30rpx;">
+			<text>热门帖子</text>
+			<uv-waterfall ref="waterfall" v-model="content" :add-time="10" :left-gap="leftGap" :rightGap="rightGap"
+				:column-gap="columnGap" @changeList="changeList">
+				<template v-slot:list1>
+					<!-- 为了磨平部分平台的BUG，必须套一层view -->
+					<view>
+						<view v-for="(item,index) in list1" :key="item.cid" :style="[imageStyle(item)]"
+							class="waterfall" @tap.stop="goArticle(item)">
+							<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
+								:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;">
+							</image>
+							<view style="margin: 10rpx;">
+								<text class="u-line-2">{{item.title}}</text>
+								<u-row style="margin-top: 10rpx;">
+									<u-avatar :src="item.authorInfo.avatar" :size="24"></u-avatar>
+									<text style="margin-left: 20rpx;font-size: 26rpx;"
+										class="u-line-1">{{item.authorInfo.screenName||item.authorInfo.name}}</text>
+								</u-row>
+							</view>
+						</view>
+					</view>
+				</template>
+				<template v-slot:list2>
+					<!-- 为了磨平部分平台的BUG，必须套一层view -->
+					<view>
+						<view v-for="(item,index) in list2" :key="item.cid" :style="[imageStyle(item)]"
+							class="waterfall" @tap.stop="goArticle(item)">
+							<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
+								:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;">
+							</image>
+							<view style="margin: 10rpx;">
+								<text class="u-line-2">{{item.title}}</text>
+								<u-row style="margin-top: 10rpx;">
+									<u-avatar :src="item.authorInfo.avatar" :size="24"></u-avatar>
+									<text style="margin-left: 20rpx;font-size: 26rpx;"
+										class="u-line-1">{{item.authorInfo.screenName||item.authorInfo.name}}</text>
+								</u-row>
+							</view>
+						</view>
+					</view>
+				</template>
+			</uv-waterfall>
+		</view>
+		<!-- 底部占位 -->
+		<template #bottom>
+			<view style="height: 80rpx;background: transparent;"></view>
+		</template>
+	</z-paging-swiper>
 
 </template>
 
@@ -96,11 +143,18 @@
 				statusBarHeight: statusHeight,
 				top: [],
 				categories: [],
-				tabHeight: 720,
 				swiperIndex: 0,
 				color: ['#aa96da', '#ff8800', '#FFCC00'],
 				tags: [],
-				follow: []
+				follow: [],
+				content: [],
+				list1: [],
+				list2: [],
+				leftGap: 6,
+				rightGap: 6,
+				columnGap: 6,
+				page: 1,
+				limit: 12,
 			}
 		},
 		computed: {
@@ -109,15 +163,26 @@
 			},
 			uniqueFollow2() {
 				return this.follow.filter((item, index) => index % 2 === 1);
+			},
+			imageStyle(item) {
+				return item => {
+					const v = uni.upx2px(750) - this.leftGap - this.rightGap - this.columnGap;
+					const w = v / 2;
+					const rate = w / item.w;
+					const h = rate * item.h;
+					return {
+						width: '100%',
+						height: h + 'px'
+					}
+				}
 			}
 		},
 		created() {
-			this.tabHeight = uni.getSystemInfoSync().windowHeight - 44 - 60
 			this.getData()
 			this.getFollowCategory()
 			this.getTop()
 			this.getTags()
-			this.$nextTick(() => {}, 1)
+			this.getArticle()
 
 		},
 		methods: {
@@ -132,6 +197,21 @@
 				}).then(res => {
 					if (res.data.code == 200) {
 						this.categories = res.data.data.data
+					}
+				})
+			},
+			getArticle() {
+				this.$http.get('/article/articleList', {
+					params: {
+						page: this.page,
+						limit: this.limit,
+						order: 'created desc,likes desc,views desc,replyTime desc'
+					}
+				}).then(res => {
+					if (res.data.code == 200) {
+						if (res.data.data.count > 0) {
+							this.content = this.content.concat(res.data.data.data)
+						}
 					}
 				})
 			},
@@ -218,16 +298,22 @@
 					}
 				})
 			},
+			changeList(e) {
+				this[e.name].push(e.value);
+			},
 		}
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.page-container {
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
+		overflow: scroll;
+	}
 
+	/deep/ .zp-swiper-super {
+		overflow: scroll;
 	}
 
 	.myPage {

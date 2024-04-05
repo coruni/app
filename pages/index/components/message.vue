@@ -4,7 +4,7 @@
 		<template #top>
 			<u-navbar placeholder title="消息通知" bgColor="transparent">
 				<view slot="left">
-					
+
 				</view>
 			</u-navbar>
 		</template>
@@ -74,7 +74,7 @@
 			}
 		},
 		created() {
-			if (this.$store.state.hasLogin) {}
+			if (!this.$store.state.hasLogin) return;
 			uni.$on('login', data => {
 				this.$refs.paging.reload()
 			})

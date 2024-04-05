@@ -10,15 +10,16 @@
 					<u-row>
 						<uv-search :showAction="false" v-model="search" actionText="搜索" :animation="true"
 							@search="searchTap = true"></uv-search>
-							<text @tap.stop="search?searchTap = true:null" style="margin-left: 30rpx;font-size: 30rpx;">搜索</text>
+						<text @tap.stop="search?searchTap = true:null"
+							style="margin-left: 30rpx;font-size: 30rpx;">搜索</text>
 					</u-row>
-					
+
 				</view>
 			</u-navbar>
 			<view v-if="searchTap">
 				<z-tabs ref="tabs" :list="tabs" :scrollCount="1" :current="tabsIndex" @change="tabsChange"
-					active-color="#aa96da" bar-animate-mode="worm" bgColor="transparent"
-					:active-style="{fontWeight:600}"></z-tabs>
+					bar-height="6" bar-width="20" active-color="#aa96da" inactive-color="#999"
+					bgColor="transparent"></z-tabs>
 
 			</view>
 		</template>

@@ -1,5 +1,6 @@
 <template>
 	<z-paging-swiper>
+		
 		<home @avatarTap="avatarTap()" v-show="tabbarIndex == 0" @edit="showMoreMenu = true;data=$event" ref="home">
 		</home>
 		<category v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex"></category>
@@ -139,7 +140,7 @@
 	} from '@/common/common.js';
 	import home from './components/home.vue';
 	import discovery from './components/discovery.vue';
-	import message from './components/message/message.vue'
+	import message from './components/message.vue'
 	import user from './components/user.vue';
 	import category from './components/category.vue';
 	export default {
