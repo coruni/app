@@ -10,8 +10,8 @@
 						<u-avatar :src="userInfo.avatar" size="30" customStyle="margin-right:20rpx"
 							@click="avatarTap()"></u-avatar>
 						<uv-search :showAction="false" placeholder="看你想看" :disabled="true" :animation="true"
-							@click="goSearch()"  class="search"></uv-search>
-						
+							@click="goSearch()" class="search"></uv-search>
+
 					</u-row>
 				</view>
 			</u-navbar>
@@ -28,8 +28,8 @@
 				<recommend @edit="$emit('edit',$event)"></recommend>
 			</swiper-item>
 			<swiper-item v-for="(page,pageIndex) in $store.state.homeTabs" :key="pageIndex" v-if="pageIndex>1">
-				<articleItem :mid="page.mid" v-if="!page.iswaterfall" :isSwiper="!pageIndex"
-					@edit="$emit('edit',$event)">
+				<articleItem :mid="page.mid" :swiper="pageIndex" :tabbar="topTabIndex" v-if="!page.iswaterfall"
+					@edit="$emit('edit',$event)" >
 				</articleItem>
 				<waterfallItem v-else :swiper="pageIndex" :mid="page.mid" :tabbar="topTabIndex" class="waterfall-home">
 				</waterfallItem>

@@ -11,34 +11,35 @@
 			<block v-for="(item,index) in messages" :key="index">
 				<u-row v-if="item.sender_id != userInfo.uid" align="top"
 					style="margin-bottom: 20rpx;transform: scaleY(-1)">
-					<u-avatar :src="item.userInfo.avatar"></u-avatar>
-					<view
-						style="background: #aa96da32;padding:10rpx;margin-left: 10rpx;border-radius: 20rpx;margin-top: 10rpx;">
+					<u-avatar :src="item.userInfo.avatar" size="35" @click="goProfile(item.sender_id)"></u-avatar>
+					<view class="message-left">
 						<uv-parse :tagStyle="{img:'border-radius:10px'}" :content="item.text"
 							style="word-wrap: normal;flex-wrap: wrap; word-break: break-all;"></uv-parse>
 					</view>
 				</u-row>
 				<u-row v-if="item.sender_id == userInfo.uid" justify="end" align="top"
 					style="margin-bottom: 20rpx;transform: scaleY(-1);">
-					<view
-						style="background: #aa96da32;padding:10rpx;margin-right: 10rpx;border-radius: 20rpx;margin-top: 10rpx;">
+					<view class="message-right">
 						<uv-parse :tagStyle="{img:'border-radius:10px'}" :content="item.text"
 							style="word-wrap: normal;flex-wrap: wrap; word-break: break-all;"></uv-parse>
 					</view>
-					<u-avatar :src="userInfo.avatar" />
+					<u-avatar :src="userInfo.avatar" size="35" />
 				</u-row>
 			</block>
 		</view>
 		<template #bottom>
-			<view style="padding: 30rpx;background: #fff;"
+			<view class="message-box"
 				:style="{transform: `translateY(${-keyboardHeight+'px'})`,transition:'transform 0.3s ease'}">
 				<u-row align="bottom">
-					<editor id="editor" @ready="onEditorReady" :adjust-position="false" :show-img-size="false"
-						:show-img-resize="false" :show-img-toolbar="false"
-						style="background: #aa96da32;height: auto;min-height: unset;max-height: 100px;border-radius: 20rpx;padding: 8rpx 16rpx;">
+					<editor id="editor" @ready="onEditorReady" placeholder="Typing something" :adjust-position="false"
+						:show-img-size="false" :show-img-resize="false" :show-img-toolbar="false">
 					</editor>
-					<u-button color="#aa96da" style="width: 140rpx;height: 60rpx;margin-left: 20rpx;" shape="circle"
-						@click="sendMessage()">发送</u-button>
+					<view style="margin-left: 20rpx;">
+						<u-button color="#aa96da" style="height: 60rpx;" @click="sendMessage()">
+							<i class="mgc_send_line" style="font-size: 40rpx;"></i>
+						</u-button>
+					</view>
+
 				</u-row>
 			</view>
 		</template>
@@ -59,6 +60,7 @@
 				editorCtx: null,
 				keyboardHeight: 0,
 				windowHeight: 0,
+				systemInfo: {}
 			}
 		},
 		onPageScroll(e) {
@@ -67,22 +69,21 @@
 			}
 		},
 		async onLoad(params) {
+			this.nickname = params.nickname
+			if (params.id != null) this.id = params.id;
+			if (params.receiver_id != null) this.receiver_id = params.receiver_id;
 			uni.onKeyboardHeightChange((data) => {
 				this.keyboardHeight = data.height
 			})
-			if (params.id != null) this.id = params.id;
-			if (params.receiver_id != null) this.receiver_id = params.receiver_id;
 			if (!this.id) {
 				this.id = await this.getChatId();
 				this.$refs.paging.reload()
 			}
-			this.nickname = params.nickname
-			let SystemInfo = uni.getSystemInfoSync()
-			this.windowHeight = SystemInfo.windowHeight - SystemInfo.statusBarHeight
+			this.systemInfo = uni.getSystemInfoSync()
+			if (this.systemInfo.theme == 'dark') plus.navigator.setStatusBarStyle('light')
+			this.windowHeight = this.systemInfo.windowHeight - this.systemInfo.statusBarHeight
 		},
-		onUnload() {
-			uni.offKeyboardHeightChange()
-		},
+
 		computed: {
 			...mapState(['userInfo'])
 		},
@@ -132,13 +133,14 @@
 							text: res.html
 						})
 						if (!res.text.length) return;
+						this.editorCtx.clear()
 						this.$http.post('/chat/sendMsg', {
 							id: this.id,
 							text: res.html
 						}).then(res => {
 							if (res.data.code == 200) {
 								// 清空编辑器消息
-								this.editorCtx.clear()
+								
 							}
 						})
 					}
@@ -164,14 +166,75 @@
 				}).exec()
 				// #endif
 			},
+			goProfile(id) {
+				this.$Router.push({
+					path: '/pages/profile/profile',
+					query: {
+						id
+					}
+				})
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	@media(prefers-color-scheme:dark) {
+
+		/deep/ .u-navbar__content,
+		.u-status-bar {
+			background-color: #292929 !important;
+		}
+
+		.message-left,
+		.message-right {
+			background-color: #525252 !important;
+		}
+
+		.message-box {
+			background-color: #191919 !important;
+		}
+
+	}
+
+	page {
+		background-color: #f7f7f7;
+	}
+
 	.ql-container ::v-deep .ql-blank::before {
 		min-height: 60rpx;
 		height: 60rpx;
 		font-style: normal;
+	}
+
+	#editor {
+		background: #f7f7f7;
+		height: auto;
+		min-height: unset;
+		max-height: 100px;
+		border-radius: 10rpx;
+		padding: 10rpx 20rpx;
+	}
+
+	.message-left {
+		background: $c-primary;
+		color: white;
+		min-width: 60rpx;
+		padding: 10rpx;
+		margin-left: 10rpx;
+		border-radius: 10rpx;
+	}
+
+	.message-right {
+		background: #fff;
+		padding: 10rpx;
+		margin-right: 10rpx;
+		border-radius: 10rpx;
+
+	}
+
+	.message-box {
+		padding: 30rpx;
+		background: #fff;
 	}
 </style>

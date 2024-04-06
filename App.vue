@@ -12,10 +12,11 @@
 		onLaunch: function() {
 			// #ifdef APP-PLUS
 			plus.nativeUI.setUIStyle('auto')
+			if (uni.getSystemInfoSync().theme == 'dark') plus.navigator.setStatusBarStyle("light");
 			// #endif
 			let token = uni.getStorageSync('token')
 			if (token) {
-				this.$store.commit('setToken', uni.getStorageSync('token'));
+				this.$store.commit('setToken', token);
 				this.$store.commit('setUser', uni.getStorageSync('user'));
 				this.$store.commit('loginStatus');
 				setTimeout(() => {

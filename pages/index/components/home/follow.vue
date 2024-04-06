@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<z-paging @query="getData" ref="paging" v-model="article"
-			:empty-view-error-text="!$store.state.hasLogin?'你还没有登录哦~':'还没有关注的人，快去关注吧~'" v-if="$store.state.hasLogin">
+		<z-paging @query="getData" ref="paging" v-model="article" v-if="$store.state.hasLogin">
 			<block v-for="(item,index) in article" :key="`${index}_${item.cid}`" v-if="article">
 				<view @tap.stop="goArticle(item)" class="article">
 					<article-header :data="item" @follow="$refs.paging.reload()"
@@ -19,7 +18,6 @@
 		<view v-else style="width: 100%; display: flex; align-items: center;justify-content: center;flex: 1;">
 			<text>你还没有登录哦</text>
 		</view>
-
 	</view>
 
 </template>
@@ -53,19 +51,16 @@
 
 			}
 		},
-		created() {
-			this.getRandomUser()
-		},
+		created() {},
 		methods: {
-
 			getData(page, limit) {
+				if (!this.$store.state.hasLogin) return;
 				let params = {
 					page,
 					limit,
 					order: 'likes desc,created desc,views desc',
 					random: 1
 				}
-
 				this.$http.get('/article/follow', {
 					params
 				}).then(res => {
@@ -111,12 +106,6 @@
 					}
 				})
 			},
-
-
-
-			reload() {
-				this.$refs.paging.reload()
-			},
 			goShare(data) {
 				console.log('getData')
 			},
@@ -143,7 +132,8 @@
 				this.$Router.push({
 					name: 'login'
 				})
-			}
+			},
+			
 		}
 	}
 </script>

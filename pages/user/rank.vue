@@ -1,21 +1,51 @@
 <template>
-	<view class="container">
-		<u-navbar title="头衔" placeholder autoBack bgColor="transparent">
-			<view slot="left">
-				<i class="ess mgc_left_line" style="font-size: 60rpx;"></i>
+	<z-paging @query="getData" v-model="ranks" ref="paging" :refresher-enabled="false">
+		<template #top>
+			<u-navbar title="头衔" placeholder autoBack bgColor="transparent">
+				<view slot="left">
+					<i class="ess mgc_left_line" style="font-size: 60rpx;"></i>
+				</view>
+			</u-navbar>
+
+			<view
+				style="display: flex;flex-direction: column;justify-content: center;align-items: center;height: 300rpx;">
+				<view v-if="$store.state.userInfo.opt&& $store.state.userInfo.opt.rank">
+					<view v-if="$store.state.userInfo.opt.rank.type">
+						<view class="rank-item-content">
+							<u-image :src="$store.state.userInfo.opt.rank.image" height="100%" width="100%"
+								mode="widthFix"></u-image>
+
+						</view>
+					</view>
+					<view v-else class="rank-item-content">
+						<view :style="{background: $store.state.userInfo.opt.rank.background}"
+							style="padding: 0 20rpx;border-radius: 10rpx;font-size: 24rpx;">
+							<text
+								:style="{color:$store.state.userInfo.opt.rank.color}">{{$store.state.userInfo.opt.rank.name}}</text>
+						</view>
+					</view>
+				</view>
+				<view v-else>
+					<text>尚未佩戴任何头衔</text>
+				</view>
+
 			</view>
-		</u-navbar>
+			<view style="padding: 20rpx 30rpx;">
+				<u-button style="color: black;" color="#f7f7f7" shape="square" @click="clear()">取消佩戴</u-button>
+			</view>
+		</template>
+
 		<view style="padding: 30rpx;">
 			<text style="font-size: 32rpx;">头衔列表</text>
 			<u-grid :col="4">
-				<u-grid-item v-for="(item,index) in ranks" :key="index" class="rank-item"
-					@click="($store.state.userInfo.rank || $store.state.userInfo.rank.includes(item.id))?setRank(item.id):$u.toast('你还没拥有该头衔')">
+				<u-grid-item v-for="(item,index) in ranks" :key="index" class="rank-item" @click="setRank(item.id)">
 					<view class="rank-item-content" v-if="item.type">
 						<u-image :src="item.image" height="100%" width="100%" mode="widthFix"></u-image>
 						<text style="margin-top: 20rpx;font-size: 28rpx;">{{item.name}}</text>
 					</view>
 					<view v-else class="rank-item-content">
-						<view :style="{background:item.background}" style="padding: 0 20rpx;border-radius: 10rpx;">
+						<view :style="{background:item.background}"
+							style="padding: 0 20rpx;border-radius: 10rpx;font-size: 24rpx;">
 							<text :style="{color:item.color}">{{item.name}}</text>
 						</view>
 					</view>
@@ -32,8 +62,7 @@
 
 			</u-grid>
 		</view>
-
-	</view>
+	</z-paging>
 
 </template>
 
@@ -61,7 +90,7 @@
 					}
 				}).then(res => {
 					if (res.data.code == 200) {
-						this.ranks = this.ranks.concat(res.data.data.data)
+						this.$refs.paging.complete(res.data.data.data)
 					}
 				})
 			},
@@ -69,11 +98,31 @@
 				this.$http.post('/rank/set', {
 					id
 				}).then(res => {
+					uni.$u.toast(res.data.msg)
+				})
+			},
+			clear() {
+				this.$http.post('/rank/clear').then(res => {
 					if (res.data.code == 200) {
-						uni.$u.toast(res.data.msg)
+						this.getUserInfo()
 					}
 				})
-			}
+			},
+			getUserInfo() {
+				if (!uni.getStorageSync('token')) return;
+				this.$http.get('/user/userInfo', {
+					params: {
+						id: this.$store.state.userInfo.uid,
+					}
+				}).then(res => {
+					if (res.data.code == 200) {
+						this.$store.commit('setUser', res.data.data)
+					}
+
+				}).catch(err => {
+					console.log(err)
+				})
+			},
 		}
 	}
 </script>

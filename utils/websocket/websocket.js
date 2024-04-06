@@ -23,13 +23,13 @@ class websocketUtil {
 		this.socketTask = uni.connectSocket({
 			url: this.url,
 			success:()=>{
-				console.log("正准备建立websocket中...");
+				// console.log("正准备建立websocket中...");
 				// 返回实例
 				return this.socketTask
 			},
 		});
 		this.socketTask.onOpen((res) => {
-			console.log("WebSocket连接正常！");
+			// console.log("WebSocket连接正常！");
 			clearTimeout(this.reconnectTimeOut)
 			clearTimeout(this.heartbeatInterval)
 			this.is_open_socket = true;

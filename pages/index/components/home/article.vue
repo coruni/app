@@ -1,5 +1,5 @@
 <template>
-	<z-paging ref="paging" v-model="content" @query="getData" :auto-scroll-to-top-when-reload="false"
+	<z-paging ref="paging" v-model="content" @query="getData" :auto="false" :auto-scroll-to-top-when-reload="false"
 		:auto-clean-list-when-reload="false" user-cache :cache-key="`Article_${mid}`">
 		<block v-for="(item,index) in content" :key="`${index}_${item.cid}`" v-if="content.length">
 			<view @tap.stop="goArticle(item)" class="article">
@@ -54,7 +54,18 @@
 			}
 		},
 		watch: {
-
+			tabbar: {
+				handler(index) {
+					if (index == this.swiper) {
+						if (!this.is_loaded) {
+							setTimeout(() => {
+								this.$refs.paging.reload()
+							}, 5)
+						}
+					}
+				},
+				immediate: true
+			}
 		},
 		data() {
 			return {
@@ -126,7 +137,8 @@
 			},
 			reload() {
 				this.$refs.paging.reload()
-			}
+			},
+
 		}
 	}
 </script>

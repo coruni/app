@@ -1,11 +1,8 @@
 <template>
 	<z-paging-swiper>
-		
-		<home @avatarTap="avatarTap()" v-show="tabbarIndex == 0" @edit="showMoreMenu = true;data=$event" ref="home">
-		</home>
+		<home v-show="tabbarIndex == 0" @avatarTap="avatarTap()" @edit="showMoreMenu = true;data=$event"></home>
 		<category v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex"></category>
-		<message v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex" @edit="showMoreMenu = true;data=$event">
-		</message>
+		<message v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex"></message>
 		<user v-show="tabbarIndex == 4" :index="4" :current="tabbarIndex" style="height: 100%;margin-bottom: 190rpx;">
 		</user>
 
@@ -24,7 +21,7 @@
 				<view class="content content-add" @click="showPublish = true">
 					<i class="mgc_add_line"></i>
 				</view>
-				<view class="content" :class="{'btn-active':tabbarIndex==3}" @tap.stop="tabbarIndex=3">
+				<view class="content" :class="{'btn-active':tabbarIndex==3}" @tap.stop="tabbarIndex = 3">
 					<i class="mgc_message_2_line"></i>
 					<text>消息</text>
 				</view>
@@ -304,6 +301,7 @@
 					name: path
 				})
 				this.$Router.$lockStatus = false
+				this.showPublish = false;
 			},
 			shareArticle(scene, data) {
 				let article = this.data
@@ -384,8 +382,8 @@
 		}
 
 		.content-add {
-			border-top: #191919 2rpx solid !important;
-			background: #292929 !important;
+			
+			background: #525252 !important;
 		}
 	}
 
@@ -398,19 +396,14 @@
 
 		&-add {
 			font-size: 60rpx;
-			background-color: #fff;
-			border-radius: 500rpx;
-			padding: 30rpx;
-			margin-bottom: 30rpx;
-			border-top: #f7f7f7 2rpx solid;
-
-			&:hover {
-				transform: translateY(-20rpx);
-			}
+			background-color: $c-primary;
+			border-radius: 10rpx;
+			padding: 0 25rpx;
 
 			&>i {
 				transition: 0.5s ease all;
 				transform-origin: 50% 50%;
+				color: white;
 
 				/* 设置旋转中心点为元素中心 */
 				&:hover {

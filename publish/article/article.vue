@@ -1140,6 +1140,12 @@
 
 
 <style lang="scss">
+	@media(prefers-color-scheme:dark) {
+		.category-item {
+			background-color: #525252 !important;
+		}
+	}
+
 	.ql-container ::v-deep .ql-blank::before {
 		font-style: normal;
 		color: #999;

@@ -1,0 +1,28 @@
+{
+  // 浅色模式
+  "light": {
+    "navBgColor": "#fff", // 导航栏背景色
+    "navTxtStyle": "black", // 导航栏文字颜色
+    "bgColor": "#f5f6f7", // 页面背景色
+    "bgTxtStyle": "light", // 下拉 loading 的样式，仅支持 dark/light
+    "bgColorTop": "#eeeeee", // 顶部窗口的背景色（bounce回弹区域）
+    "bgColorBottom": "#efefef", // 底部窗口的背景色（bounce回弹区域）
+    "tabFontColor": "#666666", // tabbar 上的文字默认颜色
+    "tabSelectedColor": "#FF9B35", // tabbar 上的文字选中颜色
+    "tabBgColor": "#ffffff", // tabbar 背景色
+    "tabBorderStyle": "white" // tabbar 上边框的颜色，可选值 black/white，也支持其他颜色值
+  },
+  // 深色模式
+  "dark": {
+    "navBgColor": "#292929", // 导航栏背景色
+    "navTxtStyle": "white", // 导航栏文字颜色
+    "bgColor": "#292929", // 页面背景色
+    "bgTxtStyle": "dark", // 下拉 loading 的样式，仅支持 dark/light
+    "bgColorTop": "#292929", // 顶部窗口的背景色（bounce回弹区域）
+    "bgColorBottom": "#292929", // 底部窗口的背景色（bounce回弹区域）
+    "tabFontColor": "#bbb", // tabbar 上的文字默认颜色
+    "tabSelectedColor": "#FF9B35", // tabbar 上的文字选中颜色
+    "tabBgColor": "#292929", // tabbar 背景色
+    "tabBorderStyle": "black" // tabbar 上边框的颜色，可选值 black/white，也支持其他颜色值
+   }
+}

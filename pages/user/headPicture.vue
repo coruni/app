@@ -97,9 +97,8 @@
 						id: this.userInfo.uid,
 					}
 				}).then(res => {
-					if (res.data.code) {
+					if (res.data.code == 200) {
 						this.$store.commit('setUser', res.data.data)
-						uni.$u.toast('头像框已更新')
 					}
 
 				}).catch(err => {

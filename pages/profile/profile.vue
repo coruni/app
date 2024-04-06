@@ -2,11 +2,12 @@
 	<view>
 		<z-paging ref="paging" refresher-only @onRefresh="onRefresh" @scroll="scroll">
 			<template #top>
-				<u-navbar :bgColor="`rgba(255,255,255,${opacity})`" id="navbar">
+				<u-navbar :bgColor="$u.colorToRgba(theme, opacity)" id="navbar">
 					<view slot="left">
 						<u-row>
 							<i class="ess mgc_left_line" style="font-size: 60rpx;"
-								:style="{color:opacity>0.4? 'black':'white'}" @click="$Router.back(1)"></i>
+								:style="{color: opacity >= 0.5 ? (theme === '#292929' ? '#fff' : 'black') : 'white'}"
+								@click="$Router.back()"></i>
 							<u-row customStyle="margin-left:20rpx" v-show="opacity>=1"
 								@click="$refs.paging.scrollToTop()">
 								<u-avatar :src="info.avatar" size="26"></u-avatar>
@@ -31,9 +32,8 @@
 					</image>
 				</view>
 
-				<u-row justify="space-between" align="top" customStyle="padding-top:20rpx">
+				<u-row justify="space-between" align="top" customStyle="padding-top:30rpx">
 					<view style="margin-top: 80rpx;">
-
 						<u-row>
 							<text style="font-Weight: bold;font-size: 34rpx;"
 								:class="{'vipname':info&& info.isVip}">{{info.screenName?info.screenName:info.name}}</text>
@@ -155,6 +155,7 @@
 				isfollow: false,
 				userData: {},
 				isScroll: false,
+				systemInfo: {},
 				tabs: [{
 						name: '帖子'
 					},
@@ -172,16 +173,15 @@
 				elementHeight: 0,
 				navbarHeight: 0,
 				sticky: 0,
+				theme: '#ffffff'
 			};
 		},
 		onLoad(params) {
 			this.id = params.id
 			this.getAuthor(this.$Route.query.id)
-			let system = uni.getSystemInfoSync()
-			this.sticky = system.statusBarHeight + 44
-		},
-		created() {
-
+			this.systemInfo = uni.getSystemInfoSync()
+			this.sticky = this.systemInfo.statusBarHeight + 44
+			if (this.systemInfo.theme == 'dark') this.theme = '#292929';
 		},
 		onReady() {
 			uni.createSelectorQuery().in(this).select('#profile').boundingClientRect(data => {
@@ -203,7 +203,7 @@
 			onRefresh() {
 				this.$refs.publish.reload()
 				// #ifdef APP
-				plus.navigator.setStatusBarStyle("dark");
+				if (uni.getSystemInfoSync().theme != 'dark') plus.navigator.setStatusBarStyle("dark");
 				// #endif
 
 				setTimeout(() => {
@@ -227,7 +227,7 @@
 				const scrollTop = data.detail.scrollTop;
 				this.opacity = scrollTop / 200;
 				// #ifdef APP
-				if (this.opacity > 0) {
+				if (this.opacity > 0 && this.systemInfo.theme != 'dark') {
 					plus.navigator.setStatusBarStyle("dark");
 				} else {
 					plus.navigator.setStatusBarStyle("light");
@@ -286,6 +286,13 @@
 </script>
 
 <style lang="scss">
+	@media(prefers-color-scheme:dark) {
+		.userPanel {
+			background-color: #292929 !important;
+			border-bottom: 1rpx solid #191919 !important;
+		}
+	}
+
 	.userMate {
 		display: flex;
 		flex-direction: column;

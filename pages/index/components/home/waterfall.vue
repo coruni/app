@@ -7,7 +7,7 @@
 			<template v-slot:list1>
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
-					<view v-for="(item,index) in list1" :key="item.cid" :style="[imageStyle(item)]" class="waterfall"
+					<view v-for="(item,index) in list1" :key="index" :style="[imageStyle(item)]" class="waterfall"
 						@tap.stop="goArticle(item)">
 						<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
 							:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;">
@@ -27,7 +27,7 @@
 			<template v-slot:list2>
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
-					<view v-for="(item,index) in list2" :key="item.cid" :style="[imageStyle(item)]" class="waterfall"
+					<view v-for="(item,index) in list2" :key="index" :style="[imageStyle(item)]" class="waterfall"
 						@tap.stop="goArticle(item)">
 						<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
 							:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;">
@@ -124,8 +124,8 @@
 							mid: this.mid || ''
 						},
 						random: 1,
-						order:'created desc'
-						
+						order: 'created desc'
+
 					}
 				}).then(res => {
 					if (res.data.code == 200) {

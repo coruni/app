@@ -42,7 +42,7 @@
 				</u-row>
 			</view>
 
-			<view style="margin-top: 0 30rpx;">
+			<view style="margin-top: 0 30rpx;" v-if="$store.state.hasLogin">
 				<block v-for="(item, index) in messages" :key="index">
 					<u-row align="top" @click="goPrivate(item)" style="padding: 20rpx 0;">
 						<u-avatar :src="item.userInfo.avatar"></u-avatar>
@@ -66,6 +66,27 @@
 
 <script>
 	export default {
+		props: {
+			index: {
+				type: [String, Number],
+				default: 0
+			},
+			current: {
+				type: [String, Number],
+				default: 0
+			}
+		},
+		watch: {
+			current: {
+				handler(index) {
+					if (index == this.index) {
+						this.$refs.paging.reload()
+					}
+				},
+				immediate: true,
+				deep: true
+			}
+		},
 		data() {
 			return {
 				messages: [],
@@ -113,6 +134,7 @@
 
 			},
 			getNoticeNum() {
+				if (!this.$store.state.hasLogin) return;
 				this.$http.get('/user/noticeNum', {}).then(res => {
 					if (res.data.code == 200) {
 						this.$store.commit('setNoticeNum', res.data.data)

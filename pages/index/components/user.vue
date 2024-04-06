@@ -234,7 +234,6 @@
 							this.onRefresh();
 						})
 					}
-
 				},
 				immediate: true
 			}

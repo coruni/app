@@ -41,15 +41,9 @@
 			<view style="margin: 30rpx;">
 				<block v-for="(item,index) in logs" :key="index">
 					<view class="task-panel">
-						<u-row justify="space-between" class="logItem" :class="[{'logItem-add':item.totalAmount>0},
-							{'logItem-reduce':item.totalAmount<0}]">
-							<view>
-								<text>{{item.subject}}</text>
-								<text style="margin-left: 20rpx;"
-									:style="{color:item.totalAmount>0?'red':'green'}">{{item.totalAmount>0?'+'+item.totalAmount:item.totalAmount}}</text>
-							</view>
-							<text style="color: #999;font-size: 28rpx;">{{$u.timeFormat(item.created,'mm-dd')}}</text>
-						</u-row>
+						<text>主题：{{item.subject}}</text>
+						<text>{{$store.state.currencyName||'积分'}}：{{item.totalAmount}}</text>
+						<text>时间：{{$u.timeFormat(item.created,'yyyy-mm-dd hh:MM:ss')}}</text>
 					</view>
 				</block>
 			</view>
@@ -451,10 +445,13 @@
 		font-size: 28rpx;
 		margin: 30rpx 0;
 		background: #fff;
-		border-radius: 20rpx;
+		border-radius: 10rpx;
+		color: #999;
 		padding: 30rpx;
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
+
+		box-shadow: 0 0 4rpx 0 #2929293c;
 	}
 
 	::v-deep .u-grid-item--hover-class {

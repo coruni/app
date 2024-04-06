@@ -1,214 +1,213 @@
 {
-    "name" : "不正常萝莉研究所",
-    "appid" : "__UNI__3F0725D",
-    "description" : "",
-    "versionName" : "1.7.5",
-    "versionCode" : 75,
-    "transformPx" : false,
-    /* 5+App特有相关 */
-    "app-plus" : {
-        "usingComponents" : true,
-        "nvueStyleCompiler" : "uni-app",
-        "compilerVersion" : 3,
-        "screenOrientation" : [ "portrait-primary", "landscape-primary" ],
-        "darkmode" : true,
-        "safearea" : {
-            //iOS平台的安全区域
-            "background" : "#ffffff",
-            "backgroundDark" : "#2f0508", // HX 3.1.19+支持
-            "bottom" : {
-                "offset" : "auto"
-            }
-        },
-        "statusbar" : {
-            "immersed" : true
-        },
-        "softinput" : {
-            "mode" : "adjustResize"
-        },
-        "splashscreen" : {
-            "alwaysShowBeforeRender" : false,
-            "waiting" : false,
-            "autoclose" : false,
-            "delay" : 0
-        },
-        "compatible" : {
-            "ignoreVersion" : true
-        },
-        /* 模块配置 */
-        "modules" : {
-            "Barcode" : {},
-            "Camera" : {},
-            "OAuth" : {},
-            "Payment" : {},
-            "VideoPlayer" : {},
-            "Share" : {},
-            "Geolocation" : {}
-        },
-        /* 应用发布信息 */
-        "distribute" : {
-            /* android打包配置 */
-            "android" : {
-                "permissions" : [
-                    "<uses-feature android:name=\"android.hardware.camera\"/>",
-                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
-                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ],
-                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ]
-            },
-            /* ios打包配置 */
-            "ios" : {
-                "dSYMs" : false,
-                "UIBackgroundModes" : "audio"
-            },
-            "apple" : {
-                "UIUserInterfaceStyle" : "Automatic", // 不推荐设置设置light或dark后，否则将无法跟随系统
-                "defaultTheme" : "auto" // HBuilderX 3.6.10及以上版本支持  
-            },
-            "google" : {
-                "defaultNightMode" : "auto"
-            },
-            /* SDK配置 */
-            "sdkConfigs" : {
-                "oauth" : {
-                    "qq" : {
-                        "appid" : "102098280",
-                        "UniversalLinks" : ""
-                    },
-                    "weixin" : {
-                        "appid" : "123123",
-                        "UniversalLinks" : ""
-                    }
-                },
-                "ad" : {},
-                "payment" : {
-                    "alipay" : {
-                        "__platform__" : [ "ios", "android" ]
-                    },
-                    "weixin" : {
-                        "__platform__" : [ "ios", "android" ],
-                        "appid" : "123123",
-                        "UniversalLinks" : ""
-                    }
-                },
-                "push" : {
-                    "unipush" : {}
-                },
-                "share" : {
-                    "qq" : {
-                        "appid" : "102098280",
-                        "UniversalLinks" : ""
-                    },
-                    "weixin" : {
-                        "appid" : "123123",
-                        "UniversalLinks" : ""
-                    }
-                },
-                "geolocation" : {
-                    "system" : {
-                        "__platform__" : [ "ios", "android" ]
-                    }
-                }
-            },
-            "icons" : {
-                "android" : {
-                    "hdpi" : "unpackage/res/icons/72x72.png",
-                    "xhdpi" : "unpackage/res/icons/96x96.png",
-                    "xxhdpi" : "unpackage/res/icons/144x144.png",
-                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
-                },
-                "ios" : {
-                    "appstore" : "unpackage/res/icons/1024x1024.png",
-                    "ipad" : {
-                        "app" : "unpackage/res/icons/76x76.png",
-                        "app@2x" : "unpackage/res/icons/152x152.png",
-                        "notification" : "unpackage/res/icons/20x20.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "proapp@2x" : "unpackage/res/icons/167x167.png",
-                        "settings" : "unpackage/res/icons/29x29.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "spotlight" : "unpackage/res/icons/40x40.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
-                    },
-                    "iphone" : {
-                        "app@2x" : "unpackage/res/icons/120x120.png",
-                        "app@3x" : "unpackage/res/icons/180x180.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "notification@3x" : "unpackage/res/icons/60x60.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "settings@3x" : "unpackage/res/icons/87x87.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
-                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
-                    }
-                }
-            },
-            "splashscreen" : {
-                "androidStyle" : "default",
-                "android" : {
-                    "xxhdpi" : "C:/Users/Amiya/Desktop/start.png",
-                    "xhdpi" : "C:/Users/Amiya/Desktop/start.png",
-                    "hdpi" : "C:/Users/Amiya/Desktop/start.png"
-                },
-                "useOriginalMsgbox" : false
-            }
-        },
-        "nvueCompiler" : "uni-app"
-    },
-    /* 快应用特有相关 */
-    "quickapp" : {},
-    /* 小程序特有相关 */
-    "mp-weixin" : {
-        "appid" : "",
-        "setting" : {
-            "urlCheck" : false
-        },
-        "usingComponents" : true
-    },
-    "mp-alipay" : {
-        "usingComponents" : true
-    },
-    "mp-baidu" : {
-        "usingComponents" : true
-    },
-    "mp-toutiao" : {
-        "usingComponents" : true
-    },
-    "uniStatistics" : {
-        "enable" : false
-    },
-    "vueVersion" : "2",
-    "h5" : {
-        "optimization" : {
-            "treeShaking" : {
-                "enable" : true
-            }
-        },
-        "router" : {
-            "base" : "./",
-            "mode" : "hash"
-        },
-        "devServer" : {
-            "https" : false,
-            "port" : ""
-        },
-        "title" : "不正常萝莉研究所"
-    }
+	"name": "不正常萝莉研究所",
+	"appid": "__UNI__3F0725D",
+	"description": "",
+	"versionName": "1.7.5",
+	"versionCode": 75,
+	"transformPx": false,
+	/* 5+App特有相关 */
+	"app-plus": {
+		"usingComponents": true,
+		"nvueStyleCompiler": "uni-app",
+		"compilerVersion": 3,
+		"screenOrientation": ["portrait-primary", "landscape-primary"],
+		"darkmode": true,
+		"safearea": {
+			//iOS平台的安全区域
+			"background": "#ffffff",
+			"backgroundDark": "#292929", // HX 3.1.19+支持
+			"bottom": {
+				"offset": "auto"
+			}
+		},
+		"statusbar": {
+			"immersed": true
+		},
+		"softinput": {
+			"mode": "adjustResize"
+		},
+		"splashscreen": {
+			"alwaysShowBeforeRender": false,
+			"waiting": false,
+			"autoclose": false,
+			"delay": 0
+		},
+		"compatible": {
+			"ignoreVersion": true
+		},
+		/* 模块配置 */
+		"modules": {
+			"Barcode": {},
+			"Camera": {},
+			"OAuth": {},
+			"Payment": {},
+			"VideoPlayer": {},
+			"Share": {},
+			"Geolocation": {}
+		},
+		/* 应用发布信息 */
+		"distribute": {
+			/* android打包配置 */
+			"android": {
+				"permissions": [
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+					"<uses-permission android:name=\"android.permission.INTERNET\"/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+				],
+				"abiFilters": ["armeabi-v7a", "arm64-v8a"]
+			},
+			/* ios打包配置 */
+			"ios": {
+				"dSYMs": false,
+				"UIBackgroundModes": "audio"
+			},
+			"apple": {
+				"UIUserInterfaceStyle": "Automatic", // 不推荐设置设置light或dark后，否则将无法跟随系统
+				"defaultTheme": "auto" // HBuilderX 3.6.10及以上版本支持  
+			},
+			"google": {
+				"defaultNightMode": "auto"
+			},
+			/* SDK配置 */
+			"sdkConfigs": {
+				"oauth": {
+					"qq": {
+						"appid": "102098280",
+						"UniversalLinks": ""
+					},
+					"weixin": {
+						"appid": "123123",
+						"UniversalLinks": ""
+					}
+				},
+				"ad": {},
+				"payment": {
+					"alipay": {
+						"__platform__": ["ios", "android"]
+					},
+					"weixin": {
+						"__platform__": ["ios", "android"],
+						"appid": "123123",
+						"UniversalLinks": ""
+					}
+				},
+				"push": {
+					"unipush": {}
+				},
+				"share": {
+					"qq": {
+						"appid": "102098280",
+						"UniversalLinks": ""
+					},
+					"weixin": {
+						"appid": "123123",
+						"UniversalLinks": ""
+					}
+				},
+				"geolocation": {
+					"system": {
+						"__platform__": ["ios", "android"]
+					}
+				}
+			},
+			"icons": {
+				"android": {
+					"hdpi": "unpackage/res/icons/72x72.png",
+					"xhdpi": "unpackage/res/icons/96x96.png",
+					"xxhdpi": "unpackage/res/icons/144x144.png",
+					"xxxhdpi": "unpackage/res/icons/192x192.png"
+				},
+				"ios": {
+					"appstore": "unpackage/res/icons/1024x1024.png",
+					"ipad": {
+						"app": "unpackage/res/icons/76x76.png",
+						"app@2x": "unpackage/res/icons/152x152.png",
+						"notification": "unpackage/res/icons/20x20.png",
+						"notification@2x": "unpackage/res/icons/40x40.png",
+						"proapp@2x": "unpackage/res/icons/167x167.png",
+						"settings": "unpackage/res/icons/29x29.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"spotlight": "unpackage/res/icons/40x40.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png"
+					},
+					"iphone": {
+						"app@2x": "unpackage/res/icons/120x120.png",
+						"app@3x": "unpackage/res/icons/180x180.png",
+						"notification@2x": "unpackage/res/icons/40x40.png",
+						"notification@3x": "unpackage/res/icons/60x60.png",
+						"settings@2x": "unpackage/res/icons/58x58.png",
+						"settings@3x": "unpackage/res/icons/87x87.png",
+						"spotlight@2x": "unpackage/res/icons/80x80.png",
+						"spotlight@3x": "unpackage/res/icons/120x120.png"
+					}
+				}
+			},
+			"splashscreen": {
+				"androidStyle": "default",
+				"android": {
+					"xxhdpi": "C:/Users/Amiya/Desktop/start.png",
+					"xhdpi": "C:/Users/Amiya/Desktop/start.png",
+					"hdpi": "C:/Users/Amiya/Desktop/start.png"
+				},
+				"useOriginalMsgbox": false
+			}
+		},
+		"nvueCompiler": "uni-app"
+	},
+	/* 快应用特有相关 */
+	"quickapp": {},
+	/* 小程序特有相关 */
+	"mp-weixin": {
+		"appid": "",
+		"setting": {
+			"urlCheck": false
+		},
+		"usingComponents": true
+	},
+	"mp-alipay": {
+		"usingComponents": true
+	},
+	"mp-baidu": {
+		"usingComponents": true
+	},
+	"mp-toutiao": {
+		"usingComponents": true
+	},
+	"uniStatistics": {
+		"enable": false
+	},
+	"vueVersion": "2",
+	"h5": {
+		"optimization": {
+			"treeShaking": {
+				"enable": true
+			}
+		},
+		"router": {
+			"base": "./",
+			"mode": "hash"
+		},
+		"devServer": {
+			"https": false,
+			"port": ""
+		},
+		"title": "不正常萝莉研究所"
+	}
 }
 /* 模块配置 */
-
