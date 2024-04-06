@@ -398,7 +398,7 @@
 			font-size: 60rpx;
 			background-color: $c-primary;
 			border-radius: 10rpx;
-			padding: 0 25rpx;
+			padding: 8rpx 25rpx;
 
 			&>i {
 				transition: 0.5s ease all;
