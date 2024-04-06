@@ -103,9 +103,9 @@
 			},
 			clear() {
 				this.$http.post('/rank/clear').then(res => {
-					if (res.data.code == 200) {
-						this.getUserInfo()
-					}
+
+					this.getUserInfo()
+					uni.$u.toast(res.data.msg)
 				})
 			},
 			getUserInfo() {
@@ -120,7 +120,7 @@
 					}
 
 				}).catch(err => {
-					console.log(err)
+
 				})
 			},
 		}
