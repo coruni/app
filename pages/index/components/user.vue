@@ -403,6 +403,7 @@
 				})
 			},
 			chooseBackImg() {
+				if (!this.$store.state.hasLogin) return;
 				uni.chooseImage({
 					count: 1,
 					sourceType: ['album'],
