@@ -1,6 +1,6 @@
 <template>
 	<z-paging @query="getData()" v-model="tags" ref="paging" :refresher-enabled="false">
-		<block v-for="(item,index) in tags">
+		<block v-for="(item,index) in tags" :key="index">
 			<view class="search-item">
 				<u-row>
 					<u--image :src="item.imgurl && item.imgurl?item.imgurl:'/static/login.jpg'" mode="aspectFill"

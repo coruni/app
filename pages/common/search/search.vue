@@ -34,7 +34,10 @@
 				</allArticle>
 			</swiper-item>
 			<swiper-item>
-				<tagItem></tagItem>
+				<tagItem :search="search"></tagItem>
+			</swiper-item>
+			<swiper-item>
+				<userItem :search="search"></userItem>
 			</swiper-item>
 		</swiper>
 	</z-paging-swiper>
@@ -43,10 +46,12 @@
 <script>
 	import allArticle from './components/all.vue'
 	import tagItem from './components/tag.vue'
+	import userItem from './components/user.vue'
 	export default {
 		components: {
 			allArticle,
-			tagItem
+			tagItem,
+			userItem
 		},
 		data() {
 			return {
