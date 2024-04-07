@@ -54,10 +54,9 @@
 					</block>
 					<view style="margin-top: 30rpx;">
 						<view class="moreComment">
-							<text>{{data.subComments && data.subComments.count}}条评论</text>
+							<text>{{data.subCommentCount}}条评论</text>
 							<i class="mgc_right_line"></i>
 						</view>
-
 					</view>
 				</view>
 				<u-gap height="6"></u-gap>
