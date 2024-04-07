@@ -84,15 +84,15 @@
 
 		</view>
 		<uv-waterfall ref="waterfall" v-model="content" :add-time="10" :left-gap="leftGap" :rightGap="rightGap"
-			:column-gap="columnGap" @changeList="changeList" v-if="index==current">
+			:column-gap="columnGap" @changeList="changeList">
 			<template v-slot:list1>
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
 					<view v-for="(item,index) in list1" :key="index" :style="[imageStyle(item)]" class="waterfall"
 						@tap.stop="goArticle(item)">
 						<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
-							:style="{width:item.width+'px'}"
-							style="border-radius: 10rpx 10rpx 0 0 ;max-height: 720rpx;">
+							:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;max-height: 720rpx;"
+							v-if="isMounted">
 						</image>
 						<view style="margin: 10rpx;">
 							<text class="u-line-2">{{item.title}}</text>
@@ -111,8 +111,8 @@
 					<view v-for="(item,index) in list2" :key="index" :style="[imageStyle(item)]" class="waterfall"
 						@tap.stop="goArticle(item)">
 						<image :src="item.images.length?item.images[0]:'/static/login.jpg'" mode="widthFix"
-							:style="{width:item.width+'px'}"
-							style="border-radius: 10rpx 10rpx 0 0 ;max-height: 720rpx;">
+							:style="{width:item.width+'px'}" style="border-radius: 10rpx 10rpx 0 0 ;max-height: 720rpx;"
+							v-if="isMounted">
 						</image>
 						<view style="margin: 10rpx;">
 							<text class="u-line-2">{{item.title}}</text>
@@ -148,6 +148,17 @@
 				default: 0
 			}
 		},
+		watch: {
+			current: {
+				handler(index) {
+					if (index == this.index) {
+						this.isMounted = true
+					}
+				},
+				immediate: true,
+				deep: true
+			}
+		},
 		data() {
 			return {
 				statusBarHeight: statusHeight,
@@ -165,6 +176,7 @@
 				columnGap: 6,
 				page: 1,
 				limit: 12,
+				isMounted: false
 			}
 		},
 		computed: {
@@ -214,9 +226,10 @@
 					params: {
 						page,
 						limit,
-						order: 'created desc,likes desc,views desc,replyTime desc'
+						order: 'likes desc,created desc,views desc,replyTime desc'
 					}
 				}).then(res => {
+					this.isMounted = true
 					if (res.data.code == 200) {
 						this.$refs.paging.complete(res.data.data.data)
 					}
