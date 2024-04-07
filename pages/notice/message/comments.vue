@@ -83,6 +83,10 @@
 			},
 			goArticle(data) {
 				console.log(data)
+				if (!data.hasOwnProperty('id') || data.id == 0) {
+					uni.$u.toast('帖子已被删除');
+					return;
+				}
 				let path
 				switch (data.type) {
 					case 'photo':

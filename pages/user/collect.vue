@@ -38,12 +38,12 @@
 		},
 		methods: {
 			getData(page, limit) {
-				this.$http.post('/article/markList', {
-					page,
-					limit,
-
+				this.$http.get('/article/markList', {
+					params: {
+						page,
+						limit,
+					}
 				}).then(res => {
-					
 					if (res.data.code == 200) {
 						this.$refs.paging.complete(res.data.data.data)
 					}
@@ -69,7 +69,7 @@
 					}
 				})
 			},
-			
+
 		}
 	}
 </script>

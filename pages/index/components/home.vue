@@ -22,14 +22,14 @@
 		<swiper style="height: 100%;" :current="topTabIndex" @transition="swiperTransition"
 			@animationfinish="swiperAnimationfinish">
 			<swiper-item>
-				<follow @edit="$emit('edit',$event)"></follow>
+				<follow @edit="$emit('edit',$event)" ref="home"></follow>
 			</swiper-item>
 			<swiper-item>
-				<recommend @edit="$emit('edit',$event)"></recommend>
+				<recommend @edit="$emit('edit',$event)" ref="home"></recommend>
 			</swiper-item>
 			<swiper-item v-for="(page,pageIndex) in $store.state.homeTabs" :key="pageIndex" v-if="pageIndex>1">
 				<articleItem :mid="page.mid" :swiper="pageIndex" :tabbar="topTabIndex" v-if="!page.iswaterfall"
-					@edit="$emit('edit',$event)" >
+					@edit="$emit('edit',$event)" ref="home">
 				</articleItem>
 				<waterfallItem v-else :swiper="pageIndex" :mid="page.mid" :tabbar="topTabIndex" class="waterfall-home">
 				</waterfallItem>
@@ -187,7 +187,7 @@
 				})
 			},
 			reload() {
-				this.$refs.article.reload()
+				this.$refs.home.reload()
 			}
 		}
 	}

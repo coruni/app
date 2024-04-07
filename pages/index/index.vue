@@ -1,6 +1,6 @@
 <template>
 	<z-paging-swiper>
-		<home v-show="tabbarIndex == 0" @avatarTap="avatarTap()" @edit="showMoreMenu = true;data=$event"></home>
+		<home v-show="tabbarIndex == 0" @avatarTap="avatarTap()" @edit="showMoreMenu = true;data=$event" ref="home"></home>
 		<category v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex"></category>
 		<message v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex"></message>
 		<user v-show="tabbarIndex == 4" :index="4" :current="tabbarIndex" style="height: 100%;margin-bottom: 190rpx;">
