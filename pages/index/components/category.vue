@@ -1,5 +1,5 @@
 <template>
-	<z-paging :refresher-enabled="false" @query="getArticle" v-model="content" ref="paging">
+	<z-paging :refresher-enabled="false" @query="getArticle" v-model="content" ref="paging" v-if="isMounted">
 		<template #top>
 			<u-navbar placeholder>
 				<view slot="left"></view>
@@ -13,7 +13,6 @@
 					</u-row>
 				</view>
 			</u-navbar>
-
 		</template>
 		<u-gap height="6" class="article-gap" bgColor="#f7f7f7"></u-gap>
 		<!-- 我的关注 -->

@@ -12,29 +12,29 @@
 				<view style="margin-top: 20rpx;">
 					<uv-parse :content="item.text" :showImgMenu="false" :preview-img="false"></uv-parse>
 				</view>
-		
+
 				<view v-if="item.images && item.images.length">
 					<u-album :urls="item.images"></u-album>
 				</view>
 				<view v-if="item.parentComment && item.parentComment.userInfo"
 					style="font-size: 28rpx;display: flex;align-items: center;color: #999;padding-left: 10rpx;border-left: 4rpx #99999932 solid;">
-					<text
-						style="flex-shrink: 0;">@{{item.parentComment.userInfo.screenName?item.parentComment.userInfo.screenName:item.parentComment.userInfo.name}}：</text>
-		
+					<text style="flex-shrink: 0;">
+						@{{item.parentComment.userInfo.screenName?item.parentComment.userInfo.screenName:item.parentComment.userInfo.name}}：
+					</text>
+
 					<uv-parse :content="item.parentComment.text" class="u-line-1"
 						style="white-space: nowrap;overflow: hidden;overflow-y: unset;"></uv-parse>
 				</view>
-		
-				<view style="background: #f9f9f9;border-radius: 20rpx;margin-top: 10rpx;"
-					@tap.stop="goArticle(item)">
+
+				<view style="background: #f9f9f9;border-radius: 20rpx;margin-top: 10rpx;" @tap.stop="goArticle(item)">
 					<u-row>
-						<image mode="aspectFill"
+						<image mode="aspectFill" :src="item.article.image"
 							style="height: 100rpx;width: 100rpx;background: #f7f7f7;border-radius: 20rpx 0 0 20rpx;">
 						</image>
 						<text style="margin-left: 20rpx;color: #999;">{{item.article.title}}</text>
 					</u-row>
 				</view>
-		
+
 				<view style="margin-top: 20rpx;color: #999;" v-if="item.article.category&&item.article.category">
 					<text>{{item.article.category.name}}</text>
 				</view>
@@ -90,8 +90,8 @@
 					}
 
 				}).then(res => {
-					
-					if (res.data.code==200) {
+
+					if (res.data.code == 200) {
 						this.$refs.paging.complete(res.data.data.data)
 					}
 				})

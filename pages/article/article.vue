@@ -214,18 +214,25 @@
 			</block>
 		</u-popup>
 		<u-popup :show="showReward" @close="showReward = false" mode="center" round="5"
-			customStyle="padding:30rpx;background-color: transparent;width:100vw;">
-			<view class="reward-container">
-				<view class="reward-container-coin">
-					<i class="mgc_coin_3_line"></i>
+			customStyle="padding:30rpx;background-color: transparent;width:500rpx;">
+			<u-row justify="space-around">
+				<view class="reward-container-coin" @click="reward(5)">
+					<i class="mgc_sparkles_fill"></i>
 					<text style="font-size: 28rpx;">5</text>
 				</view>
-				<view class="reward-container-coin">
-					<i class="mgc_coin_3_line"></i>
+				<view class="reward-container-coin" @click="reward(10)">
+					<i class="mgc_sparkles_2_fill"></i>
 					<text style="font-size: 28rpx;">10</text>
 				</view>
+			</u-row>
 
+			<view
+				style="margin-top: 100rpx;color: white;font-size: 28rpx;border-radius: 10rpx;display: flex;flex-direction: column;align-items: center;"
+				v-if="$store.state.hasLogin">
+				<text>剩余{{$store.state.appInfo.currencyName}}：{{$store.state.userInfo.assets}}</text>
+				<text>点击图标赠送</text>
 			</view>
+
 		</u-popup>
 
 		<!-- 分享 -->
@@ -885,9 +892,9 @@
 					id: this.article.cid,
 					money
 				}).then(res => {
-					if (res.data.code == 200) {
-						uni.$u.toast(res.data.msg)
-					}
+					this.getData()
+					uni.$u.toast(res.data.msg)
+					this.showReward = false
 				})
 			}
 		}
@@ -999,7 +1006,7 @@
 		transition: all 0.5s ease;
 
 		&-coin {
-			display: inline-block;
+			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;

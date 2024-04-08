@@ -11,8 +11,9 @@
 							@click="goProfile(article.authorId)" v-show="showNavAvatar" v-if="article">
 							<u-avatar :src="article && article.authorInfo && article.authorInfo.avatar" size="28"
 								customStyle="border:4rpx solid #aa96da32"></u-avatar>
-							<text
-								style="font-Weight: bold;font-size: 30rpx;margin-left: 20rpx;">{{article && article.authorInfo && article.authorInfo.screenName?article.authorInfo.screenName:article.authorInfo.name}}</text>
+							<text style="font-Weight: bold;font-size: 30rpx;margin-left: 20rpx;">
+								{{article && article.authorInfo && article.authorInfo.screenName?article.authorInfo.screenName:article.authorInfo.name}}
+							</text>
 						</view>
 					</view>
 					<view slot="right">
@@ -25,7 +26,9 @@
 									v-if="article && article.authorInfo &&!article.authorInfo.isFollow"></i>
 
 								<text style="font-size: 26rpx;margin-left: 10rpx;padding-right:20rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}</text>
+									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">
+									{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}
+								</text>
 							</u-row>
 							<view>
 								<i class="ess mgc_more_1_line" style="font-size: 60rpx;" @click="showMore = true"></i>
@@ -67,8 +70,9 @@
 								class="ripple">
 								<u-row justify="space-between">
 									<u-avatar :src="article.authorInfo.avatar" size="20"></u-avatar>
-									<text
-										style="font-size: 26rpx;margin-left: 20rpx;">{{article.authorInfo.screenName?article.authorInfo.screenName:article.authorInfo.name}}</text>
+									<text style="font-size: 26rpx;margin-left: 20rpx;">
+										{{article.authorInfo.screenName?article.authorInfo.screenName:article.authorInfo.name}}
+									</text>
 								</u-row>
 							</view>
 						</view>
@@ -284,25 +288,7 @@
 				<subComment :data="subComment" ref="paging" :keyHeigt="keyboardHeight"></subComment>
 			</view>
 		</u-popup>
-		<uv-modal :showConfirmButton="false" ref="reward" title="投喂/发电">
-			<view style="flex:1;display: flex;flex-direction: column;">
-				<u-row justify="space-between" customStyle="flex:1">
-					<block v-for="(item,index) in rewardList" :key="index">
-						<u-button size="normal" customStyle="width:100rpx;height:60rpx;margin:0"
-							:plain="selectReward!=item" @click="selectReward = item" :text="item"
-							color="#aa96da"></u-button>
-					</block>
-				</u-row>
-				<view style="margin-top: 20rpx;border-bottom: 0.5px solid #aa96da;">
-					<u-input type="number" border="none" v-model="reward" placeholder="自定义投喂数量"></u-input>
-				</view>
-				<view style="margin-top: 40rpx;">
-					<u-button color="#aa96da" shape="circle" customStyle="width:120rpx;height:60rpx"
-						@click="btnTap('reward',reward?reward:selectReward)">投喂</u-button>
-				</view>
-			</view>
-			<view slot="confirmButton"></view>
-		</uv-modal>
+		
 
 		<!-- 分享 -->
 		<u-popup mode="bottom" round="10" :show="showMore" @close="showMore =false" :closeable="true">
@@ -409,7 +395,28 @@
 				</u-row>
 			</view>
 		</u-popup>
+		<!-- 打赏 -->
+		<u-popup :show="showReward" @close="showReward = false" mode="center" round="5"
+			customStyle="padding:30rpx;background-color: transparent;width:500rpx;">
+			<u-row justify="space-around">
+				<view class="reward-container-coin" @click="reward(5)">
+					<i class="mgc_sparkles_fill"></i>
+					<text style="font-size: 28rpx;">5</text>
+				</view>
+				<view class="reward-container-coin" @click="reward(10)">
+					<i class="mgc_sparkles_2_fill"></i>
+					<text style="font-size: 28rpx;">10</text>
+				</view>
+			</u-row>
 
+			<view
+				style="margin-top: 100rpx;color: white;font-size: 28rpx;border-radius: 10rpx;display: flex;flex-direction: column;align-items: center;"
+				v-if="$store.state.hasLogin">
+				<text>剩余{{$store.state.appInfo.currencyName}}：{{$store.state.userInfo.assets}}</text>
+				<text>点击图标赠送</text>
+			</view>
+
+		</u-popup>
 	</z-paging-swiper>
 </template>
 
@@ -538,9 +545,6 @@
 						icon: 'warning'
 					}
 				],
-				rewardList: [1, 2, 5, 10],
-				reward: null,
-				selectReward: 0,
 				keyboardHeight: 0,
 				headerHeight: 0,
 			};
@@ -980,6 +984,16 @@
 					}
 				})
 			},
+			reward(money) {
+				this.$http.post('/article/reward', {
+					id: this.article.cid,
+					money
+				}).then(res => {
+					this.getData()
+					uni.$u.toast(res.data.msg)
+					this.showReward = false
+				})
+			}
 		}
 	}
 </script>
@@ -1059,5 +1073,20 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.reward-container {
+		display: inline-block;
+		text-align: center;
+		transition: all 0.5s ease;
+
+		&-coin {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			font-size: 100rpx;
+		}
 	}
 </style>
