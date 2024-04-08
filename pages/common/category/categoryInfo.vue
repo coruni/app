@@ -183,7 +183,7 @@
 				data: {},
 				list: [{
 						name: '热门',
-						order: '',
+						order: 'likes desc,created desc,views desc',
 						random: 1,
 
 					},

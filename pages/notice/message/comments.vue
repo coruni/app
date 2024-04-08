@@ -10,19 +10,24 @@
 				</u-navbar>
 			</template>
 			<block v-for="(item,index) in comments" :key="index">
-				<view class="notice-message" @click="goArticle(item.article)">
-					<u-row customStyle="margin-bottom:20rpx">
-						<u-avatar :src="item.userInfo && item.userInfo.avatar" size="24"></u-avatar>
-						<text
-							style="margin-left:20rpx;font-Weight: bold;">{{item.userInfo && item.userInfo.screenName?item.userInfo.screenName:item.userInfo.name}}</text>
-					</u-row>
+				<view class="notice-message" @click.stop.prevent="goArticle(item.article)">
+					<view @click.stop.prevent="goProfile(item)">
+						<u-row customStyle="margin-bottom:20rpx">
+							<u-avatar :src="item.userInfo && item.userInfo.avatar" size="24"></u-avatar>
+							<text style="margin-left:20rpx;font-Weight: bold;">
+								{{item.userInfo && item.userInfo.screenName?item.userInfo.screenName:item.userInfo.name}}
+							</text>
+						</u-row>
+					</view>
+					
 					<u-parse class="u-line-2" :content="formatEmoji(item.text)"
 						v-if="item.text !=item.article.title"></u-parse>
 					<u-parse class="u-line-2" :content="formatEmoji(item.reply.text)" v-else></u-parse>
 					<view style="border-left: #f7f7f7 6rpx solid;padding-left: 10rpx;margin: 10rpx 0;display: flex;"
 						class="u-line" v-if="item.text !=item.article.title">
-						<text v-if="item.reply"
-							style="color:#a899e6;flex-shrink: 0;padding-right: 10rpx;">@{{item.reply.userInfo.screenName?item.reply.userInfo.screenName:item.reply.userInfo.name}}</text>
+						<text v-if="item.reply" style="color:#a899e6;flex-shrink: 0;padding-right: 10rpx;">
+							@{{item.reply.userInfo.screenName?item.reply.userInfo.screenName:item.reply.userInfo.name}}
+						</text>
 						<uv-parse style="color: #999;font-size: 28rpx;"
 							:content="item.reply && item.reply.text"></uv-parse>
 					</view>
@@ -103,6 +108,19 @@
 					path: path,
 					query: {
 						id: data.id
+					}
+				})
+			},
+
+			goProfile(data) {
+				if (!data.hasOwnProperty('userInfo') || !data.userInfo.hasOwnProperty('uid')) {
+					uni.$u.toast('用户已注销')
+					return;
+				}
+				this.$Router.push({
+					path: '/pages/profile/profile',
+					query: {
+						id: data.userInfo.uid
 					}
 				})
 			},

@@ -24,7 +24,9 @@
 									v-if="article && article.authorInfo &&!article.authorInfo.isFollow"></i>
 
 								<text style="font-size: 26rpx;margin-left: 10rpx;padding-right:20rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}</text>
+									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">
+									{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}
+								</text>
 							</u-row>
 							<view>
 								<i class="ess mgc_more_1_line" style="font-size: 60rpx;" @click="showMore = true"></i>
@@ -117,22 +119,19 @@
 					</u-col>
 					<u-col span="5">
 						<u-row customStyle="margin-left:20rpx;flex:1" justify="space-around">
-							<!-- <view style="display: flex; flex-direction: column;align-items: center;"
-								@click="$refs.reward.open()">
-								<i class="ess mgc_copper_coin_line" style="font-size: 44rpx;"></i>
-								<u-text text="发电" size="12" color="#999"></u-text>
-							</view> -->
-							<view style="display: flex; flex-direction: column;align-items: center;"
-								@click="$u.throttle(mark(),1000,true)">
-								<i style="font-size: 44rpx;"
+							<view class="bottom-btn" @click.stop.prevent="showReward = true">
+								<i style="font-size: 45rpx;" class="mgc_pig_money_line"></i>
+								<text style="font-size: 24rpx;color: #999;">{{article && article.rewards}}</text>
+							</view>
+							<view class="bottom-btn" @click="$u.throttle(mark(),1000,true)">
+								<i style="font-size: 45rpx;"
 									:class="[article && article.isMark?'mgc_star_fill animate__animated animate__pulse like-active':'mgc_star_line']"></i>
 
 								<text style="font-size: 24rpx;color: #999;">{{article && article.marks}}</text>
 							</view>
 
-							<view style="display: flex; flex-direction: column;align-items: center;"
-								@click="$u.throttle(like(),1000,true)">
-								<i style="font-size: 44rpx;"
+							<view class="bottom-btn" @click="$u.throttle(like(),1000,true)">
+								<i style="font-size: 45rpx;"
 									:class="[article &&article.isLike?'mgc_thumb_up_2_fill animate__animated animate__pulse like-active':'mgc_thumb_up_2_line']"></i>
 								<text style="font-size: 24rpx;color: #999;">{{article && article.likes}}</text>
 							</view>
@@ -142,9 +141,8 @@
 			</template>
 		</z-paging>
 		<u-loading-page :loading="loading"></u-loading-page>
-
 		<!-- 回复文章 -->
-		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="20" :z-index="10074"
+		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="15" :z-index="10074"
 			:customStyle="{transform: `translateY(${-keyboardHeight+'px'})`,transition:'transform 0.2s ease',padding:30+'rpx'}">
 			<view style="position: relative;">
 				<editor id="editor" :adjust-position="false" :show-img-size="false" :show-img-resize="false"
@@ -215,25 +213,20 @@
 				</u-row>
 			</block>
 		</u-popup>
-		<uv-modal :showConfirmButton="false" ref="reward" title="投喂/发电">
-			<view style="flex:1;display: flex;flex-direction: column;">
-				<u-row justify="space-between" customStyle="flex:1">
-					<block v-for="(item,index) in rewardList" :key="index">
-						<u-button size="normal" customStyle="width:100rpx;height:60rpx;margin:0"
-							:plain="selectReward!=item" @click="selectReward = item" :text="item"
-							color="#aa96da"></u-button>
-					</block>
-				</u-row>
-				<view style="margin-top: 20rpx;border-bottom: 0.5px solid #aa96da;">
-					<u-input type="number" border="none" v-model="reward" placeholder="自定义投喂数量"></u-input>
+		<u-popup :show="showReward" @close="showReward = false" mode="center" round="5"
+			customStyle="padding:30rpx;background-color: transparent;width:100vw;">
+			<view class="reward-container">
+				<view class="reward-container-coin">
+					<i class="mgc_coin_3_line"></i>
+					<text style="font-size: 28rpx;">5</text>
 				</view>
-				<view style="margin-top: 40rpx;">
-					<u-button color="#aa96da" shape="circle" customStyle="width:120rpx;height:60rpx"
-						@click="btnTap('reward',reward?reward:selectReward)">投喂</u-button>
+				<view class="reward-container-coin">
+					<i class="mgc_coin_3_line"></i>
+					<text style="font-size: 28rpx;">10</text>
 				</view>
+
 			</view>
-			<view slot="confirmButton"></view>
-		</uv-modal>
+		</u-popup>
 
 		<!-- 分享 -->
 		<u-popup mode="bottom" round="10" :show="showMore" @close="showMore =false" :closeable="true">
@@ -469,7 +462,7 @@
 					}
 				],
 				rewardList: [1, 2, 5, 10],
-				reward: null,
+
 				selectReward: 0,
 				keyboardHeight: 0,
 				headerHeight: 0,
@@ -886,6 +879,16 @@
 						this.showMoreMenu = false
 					}
 				})
+			},
+			reward(money) {
+				this.$http.post('/article/reward', {
+					id: this.article.cid,
+					money
+				}).then(res => {
+					if (res.data.code == 200) {
+						uni.$u.toast(res.data.msg)
+					}
+				})
 			}
 		}
 	}
@@ -974,5 +977,34 @@
 
 	.like-active {
 		color: $c-primary;
+	}
+
+	.bottom-btn {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.reward-item {
+		padding: 15rpx 20rpx;
+		border-radius: 10rpx;
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.reward-container {
+		display: inline-block;
+		text-align: center;
+		transition: all 0.5s ease;
+
+		&-coin {
+			display: inline-block;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			font-size: 100rpx;
+		}
 	}
 </style>

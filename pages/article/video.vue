@@ -73,7 +73,9 @@
 									size="30"></u-avatar>
 								<view style="margin-left: 20rpx;display: flex;flex-direction: column;">
 									<text style="font-size: 30rpx;"
-										:class="{'vipname':article.authorInfo && article.authorInfo.isVip}">{{article && article.authorInfo && article.authorInfo.screenName?article.authorInfo.screenName:article && article.authorInfo &&article.authorInfo.name}}</text>
+										:class="{'vipname':article.authorInfo && article.authorInfo.isVip}">
+										{{article && article.authorInfo && article.authorInfo.screenName?article.authorInfo.screenName:article && article.authorInfo &&article.authorInfo.name}}
+									</text>
 									<text style="font-size: 24rpx;"
 										class="u-line-1 text">{{article && article.authorInfo &&  article.authorInfo.introduce}}</text>
 								</view>
@@ -130,7 +132,7 @@
 						</view>
 						<view style="display: flex;flex-direction: column;align-items: center;">
 							<i class="mgc_coin_fill"></i>
-							<text style="font-size: 28rpx;">{{article.marks}}</text>
+							<text style="font-size: 28rpx;">{{article.rewards}}</text>
 						</view>
 						<view style="display: flex;flex-direction: column;align-items: center;">
 							<i class="mgc_share_forward_fill"></i>
