@@ -26,10 +26,10 @@
 						style="white-space: nowrap;overflow: hidden;overflow-y: unset;"></uv-parse>
 				</view>
 
-				<view style="background: #f9f9f9;border-radius: 20rpx;margin-top: 10rpx;" @tap.stop="goArticle(item)">
+				<view style="background: #f9f9f9;border-radius: 10rpx;margin-top: 10rpx;" @tap.stop="goArticle(item)">
 					<u-row>
 						<image mode="aspectFill" :src="item.article.image"
-							style="height: 100rpx;width: 100rpx;background: #f7f7f7;border-radius: 20rpx 0 0 20rpx;">
+							style="height: 100rpx;width: 100rpx;background: #f7f7f7;border-radius: 10rpx 0 0 10rpx;">
 						</image>
 						<text style="margin-left: 20rpx;color: #999;">{{item.article.title}}</text>
 					</u-row>
