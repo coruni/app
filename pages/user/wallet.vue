@@ -22,10 +22,17 @@
 								@click="showPayment = true">充值</u-button>
 						</view>
 					</u-row>
-					<u-row style="margin-top: 20rpx;font-size: 40rpx;">
-						<i class="mgc_VIP_1_line"></i>
-						<text
-							style="margin-left: 30rpx;font-size: 32rpx;">{{userInfo.vip?$u.timeFormat(userInfo.vip, 'yyyy年mm月dd日'):'未开通'}}</text>
+					<u-row style="margin-top: 20rpx;font-size: 40rpx;" justify="space-between">
+						<u-row>
+							<i class="mgc_VIP_1_line"></i>
+							<text
+								style="margin-left: 30rpx;font-size: 32rpx;">{{userInfo.vip?$u.timeFormat(userInfo.vip, 'yyyy年mm月dd日'):'未开通'}}</text>
+						</u-row>
+
+						<view style="z-index: 1;">
+							<u-button shape="circle" style="height: 50rpx;padding: 0 30rpx;" color="#ffcc5c"
+								@click="showVip = true">{{$store.state.userInfo.isVip?'续期':'开通'}}</u-button>
+						</view>
 					</u-row>
 					<view style="margin-top: 30rpx;">
 						<text style="text-shadow: 1px 1px 1px #000, -1px -1px 1px #fff;color: #999999">
@@ -114,6 +121,33 @@
 				<u-button color="#aa96da" shape="circle" style="margin-top: 30rpx;" @click="save()">保存二维码</u-button>
 			</view>
 		</u-popup>
+
+		<u-popup round="10" :show="showVip" @close="showVip = false;" closeable>
+			<view style="padding: 30rpx;">
+				<view style="text-align: center;">
+					<text>选择会员套餐</text>
+				</view>
+				<u-grid col="3">
+					<u-grid-item v-for="(item,index) in vipPackage" :key="index">
+						<view class="package" @click="vipSelect = item"
+							:style="{background:vipSelect && vipSelect.name == item.name?'#aa96da1e':''}">
+							<view class="package-sub"
+								style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+								<text style="font-size: 26rpx;">Day</text>
+								<text style="font-size: 50rpx;">{{item.day}}</text>
+							</view>
+							<view style="color: #999;text-align: center;font-size: 24rpx;">
+								<text>{{$store.state.appInfo.currencyName}}{{item.day*config.vipPrice}}</text>
+							</view>
+						</view>
+					</u-grid-item>
+				</u-grid>
+				<view style="margin-top: 20rpx;">
+					<u-button color="#aa96da" shape="circle"
+						@click="vipSelect.name?getVip():$u.toast('你还没有选择会员套餐~')">开通</u-button>
+				</view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -138,6 +172,29 @@
 				tabsIndex: 0,
 				appInfo: {},
 				customPrice: 0,
+				vipSelect: {},
+				vipPackage: [{
+						name: '一月',
+						day: 30
+					},
+					{
+						name: '两月',
+						day: 60
+					},
+					{
+						name: '一季',
+						day: 90
+					},
+					{
+						name: '半年',
+						day: 180
+					},
+					{
+						name: '一年',
+						day: 365
+					}
+
+				],
 
 				payMent: [{
 						name: '微信',
@@ -219,7 +276,8 @@
 					}
 				],
 				paycode: '',
-				showPaycode: false
+				showPaycode: false,
+				showVip: false,
 			}
 		},
 		computed: {
@@ -227,6 +285,7 @@
 		},
 		onLoad() {
 			this.selectPackage = this.payPackage[0]
+			this.vipSelect = this.vipPackage[0]
 			this.initData()
 			this.appInfo = this.$store.state.appInfo
 			// 计算剩余高度
@@ -394,6 +453,14 @@
 					}
 				}).catch(err => {})
 			},
+			getVip() {
+				this.$http.post('/shop/vip', {
+					days: this.vipSelect.day
+				}).then(res => {
+					uni.$u.toast(res.data.msg)
+					this.showVip = false
+				})
+			}
 		}
 	}
 </script>
