@@ -217,7 +217,7 @@
 		<u-loading-page :loading="loading"></u-loading-page>
 		<!-- 页面公用组件 -->
 		<!-- 回复文章 -->
-		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="20" :z-index="10074"
+		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="10" :z-index="10074"
 			:customStyle="{transform: `translateY(${-keyboardHeight+'px'})`,transition:'transform 0.3s ease',padding:30+'rpx'}">
 			<editor id="editor" :adjust-position="false" :show-img-size="false" :show-img-resize="false"
 				:show-img-toolbar="false" @ready="onEditorReady" placeholder="说点什么"

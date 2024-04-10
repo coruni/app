@@ -194,7 +194,7 @@
 				</z-paging>
 			</swiper-item>
 		</swiper>
-		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="20" :z-index="10074"
+		<u-popup :show="showComment" @close="showComment = false;pid = 0" round="10" :z-index="10074"
 			:customStyle="{transform: `translateY(${-keyboardHeight+'px'})`,transition:'transform 0.2s ease',padding:30+'rpx'}">
 			<view style="position: relative;">
 				<editor id="editor" :adjust-position="false" :show-img-size="false" :show-img-resize="false"

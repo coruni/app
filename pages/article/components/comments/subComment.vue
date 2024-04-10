@@ -229,7 +229,7 @@
 
 		</z-paging>
 		<!-- 回复评论弹窗 -->
-		<u-popup :show="showComment" @close="showComment = false" round="20"
+		<u-popup :show="showComment" @close="showComment = false" round="10"
 			:customStyle="{transform: `translateY(${-keyboardHeight+'px'})`,transition:'transform 0.3s ease',padding:30+'rpx'}">
 			<editor id="editor" :adjust-position="false" :show-img-size="false" :show-img-resize="false"
 				:show-img-toolbar="false" @ready="onEditorReady" :placeholder="`回复${replyWho}`"
