@@ -17,17 +17,20 @@
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
 					<view v-for="(item,index) in list1" :key="item.id" :style="[imageStyle(item)]"
-						style="background: #fff;margin-top: 20rpx;border-radius: 20rpx;overflow: hidden;">
-
-						<image :src="item.detail.image" mode="widthFix"
-							:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"
-							style="border-radius: 20rpx 20rpx 0 0 ;" v-if="item.detail.type">
-						</image>
-						<view style="text-align: center;padding: 30rpx;" v-else>
-							<view :style="{background:item.detail.background,color:item.detail.color}">
-								<text>{{item.detail.name}}</text>
+						style="background: #fff;margin-top: 20rpx;border-radius: 10;overflow: hidden;"
+						@tap.stop="exchange = item;showExchange = true;">
+						<view v-if="item.type=='rank'">
+							<image :src="item.detail.image" mode="widthFix"
+								:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"
+								style="border-radius: 10rpx 10rpx 0 0 ;" v-if="item.detail.type">
+							</image>
+							<view style="text-align: center;padding: 30rpx;" v-else>
+								<view :style="{background:item.detail.background,color:item.detail.color}">
+									<text>{{item.detail.name}}</text>
+								</view>
 							</view>
 						</view>
+
 						<view style="margin: 20rpx;">
 							<text class="u-line-2">{{item.name}}</text>
 							<view style="margin-top: 20rpx;display: flex;justify-content: space-between;">
@@ -45,16 +48,22 @@
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
 					<view v-for="(item,index) in list2" :key="item.id" :style="[imageStyle(item)]"
-						style="background: #fff;margin-top: 20rpx;border-radius: 20rpx;overflow: hidden;">
-
-						<image :src="item.detail.image" mode="widthFix"
-							:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"
-							style="border-radius: 20rpx 20rpx 0 0 ;" v-if="item.detail.type">
-						</image>
-						<view style="text-align: center;padding: 30rpx;" v-else>
-							<view :style="{background:item.detail.background,color:item.detail.color}">
-								<text>{{item.detail.name}}</text>
+						style="background: #fff;margin-top: 20rpx;border-radius: 10;overflow: hidden;"
+						@tap.stop="exchange = item;showExchange = true;">
+						<view v-if="item.type=='rank'">
+							<image :src="item.detail.image" mode="widthFix"
+								:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"
+								style="border-radius: 10rpx 10rpx 0 0 ;" v-if="item.detail.type">
+							</image>
+							<view style="text-align: center;padding: 30rpx;" v-else>
+								<view :style="{background:item.detail.background,color:item.detail.color}">
+									<text>{{item.detail.name}}</text>
+								</view>
 							</view>
+						</view>
+						<view v-else>
+							<image :src="item.detail.link" mode="widthFix"
+								:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"></image>
 						</view>
 						<view style="margin: 20rpx;">
 							<text class="u-line-2">{{item.name}}</text>
@@ -69,6 +78,23 @@
 				</view>
 			</template>
 		</uv-waterfall>
+		<u-popup :show="showExchange" round="5" mode="center" customStyle="width:500rpx">
+			<view style="padding: 30rpx;">
+				<view style="display: flex;justify-content: center;color: #aaa;font-size: 30rpx;">
+					<text>兑换提示</text>
+				</view>
+				<view style="margin-top: 30rpx;text-align: center;">
+					<text>是否兑换{{exchange.name}}</text>
+				</view>
+				<u-row style="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
+					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						@click="showExchange = false">取消</u-button>
+					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						@click="goExchange()">确定</u-button>
+				</u-row>
+			</view>
+
+		</u-popup>
 	</z-paging>
 </template>
 
@@ -79,13 +105,15 @@
 	export default {
 		data() {
 			return {
+				exchange: {},
 				showSearch: false,
 				product: [],
 				list1: [],
 				list2: [],
 				columnGap: 6,
 				leftGap: 6,
-				rightGap: 6
+				rightGap: 6,
+				showExchange: false,
 
 			};
 		},
@@ -98,7 +126,7 @@
 					const rate = w / item.w;
 					const h = rate * item.h;
 					return {
-						width: w + 'px',
+						width: '100%',
 						height: h + 'px'
 					}
 				}
@@ -123,7 +151,15 @@
 			changeList(e) {
 				this[e.name].push(e.value);
 			},
-			
+			goExchange() {
+				this.$http.post('/exchange/exchange', {
+					id: this.exchange.id
+				}).then(res => {
+					uni.$u.toast(res.data.msg)
+					this.showExchange = false
+				})
+			}
+
 		}
 
 	}
