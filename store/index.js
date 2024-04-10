@@ -9,6 +9,7 @@ const store = new Vuex.Store({
 		userInfo: {},
 		userMeta: {},
 		token: null,
+		refresh_token: null,
 		config: {},
 		hasLogin: false,
 		appInfo: {},
@@ -25,6 +26,13 @@ const store = new Vuex.Store({
 			state.hasLogin = true
 			uni.setStorage({
 				key: 'token',
+				data: payload
+			})
+		},
+		setRefreshToken(state, payload) {
+			state.refresh_token = payload
+			uni.setStorage({
+				key: 'refresh_token',
 				data: payload
 			})
 		},
@@ -82,16 +90,16 @@ const store = new Vuex.Store({
 			state.token = null;
 			state.hasLogin = false
 			uni.showLoading({
-				mask:true,
-				title:'正在清除数据...'
+				mask: true,
+				title: '正在清除数据...'
 			})
-			setTimeout(()=>{
+			setTimeout(() => {
 				uni.redirectTo({
 					url: '/pages/index/index'
 				})
 				uni.hideLoading()
-			},800)
-			
+			}, 800)
+
 		},
 		setSwiper(state, payload) {
 			uni.setStorage({

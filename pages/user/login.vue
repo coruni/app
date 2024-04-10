@@ -205,7 +205,7 @@
 
 		},
 		methods: {
-			...mapMutations(['setToken', 'setUser', 'setUserMeta']),
+			...mapMutations(['setToken', 'setUser', 'setUserMeta', 'setRefreshToken']),
 			codeChange(text) {
 				this.tips = text
 			},
@@ -285,9 +285,10 @@
 			},
 			saveUser(data, type) {
 				this.setToken(data.token);
+				this.setRefreshToken(RefreshToken);
 				this.getUserInfo(data.uid);
-				uni.$emit('login', true)
-				this.$store.commit('loginStatus')
+				uni.$emit('login', true);
+				this.$store.commit('loginStatus');
 				//保存账号密码 用于持久登录
 				if (type) {
 					let account = {
@@ -311,7 +312,7 @@
 					}
 				})
 			},
-			
+
 			register() {
 				if (!this.username.length) {
 					uni.$u.toast('请填写用户名！');

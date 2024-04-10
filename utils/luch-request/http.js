@@ -10,7 +10,10 @@ http.setConfig((config) => {
 	config.baseURL = cConfig.api
 	config.header = {
 		'Content-Type': 'application/x-www-form-urlencoded',
+		'Authorization': uni.getStorageSync('token') || ''
 	}
+
+
 	config.timeout = 60 * 1000
 	return config
 })
@@ -20,8 +23,7 @@ http.setConfig((config) => {
 //   所有的网络请求都会先走这个方法
 http.interceptors.request.use((config) => {
 	config.header = {
-		...config.header,
-		'Authorization': uni.getStorageSync('token')
+		...config.header
 	}
 
 	if (!store.state.hasLogin && config.method == 'POST') {
@@ -43,6 +45,9 @@ const refresh = new Request()
 refresh.setConfig((config) => {
 	/* 设置全局配置 */
 	config.baseURL = cConfig.api
+	config.header = {
+		'Refresh-Token': uni.getStorageSync('refresh_token') || '',
+	}
 	config.timeout = 60 * 1000
 	return config
 })
@@ -60,16 +65,11 @@ againHttp.interceptors.request.use(config => {
 http.interceptors.response.use(async (response) => {
 	let code = response.data.code
 	if (store.state.hasLogin && code == 400 || code == 401 || code == 402 || code == 403 || code == 404) {
-		let account = uni.getStorageSync('account')
+		let refresh_token = uni.getStorageSync('refresh_token')
 		try {
-			const res = await refresh.get('/user/login', {
-				params: {
-					account: account.name,
-					password: account.password
-				}
-			})
+			const res = await refresh.post('/user/refresh')
 			if (res.data.code == 200) {
-				store.commit('setToken', res.data.data.token)
+				store.commit('setToken', res.data.token)
 				try {
 					const againhttp = await againHttp.middleware(response.config)
 					return againhttp
