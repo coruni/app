@@ -45,12 +45,12 @@
 							</text>
 						</u-row>
 
-						<u-row customStyle="font-size:28rpx">
-							<i class="ess mgc_renwu" style="margin-right: 10rpx;"></i>
+						<u-row style="font-size:28rpx">
+							<i class="mgc_IDcard_line" style="margin-right: 10rpx;"></i>
 							<text>通行证ID：{{info.uid}}</text>
 						</u-row>
-						<u-row customStyle="font-size:28rpx;color: #999;">
-							<i class="ess mgc_ziliao" style="margin-right: 10rpx;"></i>
+						<u-row style="font-size:28rpx;color: #999;">
+							<i class="mgc_profile_line" style="margin-right: 10rpx;"></i>
 							<text>{{info.introduce?info.introduce:'系统默认签名~'}}</text>
 						</u-row>
 					</view>
