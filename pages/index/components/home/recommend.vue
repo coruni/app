@@ -192,7 +192,7 @@
 
 	.swiper {
 		margin: 30rpx;
-		height: 400rpx;
+		height: 340rpx;
 		position: relative;
 		top: 0;
 

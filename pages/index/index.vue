@@ -1,6 +1,7 @@
 <template>
 	<z-paging-swiper>
-		<home v-show="tabbarIndex == 0" @avatarTap="avatarTap()" @edit="showMoreMenu = true;data=$event" ref="home"></home>
+		<home v-show="tabbarIndex == 0" @avatarTap="avatarTap()" @edit="showMoreMenu = true;data=$event" ref="home">
+		</home>
 		<category v-show="tabbarIndex == 1" :index="1" :current="tabbarIndex"></category>
 		<message v-show="tabbarIndex == 3" :index="3" :current="tabbarIndex"></message>
 		<user v-show="tabbarIndex == 4" :index="4" :current="tabbarIndex" style="height: 100%;margin-bottom: 190rpx;">
@@ -21,10 +22,14 @@
 				<view class="content content-add" @click="showPublish = true">
 					<i class="mgc_add_line"></i>
 				</view>
-				<view class="content" :class="{'btn-active':tabbarIndex==3}" @tap.stop="tabbarIndex = 3">
-					<i class="mgc_message_2_line"></i>
-					<text>消息</text>
+				<view style="position: relative;">
+					<view class="content" :class="{'btn-active':tabbarIndex==3}" @tap.stop="tabbarIndex = 3">
+						<i class="mgc_message_2_line"></i>
+						<text>消息</text>
+					</view>
+					<i class="mgc_round_fill noticeNum" v-if="$store.state.noticeNum.total"></i>
 				</view>
+
 				<view @tap.stop="tabbarIndex=4">
 					<u-avatar :src="$store.state.userInfo.avatar || null" size="30"></u-avatar>
 				</view>
@@ -382,7 +387,7 @@
 		}
 
 		.content-add {
-			
+
 			background: #525252 !important;
 		}
 	}
@@ -535,5 +540,13 @@
 		padding: 30rpx;
 		border-radius: 20rpx;
 		font-size: 30rpx;
+	}
+
+	.noticeNum {
+		position: absolute;
+		top: 0;
+		right: 0;
+		color: red;
+		font-size: 24rpx;
 	}
 </style>
