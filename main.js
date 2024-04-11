@@ -61,6 +61,11 @@ Vue.prototype.$config = config
 import common from "./common/common.js"
 Vue.prototype.$common = common
 
+// #ifdef H5
+import quill from "quill";
+window.Quill = quill;
+// #endif
+
 uni.getStorage({
 	key: 'token'
 }).then(() => {

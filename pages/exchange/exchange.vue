@@ -16,7 +16,7 @@
 			<template v-slot:list1>
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
-					<view v-for="(item,index) in list1" :key="item.id" :style="[imageStyle(item)]"
+					<view v-for="(item,index) in list1" :key="index" :style="[imageStyle(item)]"
 						style="background: #fff;margin-top: 20rpx;border-radius: 10;overflow: hidden;"
 						@tap.stop="exchange = item;showExchange = true;">
 						<view v-if="item.type=='rank'">
@@ -30,7 +30,10 @@
 								</view>
 							</view>
 						</view>
-
+						<view v-else>
+							<image :src="item.detail.link" mode="widthFix"
+								:style="{width:item.width+'px',maxHeight:item.height>720?720:item.height+'px'}"></image>
+						</view>
 						<view style="margin: 20rpx;">
 							<text class="u-line-2">{{item.name}}</text>
 							<view style="margin-top: 20rpx;display: flex;justify-content: space-between;">
@@ -47,7 +50,7 @@
 			<template v-slot:list2>
 				<!-- 为了磨平部分平台的BUG，必须套一层view -->
 				<view>
-					<view v-for="(item,index) in list2" :key="item.id" :style="[imageStyle(item)]"
+					<view v-for="(item,index) in list2" :key="index" :style="[imageStyle(item)]"
 						style="background: #fff;margin-top: 20rpx;border-radius: 10;overflow: hidden;"
 						@tap.stop="exchange = item;showExchange = true;">
 						<view v-if="item.type=='rank'">
