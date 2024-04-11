@@ -927,20 +927,25 @@
 						this.article = res.data.data
 						this.article.category = res.data.data.category ? res.data.data.category : this.category[0]
 						this.article.tags = res.data.data.tag
-						this.editorCtx.getContents({
-							success: (res) => {
-								if (res.text.length < 2) {
-									this.setContents()
+						if (this.editorCtx != null) {
+
+						}
+						setTimeout(() => {
+							this.editorCtx.getContents({
+								success: (res) => {
+									if (res.text.length < 2) {
+										this.setContents()
+									}
 								}
-							}
-						})
+							})
+						}, 100)
+
 					}
 				})
 			},
 			setContents() {
 				this.editorCtx.setContents({
 					html: this.article.text,
-
 				})
 			},
 			updateArticle() {
