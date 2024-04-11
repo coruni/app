@@ -285,7 +285,7 @@
 			},
 			saveUser(data, type) {
 				this.setToken(data.token);
-				this.setRefreshToken(RefreshToken);
+				this.setRefreshToken(data.RefreshToken);
 				this.getUserInfo(data.uid);
 				uni.$emit('login', true);
 				this.$store.commit('loginStatus');
