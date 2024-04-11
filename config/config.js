@@ -8,7 +8,9 @@ const config = {
 	// 首页分享处描述
 	"description": "fanbbs",
 	// websocket
-	"websocket": "wss://api.i-hentai.cc/websocket"
+	"websocket": "wss://api.i-hentai.cc/websocket",
+	// 客服QQ
+	"service": 1292778464,
 }
 
 // Author:CHIKATA

@@ -131,7 +131,6 @@
 					filePath: url,
 					name: 'file'
 				}).then(res => {
-
 					if (res.data.code == 200) {
 						if (isAvatar) this.info.avatar = res.data.data.url;
 						else this.info.userBg = res.data.data.url;
@@ -140,17 +139,18 @@
 				})
 			},
 			save() {
+				let params = {
+					introduce: this.info.introduce || '',
+					sex: this.info.sex || '未知',
+					nickname: this.info.screenName || '',
+					avatar: this.info.avatar || '',
+					background: this.info.userBg || ''
+				}
 				this.$http.post('/user/update', {
-					introduce: this.info.introduce,
-					sex: this.info.sex,
-					nickname: this.info.screenName,
-					avatar: this.info.avatar,
-					background: this.info.userBg
+					...params
 				}).then(res => {
-
-					if (res.data.code) {
-						this.getUserInfo()
-					}
+					this.getUserInfo()
+					uni.$u.toast(res.data.msg)
 				})
 			},
 			getUserInfo() {
@@ -160,10 +160,8 @@
 						id: this.userInfo.uid,
 					}
 				}).then(res => {
-
 					if (res.data.code == 200) {
 						this.$store.commit('setUser', res.data.data)
-						uni.$u.toast('资料已更新')
 					}
 
 				}).catch(err => {

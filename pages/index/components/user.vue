@@ -117,7 +117,7 @@
 		</view>
 		<!-- 更多 -->
 		<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>
-		<view style="padding: 30rpx;padding-top: 0;">
+		<view style="padding: 30rpx;">
 			<u-grid :col="4">
 				<u-grid-item v-for="(item,index) in menu" :key="index" @tap="goPage(item.path)">
 					<u-row class="menu-item" justify="space-between">
@@ -128,6 +128,24 @@
 			</u-grid>
 		</view>
 		<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>
+
+		<view style="padding: 30rpx;">
+			<u-row justify="space-between" style="padding: 20rpx 0;" @click="goService()">
+				<u-row>
+					<i class="mgc_service_line" style="font-size: 40rpx;"></i>
+					<text style="font-size: 30rpx;margin-left: 10rpx;">客服</text>
+				</u-row>
+				<i class="mgc_right_line"></i>
+			</u-row>
+			<u-row justify="space-between" style="padding: 20rpx 0;" @click="goPage('setting')">
+				<u-row>
+					<i class="mgc_settings_1_line" style="font-size: 40rpx;"></i>
+					<text style="font-size: 30rpx;margin-left: 10rpx;">设置</text>
+				</u-row>
+				<i class="mgc_right_line"></i>
+			</u-row>
+		</view>
+
 		<l-clipper v-if="backgroundShow" :image-url="cropperBg"
 			@success="upload($event.url,false); backgroundShow = false" @cancel="backgroundShow = false" is-limit-move
 			is-lock-ratio :width="1280" :height="720" :scaleRatio="2" :min-width="1280" :min-height="720"
@@ -272,15 +290,6 @@
 						name: "历史",
 						icon: "mgc_time_line",
 						path: "history"
-					}, {
-						name: "客服",
-						icon: "mgc_service_fill",
-						path: ""
-					},
-					{
-						name: "设置",
-						icon: "mgc_settings_1_line",
-						path: "setting"
 					}
 				],
 
@@ -500,6 +509,15 @@
 					uni.$u.toast(res.data.msg)
 				})
 			},
+			goService() {
+				// 获取客服QQ this.$config.service
+				// #ifdef APP
+				plus.runtime.openWeb(`tencent://message/?uin=${this.$config.service}&Site=&menu=yes`)
+				// #endif
+				// #ifdef H5
+				window.open(`tencent://message/?uin=${this.$config.service}&Site=&menu=yes`)
+				// #endif
+			}
 		}
 	}
 </script>

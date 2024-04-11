@@ -892,8 +892,8 @@
 					id: this.article.cid,
 					money
 				}).then(res => {
-					this.getData()
 					uni.$u.toast(res.data.msg)
+					this.getData()
 					this.showReward = false
 				})
 			}
