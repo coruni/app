@@ -90,15 +90,7 @@ http.interceptors.response.use(async (response) => {
 			//TODO handle the exception
 			return Promise.reject(e)
 		}
-	} else {
-		uni.$u.toast('请重新登录')
-		store.commit('logout')
-		router.push({
-			path: '/pages/user/login',
-			animationType: 'slide-in-bottom',
-			animationDuration: 500
-		})
-	}
+	} 
 
 	return response
 }, error => {
