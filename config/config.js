@@ -1,6 +1,6 @@
 const config = {
 	// API接口，必须是HTTPS开头 
-	"api": "http://127.0.0.1",
+	"api": "https://api.i-hentai.cc",
 	// 版本号，禁止私自修改，后果自负
 	"version": "1.0.0",
 	// H5网页（用于分享）
@@ -8,7 +8,7 @@ const config = {
 	// 首页分享处描述
 	"description": "fanbbs",
 	// websocket
-	"websocket": "wss://api.i-hentai.cc/websocket",
+	"websocket": "ws://api.i-hentai.cc/websocket",
 	// 客服QQ
 	"service": 1292778464,
 }

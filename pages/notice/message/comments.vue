@@ -24,7 +24,7 @@
 						v-if="item.text !=item.article.title"></u-parse>
 					<u-parse class="u-line-2" :content="formatEmoji(item.reply.text)" v-else></u-parse>
 					<view style="border-left: #f7f7f7 6rpx solid;padding-left: 10rpx;margin: 10rpx 0;display: flex;"
-						class="u-line" v-if="item.text !=item.article.title">
+						class="u-line-1" v-if="item.text !=item.article.title">
 						<text v-if="item.reply" style="color:#a899e6;flex-shrink: 0;padding-right: 10rpx;">
 							@{{item.reply.userInfo.screenName?item.reply.userInfo.screenName:item.reply.userInfo.name}}
 						</text>
@@ -32,7 +32,7 @@
 							:content="item.reply && item.reply.text"></uv-parse>
 					</view>
 					<view style="border-left: #f7f7f7 6rpx solid;padding-left: 10rpx;margin: 10rpx 0;display: flex;"
-						class="u-line" v-else>
+						class="u-line-1" v-else>
 						<text v-if="item.article"
 							style="color: #999;flex-shrink: 0;padding-right: 10rpx;font-size: 26rpx;">回复帖子：{{item.article.title}}</text>
 					</view>

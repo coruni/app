@@ -1,5 +1,5 @@
 <template>
-	<z-paging ref="paging" @query="getData" v-model="messages" use-chat-record-mode auto-hide-keyboard-when-chat>
+	<z-paging ref="paging" @query="getData" v-model="messages" v-if="id" use-chat-record-mode auto-hide-keyboard-when-chat>
 		<template #top>
 			<u-navbar placeholder autoBack :title="nickname">
 				<view slot="left">
@@ -11,7 +11,7 @@
 			<block v-for="(item,index) in messages" :key="index">
 				<u-row v-if="item.sender_id != userInfo.uid" align="top"
 					style="margin-bottom: 20rpx;transform: scaleY(-1)">
-					<u-avatar :src="item.userInfo.avatar" size="35" @click="goProfile(item.sender_id)"></u-avatar>
+					<u-avatar :src="left_avatar" size="35" @click="goProfile(item.sender_id)"></u-avatar>
 					<view class="message-left">
 						<uv-parse :tagStyle="{img:'border-radius:10px'}" :content="item.text"
 							style="word-wrap: normal;flex-wrap: wrap; word-break: break-all;"></uv-parse>
@@ -56,6 +56,7 @@
 				nickname: null,
 				id: 0,
 				receiver_id: 0,
+				left_avatar: '',
 				messages: [],
 				editorCtx: null,
 				keyboardHeight: 0,
@@ -77,11 +78,20 @@
 			})
 			if (!this.id) {
 				this.id = await this.getChatId();
-				this.$refs.paging.reload()
+				
 			}
 			this.systemInfo = uni.getSystemInfoSync()
 			if (this.systemInfo.theme == 'dark') plus.navigator.setStatusBarStyle('light')
 			this.windowHeight = this.systemInfo.windowHeight - this.systemInfo.statusBarHeight
+
+			this.$socket.getMessage((message) => {
+				// 格式化message
+				let data = JSON.parse(message.data)
+
+				this.$refs.paging.addChatRecordData({
+					...data
+				})
+			})
 		},
 
 		computed: {
@@ -117,7 +127,15 @@
 
 				}).then(res => {
 					if (res.data.code === 200) {
+						
+
 						this.$refs.paging.complete(res.data.data.data);
+						// 获取到对方avatar
+						const dataArray = res.data.data.data;
+						const currentUserID = this.userInfo.uid;
+						const targetObj = dataArray.find(item => item.sender_id !== currentUserID);
+						if (targetObj) this.left_avatar = targetObj.userInfo.avatar
+						console.log(targetObj)
 					}
 				}).catch(err => {
 
@@ -134,17 +152,29 @@
 						})
 						if (!res.text.length) return;
 						this.editorCtx.clear()
+						this.sendWebsocket(res.html)
 						this.$http.post('/chat/sendMsg', {
 							id: this.id,
 							text: res.html
 						}).then(res => {
 							if (res.data.code == 200) {
 								// 清空编辑器消息
-								
+
 							}
 						})
 					}
 				})
+			},
+			sendWebsocket(data) {
+				console.log('发送')
+				var data = {
+					type: 'message',
+					sender_id: this.userInfo.uid,
+					receiver_id: this.receiver_id,
+					data: data,
+					sender_avatar: this.userInfo.avatar
+				}
+				this.$socket.send(JSON.stringify(data))
 			},
 			shouldDisplayAvatar(index) {
 				// 如果是第一条消息，或者当前消息用户与上一条消息用户不同，则显示当前消息用户的头像

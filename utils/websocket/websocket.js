@@ -59,7 +59,7 @@ class websocketUtil {
 		this.socketTask.send({
 			data: value,
 			async success() {
-				// console.log("消息发送成功");
+				console.log("消息发送成功");
 			},
 		});
 	}
