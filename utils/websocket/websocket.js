@@ -29,7 +29,7 @@ class websocketUtil {
 			},
 		});
 		this.socketTask.onOpen((res) => {
-			// console.log("WebSocket连接正常！");
+			console.log("WebSocket连接正常！");
 			clearTimeout(this.reconnectTimeOut)
 			clearTimeout(this.heartbeatInterval)
 			this.is_open_socket = true;
@@ -47,7 +47,7 @@ class websocketUtil {
 		// });
 		// 这里仅是事件监听【如果socket关闭了会执行】
 		this.socketTask.onClose(() => {
-			// console.log("已经被关闭了")
+			console.log("已经被关闭了")
 			this.is_open_socket = false;
 			this.reconnect();
 		})

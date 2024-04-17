@@ -68,9 +68,9 @@ window.Quill = quill;
 
 uni.getStorage({
 	key: 'token'
-}).then(() => {
+}).then((res) => {
 	//开启websocket
-	let websocket = new wsRequest(config.websocket + `?token=${uni.getStorageSync('token')||''}`, 3000)
+	let websocket = new wsRequest(config.websocket + `?token=${res.data}`, 6000)
 	//挂载到全局
 	Vue.prototype.$socket = websocket
 
