@@ -187,7 +187,7 @@
 				})
 			},
 			reload() {
-				this.$refs.home.reload()
+				this.$refs.home[this.topTabIndex].reload()
 			}
 		}
 	}

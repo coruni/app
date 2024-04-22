@@ -269,7 +269,7 @@
 						</u-row>
 						<!-- #endif -->
 						<view
-							v-if="article&& article.authorId == $store.state.userInfo.uid|| $store.state.userInfo.group =='administrator'">
+							v-if="article&& article.authorId == $store.state.userInfo.uid|| isAdmin">
 							<u-row customStyle="margin-bottom: 30rpx;" @click="goEdit()">
 								<i class="ess mgc_edit_line" style="font-size: 40rpx;"></i>
 								<text style="margin-left:20rpx">编辑</text>
@@ -277,6 +277,10 @@
 							<u-row customStyle="margin-bottom: 30rpx;color:red" @click="showDelete = true">
 								<i class="ess mgc_delete_2_line" style="font-size: 40rpx;"></i>
 								<text style="margin-left:20rpx">删除</text>
+							</u-row>
+							<u-row style="margin:20rpx 0;color:red" @click="showPublishAction = true" v-if="isAdmin">
+								<i class="mgc_seal_line" style="font-size: 40rpx;"></i>
+								<text style="margin-left:20rpx">审核</text>
 							</u-row>
 						</view>
 					</view>
@@ -295,6 +299,26 @@
 							@click="showDelete = false">取消</u-button>
 						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="deleteArticle()">确定</u-button>
+					</u-row>
+				</view>
+			</u-popup>
+			<!-- 弹出审核 -->
+			<u-popup :show="showPublishAction" :round="10" mode="center" @close="showPublishAction = false"
+				customStyle="width:500rpx">
+				<view style="display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 50rpx;">
+					<text style="font-size: 34rpx;">提示</text>
+					<view style="margin-top:30rpx">
+						<text>是否{{article&& article.status=='publish'?'取消审核':'审核通过'}}</text>
+					</view>
+					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
+						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+							@click="showPublishAction = false">取消</u-button>
+						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+							@click="appArticle()">确定</u-button>
 					</u-row>
 				</view>
 			</u-popup>
@@ -370,6 +394,7 @@
 				showDelete: false,
 				showFollow: false,
 				isReply: false,
+				showPublishAction: false,
 				editorCtx: null,
 				percentage: 0,
 				showLoading: false,
@@ -503,6 +528,13 @@
 		onUnload() {
 			// 取消监听
 			uni.offKeyboardHeightChange(data => {})
+		},
+		computed: {
+			isAdmin() {
+				if (!this.$store.state.hasLogin) return false;
+				let userInfo = this.$store.state.userInfo;
+				return userInfo.group == 'administrator' || userInfo.group == 'editor';
+			}
 		},
 		methods: {
 			shareTap,
@@ -896,7 +928,18 @@
 					this.getData()
 					this.showReward = false
 				})
-			}
+			},
+			appArticle() {
+				this.$http.post('/article/action', {
+					id: this.article.cid,
+					type: 'publish',
+				}).then(res => {
+					this.showPublishAction = false;
+					this.showMoreMenu = false;
+					this.getData();
+					uni.$u.toast(res.data.msg)
+				})
+			},
 		}
 	}
 </script>

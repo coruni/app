@@ -207,7 +207,8 @@
             "https" : false,
             "port" : ""
         },
-        "title" : "不正常萝莉研究所"
+        "title" : "不正常萝莉研究所",
+        "template" : "template.html"
     }
 }
 /* 模块配置 */

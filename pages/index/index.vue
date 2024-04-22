@@ -86,26 +86,30 @@
 					</u-row>
 					<view style="display: flex;flex-direction: column;margin-top: 50rpx;">
 						<u-row style="margin:20rpx 0">
-							<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
+							<i class="mgc_alert_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">举报</text>
 						</u-row>
 						<u-row style="margin:20rpx 0" @click="shareArticle('link')">
-							<i class="ess mgc_flash_line" style="font-size: 40rpx;"></i>
+							<i class="mgc_flash_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">复制链接</text>
 						</u-row>
 						<!-- #ifdef APP -->
 						<u-row style="margin:20rpx 0" @click="shareArticle('system')">
-							<i class="ess mgc_share_forward_line" style="font-size: 40rpx;"></i>
+							<i class="mgc_share_forward_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">通过系统分享</text>
 						</u-row>
 						<!-- #endif -->
 						<u-row style="margin:20rpx 0" @click="goEdit()" v-if="permission">
-							<i class="ess mgc_edit_line" style="font-size: 40rpx;"></i>
+							<i class="mgc_edit_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">编辑</text>
 						</u-row>
 						<u-row style="margin:20rpx 0;color:red" @click="showDelete = true" v-if="permission">
-							<i class="ess mgc_delete_2_line" style="font-size: 40rpx;"></i>
+							<i class="mgc_delete_2_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">删除</text>
+						</u-row>
+						<u-row style="margin:20rpx 0;color:red" @click="showPublishAction = true" v-if="isAdmin">
+							<i class="mgc_seal_line" style="font-size: 40rpx;"></i>
+							<text style="margin-left:20rpx">审核</text>
 						</u-row>
 					</view>
 				</view>
@@ -130,7 +134,28 @@
 					</u-row>
 				</view>
 			</u-popup>
+			<!-- 弹出审核 -->
+			<u-popup :show="showPublishAction" :round="10" mode="center" @close="showPublishAction = false"
+				customStyle="width:500rpx">
+				<view style="display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 50rpx;">
+					<text style="font-size: 34rpx;">提示</text>
+					<view style="margin-top:30rpx">
+						<text>是否{{data&& data.status=='publish'?'取消审核':'审核通过'}}</text>
+					</view>
+					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
+						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+							@click="showPublishAction = false">取消</u-button>
+						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+							@click="appArticle()">确定</u-button>
+					</u-row>
+				</view>
+			</u-popup>
 		</u-popup>
+
 	</z-paging-swiper>
 </template>
 
@@ -163,6 +188,7 @@
 				page: 1,
 				data: null,
 				showMoreMenu: false,
+				showPublishAction: false,
 				topTabIndex: 0,
 				tabbarIndex: 0,
 				showPublish: false,
@@ -260,6 +286,11 @@
 					.group == 'editor')
 					return true;
 				return false;
+			},
+			isAdmin() {
+				if (!this.$store.state.hasLogin) return false;
+				let userInfo = this.$store.state.userInfo;
+				return userInfo.group == 'administrator' || userInfo.group == 'editor';
 			}
 		},
 		methods: {
@@ -347,6 +378,17 @@
 						break;
 				}
 				this.showMoreMenu = false;
+			},
+			appArticle() {
+				this.$http.post('/article/action', {
+					id: this.data.cid,
+					type: 'publish',
+				}).then(res => {
+					this.showPublishAction = false;
+					this.showMoreMenu = false;
+					this.$refs.home.reload()
+					uni.$u.toast(res.data.msg)
+				})
 			},
 			goEdit() {
 				this.showMoreMenu = false

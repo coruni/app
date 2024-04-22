@@ -3,15 +3,16 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": false
 			},
+			
 			"name":"home"
 
 		}, {
 			"path": "pages/profile/profile",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "用户信息",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white"
 			}
@@ -19,7 +20,7 @@
 		}, {
 			"path": "pages/article/article",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "文章",
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"softinputmode": "nothing"
@@ -29,7 +30,7 @@
 		{
 			"path": "pages/user/login",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white"
 			},
@@ -38,7 +39,7 @@
 		{
 			"path": "pages/common/category/category",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "分类",
 				"enablePullDownRefresh": false
 			},
 			"name": "categoryList"
@@ -46,7 +47,7 @@
 		{
 			"path": "pages/user/profile",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "编辑信息",
 				"enablePullDownRefresh": false
 			},
 			"name": "editUser",
@@ -55,14 +56,14 @@
 		{
 			"path": "pages/article/photo",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "相册",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "publish/article/article",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "发布帖子",
 				"enablePullDownRefresh": false
 
 			},
@@ -72,7 +73,7 @@
 		{
 			"path": "pages/user/avatar",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "修改头像",
 				"enablePullDownRefresh": false
 			},
 			"name": "avatar",
@@ -81,7 +82,7 @@
 		{
 			"path": "pages/user/headPicture",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "修改头像框",
 				"enablePullDownRefresh": false
 			},
 			"name": "headPicture",
@@ -90,7 +91,7 @@
 		{
 			"path": "pages/user/collect",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的收藏",
 				"enablePullDownRefresh": false
 			},
 			"name": "collect",
@@ -99,21 +100,21 @@
 		{
 			"path": "pages/article/components/comments/subComment",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "评论",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/common/category/categoryInfo",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "分类信息",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "publish/article/photo",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "发布相册",
 				"enablePullDownRefresh": false,
 				"app-plus": {
 					"softinputmode": "nothing"
@@ -125,7 +126,7 @@
 		{
 			"path": "pages/notice/private",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "聊天室",
 				"enablePullDownRefresh": false
 			},
 			"perm": "login"
@@ -155,7 +156,7 @@
 		{
 			"path": "pages/common/search/search",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "搜索",
 				"enablePullDownRefresh": false
 			},
 			"name": "search"
@@ -163,7 +164,7 @@
 		{
 			"path": "pages/notice/message/finance",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "财务通知",
 				"enablePullDownRefresh": false
 			},
 			"name": "finance"
@@ -171,7 +172,7 @@
 		{
 			"path": "pages/notice/message/systems",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "系统通知",
 				"enablePullDownRefresh": false
 			},
 			"name": "systems"
@@ -179,7 +180,7 @@
 		{
 			"path": "pages/notice/message/comments",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "评论通知",
 				"enablePullDownRefresh": false
 			},
 			"name": "comments"
@@ -187,7 +188,7 @@
 		{
 			"path": "pages/user/wallet",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的钱包",
 				"enablePullDownRefresh": false
 			},
 			"name": "wallet",
@@ -196,7 +197,7 @@
 		{
 			"path": "pages/shop/index",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "商城",
 				"enablePullDownRefresh": false
 			},
 			"name": "shop"
@@ -204,28 +205,28 @@
 		{
 			"path": "pages/shop/product_detail",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "商品详情",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/shop/addProduct",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "添加商品",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/shop/order",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的订单",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/user/orderList",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "订单列表",
 				"enablePullDownRefresh": false
 			},
 			"name": "orderList",
@@ -234,14 +235,14 @@
 		{
 			"path": "pages/user/tracking",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "发货",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/shop/myProduct",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的小摊",
 				"enablePullDownRefresh": false
 			},
 			"name": "myProduct"
@@ -265,7 +266,7 @@
 		{
 			"path": "pages/user/setting/setting",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "设置",
 				"enablePullDownRefresh": false
 			},
 			"name": "setting"
@@ -273,7 +274,7 @@
 		{
 			"path": "pages/user/setting/account",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "账号设置",
 				"enablePullDownRefresh": false
 			},
 			"name": "account",
@@ -282,7 +283,7 @@
 		{
 			"path": "pages/user/setting/destroy",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "账号注销",
 				"enablePullDownRefresh": false
 			},
 			"name": "destroy",
@@ -291,7 +292,7 @@
 		{
 			"path": "pages/exchange/exchange",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "兑换",
 				"enablePullDownRefresh": false
 			},
 			"name": "exchange"
@@ -299,7 +300,7 @@
 		{
 			"path": "pages/user/history",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "历史记录",
 				"enablePullDownRefresh": false
 			},
 			"name": "history"
@@ -307,7 +308,7 @@
 		{
 			"path": "publish/article/video",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "发布视频",
 				"enablePullDownRefresh": false
 			},
 			"name": "video",
@@ -316,7 +317,7 @@
 		{
 			"path": "pagesA/lottery/lottery",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "抽奖",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -324,7 +325,7 @@
 			"path" : "pages/user/reward",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "我的奖品",
 				"enablePullDownRefresh" : false
 			},
 			"name":"myReward",
@@ -334,7 +335,7 @@
 			"path" : "pages/common/tag/tag",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "标签",
 				"enablePullDownRefresh" : false
 			}
 		},
@@ -342,7 +343,7 @@
 			"path" : "pages/article/video",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "视频",
 				"enablePullDownRefresh" : false,
 				"navigationBarTextStyle": "white"
 			}
@@ -351,7 +352,7 @@
 			"path" : "pages/user/rank",
 			"style" : 
 			{
-				"navigationBarTitleText" : "",
+				"navigationBarTitleText" : "我的头衔",
 				"enablePullDownRefresh" : false
 			},
 			"name":"rank",
