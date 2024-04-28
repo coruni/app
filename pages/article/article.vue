@@ -121,19 +121,19 @@
 						<u-row customStyle="margin-left:20rpx;flex:1" justify="space-around">
 							<view class="bottom-btn" @click.stop.prevent="showReward = true">
 								<i style="font-size: 45rpx;" class="mgc_pig_money_line"></i>
-								<text style="font-size: 24rpx;color: #999;">{{article && article.rewards}}</text>
+								<text class="bottom-btn-text">{{article && article.rewards}}</text>
 							</view>
 							<view class="bottom-btn" @click="$u.throttle(mark(),1000,true)">
 								<i style="font-size: 45rpx;"
 									:class="[article && article.isMark?'mgc_star_fill animate__animated animate__pulse like-active':'mgc_star_line']"></i>
 
-								<text style="font-size: 24rpx;color: #999;">{{article && article.marks}}</text>
+								<text class="bottom-btn-text">{{article && article.marks}}</text>
 							</view>
 
 							<view class="bottom-btn" @click="$u.throttle(like(),1000,true)">
 								<i style="font-size: 45rpx;"
 									:class="[article &&article.isLike?'mgc_thumb_up_2_fill animate__animated animate__pulse like-active':'mgc_thumb_up_2_line']"></i>
-								<text style="font-size: 24rpx;color: #999;">{{article && article.likes}}</text>
+								<text class="bottom-btn-text">{{article && article.likes}}</text>
 							</view>
 						</u-row>
 					</u-col>
@@ -268,8 +268,7 @@
 							<text style="margin-left:20rpx" @click="shareWithSystem()">通过系统分享</text>
 						</u-row>
 						<!-- #endif -->
-						<view
-							v-if="article&& article.authorId == $store.state.userInfo.uid|| isAdmin">
+						<view v-if="article&& article.authorId == $store.state.userInfo.uid|| isAdmin">
 							<u-row customStyle="margin-bottom: 30rpx;" @click="goEdit()">
 								<i class="ess mgc_edit_line" style="font-size: 40rpx;"></i>
 								<text style="margin-left:20rpx">编辑</text>
@@ -1030,9 +1029,19 @@
 	}
 
 	.bottom-btn {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	.bottom-btn-text {
+		position: absolute;
+		top: 0;
+		right: 0;
+		font-size: 24rpx;
+		color: #999;
+		background-color: #fff;
 	}
 
 	.reward-item {
