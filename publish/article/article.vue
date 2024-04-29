@@ -201,10 +201,24 @@
 						<text style="font-weight: bold;">标签&话题：</text>
 						<text style="color: #999;">选择相关内容、分类，获得更多浏览</text>
 					</u-row>
-					<view style="margin-top: 20rpx;">
-						<u-input prefix-icon="search" placeholder="搜索标签&话题"
-							customStyle="padding:10rpx 6rpx;background:#f7f7f7" border="none"></u-input>
+					<view style="margin-top: 20rpx;display: flex">
+						<uv-input prefix-icon="search" v-model="tagKey" placeholder="搜索标签&话题"
+							customStyle="padding:10rpx 6rpx;background:#f7f7f7" border="none"
+							@input="getTags()"></uv-input>
+						<view style="margin-left: 20rpx;">
+							<u-button color="#aa96da" @click="addNewTag()">新增</u-button>
+						</view>
 					</view>
+				</view>
+				<view style="margin-top: 30rpx;">
+					<block v-for="(item,index) in article.tags" :key="index">
+						<view style="position: relative;display: inline-block;">
+							<view class="select-tag">
+								<text>{{item.name}}</text>
+							</view>
+							<i class="mgc_close_circle_line select-tag-close" @click="tagTap(item)"></i>
+						</view>
+					</block>
 				</view>
 				<view style="margin-top: 40rpx;">
 					<text style="font-weight: bold;">推荐话题</text>
@@ -215,9 +229,8 @@
 									style="width: 50rpx;height: 50rpx;background: #f7f7f7;margin-right: 20rpx;border-radius: 20rpx;">
 								</image>
 								<text
-									:style="{color:article.tags.some(tag=>tag.mid == item.mid)?'#aa96da':''}">{{item.name}}</text>
+									:style="{color:article.tags.some(tag=>tag.name == item.name)?'#aa96da':''}">{{item.name}}</text>
 							</u-row>
-
 						</block>
 					</scroll-view>
 				</view>
@@ -344,6 +357,8 @@
 				showInsertImage: false,
 				videoPath: null,
 				VideoFrame: [],
+				tagKey: '',
+				newTags: [],
 				videoInfo: {
 					frame: [],
 					width: 0,
@@ -568,10 +583,11 @@
 				this.$http.get('/category/list', {
 					params: {
 						page: 1,
-						limit: 10,
+						limit: 20,
 						params: JSON.stringify({
 							type: 'tag',
 						}),
+						searchKey: this.tagKey,
 						order: 'count'
 					}
 				}).then(res => {
@@ -729,13 +745,26 @@
 						}
 
 						this.$refs.publish.open();
-						let tags = this.article.tags.map(tag => tag.mid).join(',');
+						let tags = [];
+						let newTags = [];
+
+						this.article.tags.forEach(tag => {
+							if (tag.hasOwnProperty('mid')) {
+								tags.push(tag.mid);
+							} else if (tag.id === 0) {
+								newTags.push(tag.name); // 假设标签名字的属性为'name'
+							}
+						});
+
+						tags = tags.join(',');
+						newTags = newTags.join(',');
 						this.$http.post('/article/articleAdd', {
 							title: this.article.title,
 							text: this.article.text,
 							category: this.article.category.mid,
 							mid: this.article.category.mid,
 							tag: tags,
+							newTag: newTags,
 							opt: JSON.stringify(this.article.opt),
 							price: this.article.price,
 							discount: this.article.discount,
@@ -1069,8 +1098,17 @@
 					default:
 						break;
 				}
+			},
+			addNewTag() {
+				if (this.tagKey == '' || !this.tagKey) return;
+				let tag = {
+					name: this.tagKey,
+					id: 0,
+				}
+				this.article.tags.push(tag)
+				this.tagKey = ''
+				console.log(this.article.tags);
 			}
-
 		}
 	}
 </script>
@@ -1258,5 +1296,22 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.select-tag {
+		display: inline-block;
+		border-radius: 20rpx;
+		padding: 10rpx;
+		border: $c-primary 1rpx solid;
+		color: $c-primary;
+		font-size: 28rpx;
+		margin: 10rpx;
+
+		&-close {
+			color: $c-primary;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
 	}
 </style>
