@@ -333,6 +333,7 @@
 							category: this.article.category.mid,
 							mid: this.article.category.mid,
 							tag: tags,
+							type:'photo',
 							newTag: newTags,
 							opt: JSON.stringify(this.article.opt)
 						}).then(res => {
