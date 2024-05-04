@@ -264,24 +264,6 @@
 			</view>
 			<view slot="confirmButton"></view>
 		</uv-modal>
-		<!-- 插入链接 -->
-		<uv-modal ref="insertLink" :showConfirmButton="false" @close="showInsertLink = false" title="插入链接" :zIndex="100"
-			:show="showInsertLink">
-			<view style="width: 100%;display: flex;flex-direction: column;">
-				<view>
-					<u-input v-model="link.link" placeholder="http(s)://" border="none"
-						style="padding:15rpx;border-radius: 10rpx;background: #f7f7f7;"></u-input>
-				</view>
-				<u-gap height="10"></u-gap>
-				<u-input v-model="link.text" placeholder="链接文本" border="none"
-					style="padding:15rpx;border-radius: 10rpx;background: #f7f7f7;"></u-input>
-				<view style="margin-top: 30rpx;">
-					<u-button shape="circle" color="#aa96da" @click="insertLink()">插入链接</u-button>
-				</view>
-			</view>
-			<view slot="confirmButton"></view>
-		</uv-modal>
-
 		<!-- 插入视频 -->
 		<uv-modal ref="insertVideo" :showConfirmButton="false" @close="showInsertVideo = false" title="插入视频"
 			:zIndex="100" :show="showInsertVideo">
@@ -437,7 +419,7 @@
 				uploadTask: null,
 				showCancelTask: false,
 				showAddMore: false,
-				showInsertLink: false,
+				
 				showInsertVideo: false,
 				actions: [{
 						name: '插入外部图片',
@@ -446,12 +428,7 @@
 					{
 						name: '插入外部视频',
 						type: 'video'
-					},
-					{
-						name: '插入链接',
-						type: 'link'
 					}
-
 				],
 				link: {
 					link: '',
@@ -538,14 +515,14 @@
 				return;
 			}
 			if (this.showInsertImage || this.showCategory || this.showDraft || this.showTag || this.showPanel || this
-				.showAddMore || this.showInsertLink) {
+				.showAddMore) {
 				this.showInsertImage = false;
 				this.showCategory = false;
 				this.showDraft = false;
 				this.showTag = false;
 				this.showPanel = false;
 				this.showAddMore = false;
-				this.showInsertLink = false;
+				
 				this.$refs.insertImage.close();
 				this.$refs.insertLink.close();
 				this.$Router.$lockStatus = false
@@ -1036,29 +1013,6 @@
 					}
 				});
 			},
-			insertLink() {
-				if (!this.link.link) {
-					uni.$u.toast('链接不可为空')
-					return;
-				}
-				this.editorCtx.getContents({
-					success: (res) => {
-						let html = res.html;
-						html +=
-							`<a href='${this.link.link}'>${this.link.text?this.link.text:this.link.link}</a>`;
-						this.editorCtx.setContents({
-							html,
-							success: () => {
-								this.link.link = '';
-								this.link.text = '';
-								this.showInsertLink = false;
-								this.$refs.insertLink.close();
-							}
-						})
-					}
-				})
-
-			},
 			insertDraft(data) {
 				this.article = data
 				this.draftId = data.draftId
@@ -1085,10 +1039,6 @@
 					case 'picture':
 						this.showInsertImage = true;
 						this.$refs.insertImage.open();
-						break;
-					case 'link':
-						this.showInsertLink = true;
-						this.$refs.insertLink.open()
 						break;
 					case 'video':
 						this.showInsertVideo = true;
