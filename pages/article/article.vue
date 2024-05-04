@@ -681,34 +681,38 @@
 			replaceEmoji(html) {
 				if (html) {
 					return html.replace(
-						/<img[^>]*?alt="src=([^"]+)\|poster=([^"]+)\|type=video"[^>]*?>/g, (match, src, poster) => {
-							return `<div style="border-radius:10px"><video src="${src}" poster="${poster}" object-fit width="100%" style="border-radius:10px" /></div>`
-						}).replace(/_\|#([^_]+)_([^|]+)\|/g, (match, name, key) => {
-						const emoji = this.$emoji.data.find(e => e.name === name)
-						if (emoji) {
-							const src = `${emoji.base}${emoji.slug}_${emoji.list[key]}.${emoji.format}`
-							return `<img src="${src}" style="width:100rpx;height:100rpx" ignore>`
-						}
-						// 如果没有找到,直接返回空字符串
-						// 即删除整个匹配文本
-						return ''
-					}).replace(/\|</g, '<').replace(/>\|/g, '>').replace(/【(回复|付费)查看：([^】]+)】/g, (match, type,
-						content) => {
-						let html = ''
+							/<img[^>]*?alt="src=([^"]+)\|poster=([^"]+)\|type=video"[^>]*?>/g, (match, src, poster) => {
+								return `<div style="border-radius:10px"><video src="${src}" poster="${poster}" object-fit width="100%" style="border-radius:10px" /></div>`
+							}).replace(/_\|#([^_]+)_([^|]+)\|/g, (match, name, key) => {
+							const emoji = this.$emoji.data.find(e => e.name === name)
+							if (emoji) {
+								const src = `${emoji.base}${emoji.slug}_${emoji.list[key]}.${emoji.format}`
+								return `<img src="${src}" style="width:100rpx;height:100rpx" ignore>`
+							}
+							// 如果没有找到,直接返回空字符串
+							// 即删除整个匹配文本
+							return ''
+						})
+						.replace(/\|</g, '<').replace(/>\|/g, '>').replace(/【(回复|付费)查看：([^】]+)】/g, (match, type,
+							content) => {
+							let html = ''
 
-						html += `<a style="text-decoration:unset;color:#aa96da;border:#aa96da dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
+							html += `<a style="text-decoration:unset;color:#aa96da;border:#aa96da dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
 						隐藏内容，${type}后查看
 						</a>`
-						if (type == "付费") {
-							html += `<div style="position:absolute;bottom:10px;right:0;border-radius:5px 0 5px 0;color:white;background:#a385ff;padding:0 8px;font-size:12px !important;display:flex">
+							if (type == "付费") {
+								html += `<div style="position:absolute;bottom:10px;right:0;border-radius:5px 0 5px 0;color:white;background:#a385ff;padding:0 8px;font-size:12px !important;display:flex">
 							<div><i class="ess mgc_coin_line" style="font-size:12px"></div>
 							<p style="font-size:12px;margin-left:2px">${this.article.price>0?this.article.price:'免费'}</p>
 							</div>`
-						}
-						return html;
-					})
+							}
+							return html;
+						}).replace(/(?:https?:\/\/)(?![^<>]*>)[^\s<>]+/g, (url) => {
+							console.log(url);
+							// 匹配到链接，则用<a>标签包裹链接
+							return '<a href="' + url + '">' + url + '</a>';
+						})
 				}
-
 			},
 			like() {
 				this.$http.post('/article/like', {
