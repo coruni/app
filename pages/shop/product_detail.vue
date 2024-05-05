@@ -159,7 +159,7 @@
 					<text>收货地址</text>
 				</view>
 				<view style="margin: 30rpx;height: 50vh;">
-					<u-form :model="address" :rules="addressRules" ref="address">
+					<u-form :model="address" :rules="rules" ref="address">
 						<u-form-item :borderBottom="false" prop="contacts" label="收货人" label-width="80">
 							<u-input v-model="address && address.contacts" placeholder="名字"></u-input>
 						</u-form-item>
@@ -202,6 +202,7 @@
 				showSpecs: false,
 				showBuy: false,
 				showAddress: false,
+				
 				address: {
 					contacts: '',
 					phone: '',
@@ -308,7 +309,7 @@
 						this.address.district = res.address.district
 					},
 					fail: (err) => {
-						
+
 					}
 				})
 			},

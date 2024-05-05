@@ -125,6 +125,12 @@
 						<text style="font-size: 30rpx;margin-top: 10rpx;">{{item.name}}</text>
 					</u-row>
 				</u-grid-item>
+				<u-grid-item v-if="userInfo.group=='administrator'" @tap="goPage('myProduct')">
+					<u-row class="menu-item" justify="space-between">
+						<i class="mgc_basket_line user-menu"></i>
+						<text style="font-size: 30rpx;margin-top: 10rpx;">商品</text>
+					</u-row>
+				</u-grid-item>
 			</u-grid>
 		</view>
 		<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>

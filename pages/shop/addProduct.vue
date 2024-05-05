@@ -31,7 +31,8 @@
 					<uv-scroll-list indicatorActiveColor="#aa96da">
 						<block v-for="(image,index) in shop.imgurl" :key="index">
 							<view style="position: relative;margin-right: 20rpx;border-radius: 16rpx;">
-								<u-image :src="image" height="130" width="100" radius="8" @click="previewImg(index)"></u-image>
+								<u-image :src="image" height="130" width="100" radius="8"
+									@click="previewImg(index)"></u-image>
 								<view @click="deleteImage(index)"
 									style="position: absolute;right: 0;top: 0;background: #aa96da;color: white;border-radius: 0 16rpx 0 16rpx;">
 									<i class="ess mgc_close_line"></i>
@@ -271,10 +272,15 @@
 				});
 			},
 			save() {
+				if (this.shop.sort == null || this.shop.sort == '') {
+					uni.$u.toast('请选择分类');
+					return;
+				}
 				uni.showLoading({
 					mask: true,
 					title: '发布中...'
 				})
+				
 				let params = this.shop
 				params.sort = params.sort.id
 				if (!params.num) {
@@ -290,7 +296,7 @@
 						this.$http.post('/shop/add', {
 							...params,
 							specs: JSON.stringify(params.specs),
-							images:JSON.stringify(params.imgurl)
+							images: JSON.stringify(params.imgurl)
 						}).then(res => {
 							uni.hideLoading()
 							if (res.data.code) {
@@ -369,8 +375,8 @@
 						filePath: image,
 						name: 'file',
 					}).then(res => {
-						
-						if (res.data.code==200) {
+
+						if (res.data.code == 200) {
 							resolve(res.data.data.url)
 						} else {
 							uni.$u.toast(res.data.msg)
@@ -383,10 +389,10 @@
 			deleteImage(index) {
 				this.shop.imgurl.splice(index, 1); // 删除对应索引的图片
 			},
-			previewImg(index){
+			previewImg(index) {
 				uni.previewImage({
-					urls:this.shop.imgurl,
-					current:index
+					urls: this.shop.imgurl,
+					current: index
 				})
 			}
 
