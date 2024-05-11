@@ -1,16 +1,16 @@
 const config = {
-	// API接口，必须是HTTPS开头 
-	"api": "http://127.0.0.1",
+	// API接口，必须是HTTPS开头  填写后端域名
+	"api": "http://192.168.50.102",
 	// 版本号，禁止私自修改，后果自负
 	"version": "1.0.0",
-	// H5网页（用于分享）
+	// H5网页（用于分享） 填写前端域名
 	"h5": "https://h5.i-hentai.cc",
 	// 首页分享处描述
 	"description": "fanbbs",
-	// websocket
+	// websocket 填写后端域名
 	"websocket": "wss://api.i-hentai.cc/websocket",
-	// 客服QQ
-	"service": 1292778464,
+	// 客服QQ 在好友二维码那获取
+	"service": 'https://qm.qq.com/q/Hu5g8JpnAy',
 }
 
 // Author:CHIKATA

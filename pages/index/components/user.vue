@@ -1,230 +1,140 @@
 <template>
 	<view style="overflow: scroll;">
-		<u-navbar id="navbar"
-			:bgColor="theme === '#292929' ? $u.colorToRgba(theme, opacity) : $u.colorToRgba('#fff', opacity)">
-			<view slot="left"></view>
-		</u-navbar>
-		<!-- 头部 -->
-		<view style="position: relative;">
-			<image :src="userInfo && userInfo.userBg?userInfo.userBg:'/static/login.jpg'" mode="aspectFill"
-				class="backCover" @click="chooseBackImg()">
-			</image>
-			<view class="top-header"></view>
-			<!-- 头像 -->
-			<view class="avatar-position" @click="$store.state.hasLogin?goProfile():goLogin()">
-				<u-avatar style="border: 6rpx solid #fff;" :src="userInfo && userInfo.avatar" size="80"></u-avatar>
-				<image class="avatar_head" mode="aspectFill" :src="userInfo && userInfo.opt&&userInfo.opt.head_picture">
-				</image>
-			</view>
-			<!-- 用户数据 -->
-			<view class="data-position" style="width: 30%;" v-if="$store.state.hasLogin">
-				<u-row justify="space-between">
-					<u-col :span="6">
-						<view class="userMate">
-							<text style="font-size: 34rpx;font-Weight: bold;">{{userInfo &&userInfo.follows}}</text>
-							<text>关注</text>
-						</view>
-					</u-col>
-					<u-col :span="6">
-						<view class="userMate">
-							<text style="font-size: 34rpx;font-Weight: bold;">{{userInfo &&userInfo.fans}}</text>
-							<text>粉丝</text>
-						</view>
-					</u-col>
-				</u-row>
-			</view>
-		</view>
-		<!-- 内容 --> <!-- 间隔 -->
-		<view style="padding: 40rpx;">
-			<u-row justify="space-between" v-if="$store.state.hasLogin">
-				<view>
-					<u-row>
-						<text style="font-Weight: bold;font-size: 34rpx;"
-							:class="{'vipname':userInfo&& userInfo.isVip}">{{userInfo && userInfo.screenName?userInfo.screenName:userInfo.name}}</text>
-						<text
-							:style="{border:`${userInfo && userInfo.level > 8 ? $level[Math.floor(userInfo.level/2)-1] : $level[userInfo.level-1]} solid 2rpx`,background:userInfo && userInfo.level > 8 ? $level[Math.floor(userInfo.level/2)-1] : $level[userInfo.level-1] }"
-							class="level" v-if="userInfo.level" @click="showLevel = true">
-							Lv.{{userInfo.level}}
-						</text>
-					</u-row>
-					<u-row style="font-size: 26rpx;color: #999;">
-						<text>通行证：</text>
-						<text>{{userInfo&& userInfo.uid}}</text>
-					</u-row>
-				</view>
-				<u-row class="wallet" justify="space-between" align="end" @click="goPage('wallet')">
-					<i class="mgc_wallet_3_fill wallet-icon"></i>
-					<text class="u-line-1" style="font-size: 28rpx;">{{userInfo&& userInfo.assets}}</text>
-				</u-row>
-			</u-row>
-			<u-row v-else>
-				<text style="font-Weight: bold;font-size: 34rpx;" @click="goLogin()">登录查看更多精彩</text>
-			</u-row>
-		</view>
-		<u-gap height="6" bg-color="#f7f7f7" class="article-gap"></u-gap>
-		<view style="padding: 40rpx;" class="panel-container">
-			<u-row style="height: 400rpx;" justify="space-between">
-				<u-col :span="5" id="sign" @click="checkUp()">
-					<view class="panel-article" :style="{backgroundColor:getTime.backgroundColor}">
-						<view class="panel-article-text">
-							<text>{{getTime.greeting}}</text>
-							<text>{{($store.state.tasks && $store.state.tasks.isSign && getTime.hour>=21) ||($store.state.tasks && $store.state.tasks.isSign && getTime.hour<6)?'记得早点休息哦~':$store.state.tasks && $store.state.tasks.isSign?'今天的事务都完成了哦~':'戳戳我签到'}}</text>
-						</view>
-					</view>
-				</u-col>
-				<u-col :span="6.6" style="height: 100%;">
-					<view class="panel">
-						<view class="panel-photo">
-							<u-row justify="space-around" style="height: 100%;flex: 1;">
-								<view class="circle">
-									<i class="circle-icon circle-icon-article mgc_document_fill" data-text="文章"></i>
-									<text
-										style="margin-top: 20rpx;font-size: 24rpx;">{{userInfo && userInfo.articles}}</text>
-
-								</view>
-								<view class="circle">
-									<i class="circle-icon circle-icon-comment mgc_chat_4_fill" data-text="评论"></i>
-									<text
-										style="margin-top: 20rpx;font-size: 24rpx;">{{userInfo && userInfo.comments}}</text>
-								</view>
-								<view class="circle">
-									<i class="circle-icon circle-icon-level mgc_heart_fill" data-text="经验"
-										:style="{ background: fillStyle }"></i>
-									<text style="margin-top: 20rpx;font-size: 24rpx;"
-										v-if="$store.state.hasLogin">{{ Math.floor((userInfo.experience / userInfo.nextExp) * 100) }}%</text>
-								</view>
+		<!-- 用户banner -->
+		<view class="user-banner">
+			<u-image :src="userInfo.userBg?userInfo.userBg:'/static/login.jpg'" height="440rpx" width="100%"></u-image>
+			<view class="user-banner-radius"></view>
+			<view class="user-banner-avatar_contaniner">
+				<view class="user-banner-avatar_contaniner-avatar">
+					<u-avatar :src="userInfo.avatar||''" size="76"
+						@click="$store.state.hasLogin?goPage('headPicture'):goLogin()"></u-avatar>
+					<view class="user-banner-avatar_contaniner-button_container" v-if="$store.state.hasLogin">
+						<u-button class="user-banner-avatar_contaniner-button_container-zone"
+							@click="goProfile()">个人空间</u-button>
+						<u-button class="user-banner-avatar_contaniner-button_container-edit"
+							@click="goPage('editUser')">
+							<u-row>
+								<i class="mgc_user_setting_line" style="margin-right: 10rpx;font-size: 34rpx;"></i>
+								<text>编辑</text>
 							</u-row>
-						</view>
-						<view class="panel-video">
-							<u-row justify="space-around" style="height: 100%;flex: 1;">
-								<view class="circle" @click="goPage('editUser')">
-									<i class="circle-icon circle-icon-user mgc_user_edit_fill"></i>
-									<text style="margin-top: 20rpx;font-size: 24rpx;">信息</text>
-								</view>
-								<view class="circle" @click="goPage('headPicture')">
-									<i class="circle-icon circle-icon-head mgc_bling_fill"></i>
-									<text style="margin-top: 20rpx;font-size: 24rpx;">头像框</text>
-								</view>
-								<view class="circle" @click="goPage('rank')">
-									<i class="circle-icon circle-icon-rank mgc_drop_fill"></i>
-									<text style="margin-top: 20rpx;font-size: 24rpx;">头衔</text>
-								</view>
-							</u-row>
-						</view>
-					</view>
-				</u-col>
-			</u-row>
-		</view>
-		<!-- 更多 -->
-		<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>
-		<view style="padding: 30rpx;">
-			<u-grid :col="4">
-				<u-grid-item v-for="(item,index) in menu" :key="index" @tap="goPage(item.path)">
-					<u-row class="menu-item" justify="space-between">
-						<i :class="item.icon" class="user-menu"></i>
-						<text style="font-size: 30rpx;margin-top: 10rpx;">{{item.name}}</text>
-					</u-row>
-				</u-grid-item>
-				<u-grid-item v-if="userInfo.group=='administrator'" @tap="goPage('myProduct')">
-					<u-row class="menu-item" justify="space-between">
-						<i class="mgc_basket_line user-menu"></i>
-						<text style="font-size: 30rpx;margin-top: 10rpx;">商品</text>
-					</u-row>
-				</u-grid-item>
-			</u-grid>
-		</view>
-		<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>
-
-		<view style="padding: 30rpx;">
-			<u-row justify="space-between" style="padding: 20rpx 0;" @click="goService()">
-				<u-row>
-					<i class="mgc_service_line" style="font-size: 40rpx;"></i>
-					<text style="font-size: 30rpx;margin-left: 10rpx;">客服</text>
-				</u-row>
-				<i class="mgc_right_line"></i>
-			</u-row>
-			<u-row justify="space-between" style="padding: 20rpx 0;" @click="goPage('setting')">
-				<u-row>
-					<i class="mgc_settings_1_line" style="font-size: 40rpx;"></i>
-					<text style="font-size: 30rpx;margin-left: 10rpx;">设置</text>
-				</u-row>
-				<i class="mgc_right_line"></i>
-			</u-row>
-		</view>
-
-		<l-clipper v-if="backgroundShow" :image-url="cropperBg"
-			@success="upload($event.url,false); backgroundShow = false" @cancel="backgroundShow = false" is-limit-move
-			is-lock-ratio :width="1280" :height="720" :scaleRatio="2" :min-width="1280" :min-height="720"
-			:max-width="1920" :max-height="720" style="z-index: 99999;" />
-
-		<!-- 等级弹窗 -->
-		<u-popup mode="center" :show="showLevel" @close="showLevel = false" round="10">
-			<view style="width: 500rpx;padding: 30rpx;">
-				<view style="text-align: center;">
-					<text>等级详情</text>
-				</view>
-				<view style="display: flex;flex-direction: column;font-size: 28rpx;">
-					<u-row>
-						<text>当前等级：</text>
-						<i @click="showLevel = true" v-if="userInfo.level" :class="`level mgc_lv-${userInfo.level}`"
-							style="font-size: 50rpx; margin-left: 20rpx;"
-							:style="{ color: userInfo && userInfo.level > 8 ? $level[Math.floor(userInfo.level/2)-1] : $level[userInfo.level-1] }">
-						</i>
-					</u-row>
-					<view style="display: flex;flex-direction: column;margin-top: 30rpx;">
-						<text
-							style="color: #999;">下一级所需经验{{userInfo && userInfo.experience}}/{{userInfo && userInfo.nextExp}}</text>
-						<u-line-progress :height="4"
-							:activeColor="userInfo.level > 8 ? $level[Math.floor(userInfo.level/2)-1] : $level[userInfo.level-1]"
-							:percentage="100-((userInfo && userInfo.nextExp - userInfo.experience) / userInfo.nextExp) * 100"
-							:showText="false" v-if="userInfo"></u-line-progress>
-					</view>
-				</view>
-				<view style="margin-top: 60rpx;">
-					<u-button color="#aa96da" shape="circle" @click="showLevel = false">确定</u-button>
-				</view>
-			</view>
-		</u-popup>
-
-		<!-- 文章菜单 -->
-		<u-popup :show="showArticleMenu" round="10" @close="showArticleMenu = false" closeable>
-			<view style="margin: 30rpx;text-align: center;">
-				<text>帖子管理</text>
-				<view style="display: flex;
-				flex-direction: column;">
-					<view style="margin-bottom:30rpx">
-						<u-row @click="goEdit()">
-							<i class="ess mgc_edit_line" style="font-size: 40rpx;"></i>
-							<text style="margin-left:20rpx">编辑</text>
-						</u-row>
-					</view>
-					<view style="margin-bottom:30rpx">
-						<u-row style="color: red;" @click="showDelete = true">
-							<i class="ess mgc_delete_2_line" style="font-size: 40rpx;"></i>
-							<text style="margin-left:20rpx">删除</text>
-						</u-row>
+						</u-button>
 					</view>
 				</view>
 			</view>
 
-			<!-- 删除弹出框 -->
-			<u-popup :show="showDelete" :round="10" mode="center" @close="showDelete = false"
-				customStyle="width:500rpx">
-				<view
-					style="display: flex;flex-direction: column;align-items: center;justify-content: center;padding: 50rpx;">
-					<text style="font-size: 34rpx;">提示</text>
-					<view style="margin-top:30rpx">
-						<text>是否确定删除？</text>
+		</view>
+		<u-gap height="20"></u-gap>
+		<!-- 用户信息 -->
+		<view class="user-info" v-if="$store.state.hasLogin">
+			<text class="user-info-nickname">{{userInfo.screenName||userInfo.name}}</text>
+			<u-row class="user-info-nickname-info">
+				<i class="mgc_IDcard_fill"></i>
+				<text>UID：{{userInfo.uid}}</text>
+			</u-row>
+			<u-row class="user-info-nickname-info">
+				<i class="mgc_profile_fill"></i>
+				<text class="u-line-1">{{userInfo.introduce?userInfo.introduce:'系统默认签名'}}</text>
+			</u-row>
+			<view style="margin-top: 40rpx;">
+				<u-row>
+					<view>
+						<text class="user-info-detail">{{userInfo.fans}}</text>
+						<text class="user-info-detail-noti">粉丝</text>
 					</view>
-					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
-							@click="showDelete = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
-							@click="deleteArticle()">确定</u-button>
-					</u-row>
+					<view style="margin-left: 30rpx;">
+						<text class="user-info-detail">{{userInfo.follows}}</text>
+						<text class="user-info-detail-noti">关注</text>
+					</view>
+					<view style="margin-left: 30rpx;" @click="goPage('wallet')">
+						<text class="user-info-detail">{{userInfo.assets}}</text>
+						<text class="user-info-detail-money">{{$store.state.appInfo.currencyName||'积分'}}</text>
+					</view>
+				</u-row>
+			</view>
+		</view>
+		<view v-else class="user-info" @click="goLogin()">
+			<text class="user-info-nickname">登录解锁更多精彩</text>
+		</view>
+		<u-gap height="20"></u-gap>
+		<!-- 创作中心 -->
+		<view class="creator">
+			<text>创作中心</text>
+			<view class="creator-inner-container">
+				<view class="creator-item">
+					<i class="mgc_edit_4_line"></i>
+					<u-gap height="1"></u-gap>
+					<text>稿件管理</text>
 				</view>
-			</u-popup>
-		</u-popup>
+				<view class="creator-item">
+					<i class="mgc_firework_line"></i>
+					<u-gap height="1"></u-gap>
+					<text>精彩活动</text>
+				</view>
+			</view>
+		</view>
+		<!-- 菜单 -->
+		<u-grid :col="4">
+			<u-grid-item v-for="(item,index) in menu" :key="index" @click="goPage(item.path)">
+				<view class="creator-item" style="margin-top: 30rpx;">
+					<i :class="item.icon" style="font-size: 50rpx;"></i>
+					<u-gap height="8"></u-gap>
+					<text>{{item.name}}</text>
+				</view>
+			</u-grid-item>
+			<u-grid-item @click="goPage('level')">
+				<view class="creator-item" style="margin-top: 30rpx;">
+					<i class="mgc_VIP_1_line" style="font-size: 50rpx;"></i>
+					<u-gap height="8"></u-gap>
+					<text>我的等级</text>
+				</view>
+			</u-grid-item>
+			<u-grid-item @click="goService()">
+				<view class="creator-item" style="margin-top: 30rpx;">
+					<i class="mgc_service_line" style="font-size: 50rpx;"></i>
+					<u-gap height="8"></u-gap>
+					<text>联系客服</text>
+				</view>
+			</u-grid-item>
+		</u-grid>
+
+		<!-- 其他控件 -->
+		<view class="other-list">
+			<u-row justify="space-between">
+				<u-row>
+					<i class="mgc_align_arrow_up_line other-list-icon"></i>
+					<text>当前版本</text>
+				</u-row>
+				<text class="other-list-right" style="font-size: unset;">{{system.appVersion}}</text>
+			</u-row>
+			<!-- #ifdef APP -->
+			<u-gap height="15"></u-gap>
+			<u-row justify="space-between" @click="getUpdate()">
+				<u-row>
+					<i class="mgc_refresh_1_line other-list-icon"></i>
+					<text>更新检测</text>
+				</u-row>
+				<i class="mgc_right_line other-list-right"></i>
+			</u-row>
+			<!-- #endif -->
+
+			<u-gap height="15"></u-gap>
+			<u-row justify="space-between" @click="goPage('setting')">
+				<u-row>
+					<i class="mgc_settings_1_line other-list-icon"></i>
+					<text>设置</text>
+				</u-row>
+				<i class="mgc_right_line other-list-right"></i>
+			</u-row>
+			<u-gap height="15"></u-gap>
+			<u-row justify="space-between" @click="goPage('about')">
+				<u-row>
+					<i class="mgc_information_line other-list-icon"></i>
+					<text>关于</text>
+				</u-row>
+				<i class="mgc_right_line other-list-right"></i>
+			</u-row>
+		</view>
+
 	</view>
 </template>
 
@@ -233,7 +143,8 @@
 		mapState
 	} from 'vuex';
 	import articleItem from '../components/user/article.vue';
-	import commentItem from '../components/user/comment.vue'
+	import commentItem from '../components/user/comment.vue';
+	import silenceUpdate from '@/uni_modules/rt-uni-update/js_sdk/silence-update.js' //引入静默更新
 	export default {
 		components: {
 			articleItem,
@@ -270,30 +181,30 @@
 				backgroundShow: false,
 				cropperBg: null,
 				menu: [{
-						name: '商店',
+						name: '积分商店',
 						icon: 'mgc_shop_line',
 						path: 'shop',
 					}, {
-						name: '订单',
+						name: '我的订单',
 						icon: 'mgc_coupon_line ',
 						path: 'orderList',
 					},
 					{
-						name: '奖品',
+						name: '我的奖品',
 						icon: 'mgc_gift_line',
 						path: 'myReward'
 					}, {
-						name: "兑换",
+						name: "挂饰兑换",
 						icon: "mgc_sparkles_line",
 						path: "exchange"
 					},
 					{
-						name: "收藏",
+						name: "我的收藏",
 						icon: "mgc_star_line ",
 						path: "collect"
 					},
 					{
-						name: "历史",
+						name: "浏览历史",
 						icon: "mgc_time_line",
 						path: "history"
 					}
@@ -315,6 +226,7 @@
 				theme: '#fff',
 				sticky: 0,
 				hours: 0,
+				system: {}
 			}
 		},
 		computed: {
@@ -361,6 +273,7 @@
 				else this.theme = '#fff'
 			})
 			let system = uni.getSystemInfoSync()
+			this.system = system;
 			this.sticky = system.statusBarHeight + 44
 		},
 		onShow() {
@@ -518,316 +431,208 @@
 			goService() {
 				// 获取客服QQ this.$config.service
 				// #ifdef APP
-				plus.runtime.openWeb(`tencent://message/?uin=${this.$config.service}&Site=&menu=yes`)
+				plus.runtime.openWeb(this.$config.service)
 				// #endif
 				// #ifdef H5
-				window.open(`tencent://message/?uin=${this.$config.service}&Site=&menu=yes`)
+				window.open(this.$config.service)
 				// #endif
-			}
+			},
+			getUpdate() {
+				let platform = uni.getSystemInfoSync().platform
+				let data = {
+					describe: '', // 版本更新内容 支持<br>自动换行
+					edition_url: '', //apk、wgt包下载地址或者应用市场地址  安卓应用市场 market://details?id=xxxx 苹果store itms-apps://itunes.apple.com/cn/app/xxxxxx
+					edition_force: 0, //是否强制更新 0代表否 1代表是
+					package_type: 1, //0是整包升级（apk或者appstore或者安卓应用市场） 1是wgt升级
+					edition_issue: 1, //是否发行  0否 1是 为了控制上架应用市场审核时不能弹出热更新框
+					edition_number: 1, //版本号 最重要的manifest里的版本号 （检查更新主要以服务器返回的edition_number版本号是否大于当前app的版本号来实现是否更新）
+					edition_name: '1.0.0', // 版本名称 manifest里的版本名称
+					edition_silence: 0, // 是否静默更新 0代表否 1代表是
+				}
+				plus.runtime.getProperty(plus.runtime.appid, (inf) => {
+					this.$http.get('/system/app', {}).then(res => {
+						if (res.data.code == 200) {
+							let app = res.data.data.app
+							data.describe = app.versionIntro
+							data.edition_url = platform == 'android' ? app.androidUrl : app.iosUrl
+							data.edition_force = app.forceUpdate
+							data.package_type = app.updateType
+							data.edition_number = app.versionCode
+							data.edition_name = app.version
+							data.edition_silence = app.silence
+							data.edition_issue = app.issue
+
+							if (Number(data.edition_number) == Number(inf.versionCode)) {
+								uni.$u.toast('已是最新版本');
+							}
+							// 判断版本号
+							if (Number(data.edition_number) > Number(inf.versionCode) && data
+								.edition_issue == 1) {
+								// 判断是否热更新
+								if (data.package_type == 1 && data.edition_silence == 1) {
+									silenceUpdate(data.edition_url)
+								} else {
+									setTimeout(() => {
+										this.$Router.push({
+											path: '/uni_modules/rt-uni-update/components/rt-uni-update/rt-uni-update',
+											query: {
+												obj: JSON.stringify(data)
+											}
+										})
+									}, 200)
+
+								}
+							}
+						}
+					})
+
+				});
+			},
 		}
 	}
 </script>
 
 <style lang="scss">
-	@media (prefers-color-scheme: dark) {
-		.userPanel {
-			background: #292929 !important;
+	@media(prefers-color-scheme:dark) {}
+
+	.user-banner {
+		position: relative;
+		height: 440rpx;
+		width: 100%;
+
+		&-radius {
+			position: absolute;
+			height: 46rpx;
+			bottom: 0;
+			width: 100%;
+			background-color: white;
+			border-radius: 20rpx 20rpx 0 0;
 		}
 
-		.tabs-dark {
-			background: #292929 !important;
-			color: white;
-		}
+		&-avatar_contaniner {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
 
-		.rightPanel {
-			background: #525252 !important;
+			&-avatar {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				transform: translate(0, 25%);
+				margin: 0 30rpx;
+			}
 
-			&-bottom {
-				background: #525252 !important;
+			&-button_container {
+				display: flex;
+				align-items: center;
 
-				&-icon {
-					background: #606060 !important;
+				&-zone {
+					height: 60rpx;
+					font-size: 28rpx;
+					border-radius: 50rpx;
+					border: #eee solid 2rpx;
+					border-radius: 50rpx;
+					margin-right: 20rpx;
+				}
+
+				&-edit {
+					height: 60rpx;
+					font-size: 28rpx;
+					width: 160rpx;
+					flex-shrink: 0;
+					border-radius: 50rpx;
+					border-radius: 50rpx;
+					color: $c-primary;
+					border: $c-primary solid 2rpx;
 				}
 			}
 		}
 	}
 
-	.top-header {
-		width: 100%;
-		border-radius: 30rpx 30rpx 0 0;
-		height: 40rpx;
-		position: absolute;
-		bottom: 0;
-		background: white;
+	.user-info {
+		margin: 30rpx;
+
+		&-nickname {
+			font-weight: bold;
+			font-size: 36rpx;
+
+			&-info {
+				color: #999;
+				font-size: 28rpx;
+
+				&>i {
+					font-size: 36rpx;
+					margin-right: 15rpx;
+					color: #00aaee;
+				}
+			}
+		}
+
+		&-detail {
+
+			font-size: 34rpx;
+
+			&-noti {
+				margin-left: 15rpx;
+				color: #999;
+				font-size: 28rpx;
+			}
+
+			&-money {
+				margin-left: 15rpx;
+				font-size: 28rpx;
+				color: #ffb300;
+			}
+		}
 	}
 
-	.overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.15);
-		pointer-events: none;
-	}
-
-	.userMate {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		font-size: 26rpx;
+	.creator {
+		background-color: $c-primary;
+		padding: 20rpx;
+		font-size: 34rpx;
+		margin: 0 30rpx;
 		color: white;
-	}
-
-	.userPanel {
-		position: relative;
-		padding: 0 40rpx 40rpx 40rpx;
-	}
-
-	.u-button::before {
-		background: #aa96da;
-	}
-
-	.backCover {
-		height: 100%;
-		background-size: cover;
-		background-repeat: no-repeat;
-		width: 100%;
-		height: 500rpx;
-		transform: scale(1);
-	}
-
-	.backCover::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-
-	.btn {
-		border-radius: 50rpx;
-		height: 60rpx;
-	}
-
-	.rightPanel {
-		margin: 30rpx 30rpx 0 30rpx;
-		background: #fff;
 		border-radius: 20rpx;
 
-		&-bottom {
-			margin: 30rpx;
-			background: #fff;
+		&-inner-container {
+			margin-top: 20rpx;
 			border-radius: 20rpx;
-			padding: 30rpx;
+			padding: 20rpx;
+			background-color: white;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
 
-			&-icon {
-				font-size: 40rpx;
-				padding: 14rpx;
-				border-radius: 50rpx;
-				background: #f7f7f7;
-				color: red;
+		}
+
+		&-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			color: #999;
+			font-size: 28rpx;
+
+			&>i {
+				font-size: 60rpx;
 			}
 		}
 	}
 
-	.avatar-position {
-		position: absolute;
-		bottom: -60rpx;
-		margin: 40rpx;
-	}
-
-	.level {
-		font-size: 18rpx;
-		padding: 0 16rpx;
-		border-radius: 50rpx;
-		margin-left: 20rpx;
-		color: white;
-	}
-
-	.data-position {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		padding: 40rpx;
-	}
-
-	.wallet {
-		background: #09244b;
-		color: white;
-		width: 140rpx;
-		border-radius: 6rpx;
-		overflow: hidden;
-		padding: 10rpx;
+	.other-list {
+		margin: 30rpx;
+		border-radius: 20rpx;
+		background-color: #fafafa;
+		padding: 20rpx;
 
 		&-icon {
-			color: white;
-			font-size: 45rpx;
-		}
-	}
-
-	.panel-container {
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: right;
-	}
-
-	.panel {
-		display: flex;
-		flex-direction: column;
-		height: 100%;
-		justify-content: space-around;
-
-		&-article {
-			display: flex;
-			position: relative;
-			justify-content: center;
-			align-items: flex-end;
-			background-color: #f38181;
-			border-radius: 10rpx;
-			width: 100%;
-			height: 400rpx;
-			color: white;
-			background-image: url('@/static/user/sign_background.webp') !important;
-			background-repeat: no-repeat !important;
-			background-position: center 300rpx !important;
-			background-size: cover !important;
-			transition: all ease 0.5s;
-
-			&:hover {
-				background-position: 0 22rpx !important;
-
-				.panel-article-text {
-					bottom: 200rpx;
-					color: #78bbde;
-
-				}
-			}
-
-			&-text {
-				overflow: hidden;
-				display: flex;
-				padding: 0 20rpx;
-				flex-direction: column;
-				position: absolute;
-				bottom: 100rpx;
-				transition: all 0.5s ease;
-			}
-		}
-	}
-
-	.circle {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-	}
-
-	.circle-icon {
-		padding: 20rpx;
-		border-radius: 50rpx;
-		color: white;
-		font-size: 40rpx;
-		position: relative; // 添加相对定位
-		transition: all 0.3s ease; // 添加过渡效果
-
-		&::after {
-			content: attr(data-text); // 获取 data-text 属性作为文字内容
-			color: black;
-			position: absolute; // 绝对定位
-			left: 50%;
-			font-size: 24rpx;
-			font-Weight: bold;
-			width: 100%;
-			text-align: center;
-			transform: translateX(-50%); // 水平居中
-			bottom: -30rpx; // 距离图标底部 30rpx
-			opacity: 0; // 初始时文字不可见
-			transition: opacity 0.3s ease; // 添加过渡效果
+			font-size: 40rpx;
+			margin-right: 15rpx;
 		}
 
-		&:hover {
-			transform: translateY(-10rpx); // 悬停时向上平移 10rpx
-
-			&::after {
-				opacity: 1; // 悬停时文字可见
-			}
+		&-right {
+			font-size: 40rpx;
+			color: #999;
 		}
-
-		&-article {
-			background-color: #ff8c94;
-			box-shadow: 0 0 10rpx 0 #ff8c94;
-		}
-
-		&-comment {
-			background-color: #0dceda;
-			box-shadow: 0 0 10rpx 0 #0dceda;
-		}
-
-		&-level {
-			background-color: #aa96da;
-			box-shadow: 0 0 10rpx 0 #aa96da;
-		}
-
-		&-user {
-			background-color: #ffaa64;
-			box-shadow: 0 0 10rpx 0 #ffaa64;
-		}
-
-		&-rank {
-			background-color: #6eb6ff;
-			box-shadow: 0 0 10rpx 0 #6eb6ff;
-		}
-
-		&-head {
-			background-color: #f67280;
-			box-shadow: 0 0 10rpx 0 #f67280;
-		}
-	}
-
-	.menu-item {
-		padding: 30rpx;
-		margin-bottom: 20rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		border-radius: 10rpx;
-	}
-
-	.more {
-		font-Weight: bold;
-		position: relative;
-
-		::after {
-			content: "";
-			position: absolute;
-			bottom: -8rpx;
-			height: 6rpx;
-			background: #2d4059;
-			border-radius: 50rpx;
-			left: 0;
-			width: 100%;
-		}
-
-		&-position {
-			position: absolute;
-			overflow: hidden;
-			right: 0;
-			top: 0;
-			opacity: 0.5;
-			font-size: 160rpx;
-		}
-	}
-
-	.user-menu {
-		font-size: 45rpx;
-		padding: 15rpx;
-		background-color: #aa96da1e;
-		color: #aa96da;
-		border-radius: 50rpx;
 	}
 </style>

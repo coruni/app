@@ -6,8 +6,8 @@
 				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": false
 			},
-			
-			"name":"home"
+
+			"name": "home"
 
 		}, {
 			"path": "pages/profile/profile",
@@ -86,7 +86,7 @@
 				"enablePullDownRefresh": false
 			},
 			"name": "headPicture",
-			"perm":"login"
+			"perm": "login"
 		},
 		{
 			"path": "pages/user/collect",
@@ -230,7 +230,7 @@
 				"enablePullDownRefresh": false
 			},
 			"name": "orderList",
-			"perm":"login"
+			"perm": "login"
 		},
 		{
 			"path": "pages/user/tracking",
@@ -312,7 +312,7 @@
 				"enablePullDownRefresh": false
 			},
 			"name": "video",
-			"perm":"login"
+			"perm": "login"
 		},
 		{
 			"path": "pagesA/lottery/lottery",
@@ -322,41 +322,52 @@
 			}
 		},
 		{
-			"path" : "pages/user/reward",
-			"style" : 
-			{
-				"navigationBarTitleText" : "我的奖品",
-				"enablePullDownRefresh" : false
+			"path": "pages/user/reward",
+			"style": {
+				"navigationBarTitleText": "我的奖品",
+				"enablePullDownRefresh": false
 			},
-			"name":"myReward",
-			"perm":"login"
+			"name": "myReward",
+			"perm": "login"
 		},
 		{
-			"path" : "pages/common/tag/tag",
-			"style" : 
-			{
-				"navigationBarTitleText" : "标签",
-				"enablePullDownRefresh" : false
+			"path": "pages/common/tag/tag",
+			"style": {
+				"navigationBarTitleText": "标签",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
-			"path" : "pages/article/video",
-			"style" : 
-			{
-				"navigationBarTitleText" : "视频",
-				"enablePullDownRefresh" : false,
+			"path": "pages/article/video",
+			"style": {
+				"navigationBarTitleText": "视频",
+				"enablePullDownRefresh": false,
 				"navigationBarTextStyle": "white"
 			}
 		},
 		{
-			"path" : "pages/user/rank",
+			"path": "pages/user/rank",
+			"style": {
+				"navigationBarTitleText": "我的头衔",
+				"enablePullDownRefresh": false
+			},
+			"name": "rank",
+			"perm": "login"
+		},
+		{
+			"path": "pages/user/setting/about",
+			"style": {
+				"navigationBarTitleText": ""
+			},
+			"name": "about"
+		},
+		{
+			"path" : "pages/user/level",
 			"style" : 
 			{
-				"navigationBarTitleText" : "我的头衔",
-				"enablePullDownRefresh" : false
+				"navigationBarTitleText" : ""
 			},
-			"name":"rank",
-			"perm":"login"
+			"name":"level"
 		}
 	],
 	"globalStyle": {

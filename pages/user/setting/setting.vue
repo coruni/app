@@ -48,10 +48,10 @@
 					<text>建议与反馈</text>
 					<i class="ess mgc_right_small_line" style="font-size: 50rpx;"></i>
 				</u-row>
-				<u-row justify="space-between" style="padding: 20rpx 30rpx;" @click="getUpdate()">
+				<!-- <u-row justify="space-between" style="padding: 20rpx 30rpx;" @click="getUpdate()">
 					<text>检查更新</text>
 					<i class="ess mgc_right_small_line" style="font-size: 50rpx;"></i>
-				</u-row>
+				</u-row> -->
 			</view>
 			<u-gap height="6" bgColor="#f7f7f7" class="article-gap"></u-gap>
 			<view>
