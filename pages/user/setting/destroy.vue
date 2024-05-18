@@ -28,12 +28,12 @@
 
 			<view style="margin-top: 30rpx;">
 				<u-checkbox-group>
-					<u-checkbox v-model="accept" activeColor="#aa96da" size="mini" shape="circle"
+					<u-checkbox v-model="accept" activeColor="#88d8c0" size="mini" shape="circle"
 						@change="accept = !accept" label="注销账号则代表您已阅读并同意本协议"></u-checkbox>
 				</u-checkbox-group>
 
 				<view style="margin-top: 30rpx;">
-					<u-button shape="circle" color="#aa96da" style="box-shadow: #aa96da 0 0 8rpx 0 ;"
+					<u-button shape="circle" color="#88d8c0" style="box-shadow: #88d8c0 0 0 8rpx 0 ;"
 						@click="destroyAccount">确定注销</u-button>
 				</view>
 			</view>

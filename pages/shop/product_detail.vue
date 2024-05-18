@@ -12,7 +12,7 @@
 			<u-swiper height="280" :list="info && info.imgurl" radius="0" circular @click="swiperTap"
 				@change="swiperIndex = $event.current"></u-swiper>
 			<view
-				style="font-size: 24rpx;background: #aa96daa0;border-radius:20rpx 0rpx 0rpx 0 ;padding:6rpx 20rpx;position: absolute;bottom: 0;right: 0;"
+				style="font-size: 24rpx;background: #88d8c0a0;border-radius:20rpx 0rpx 0rpx 0 ;padding:6rpx 20rpx;position: absolute;bottom: 0;right: 0;"
 				v-if="info.imgurl && info.imgurl.length">
 				<text style="color: #fff;">{{swiperIndex+1}}/{{info.imgurl&&info.imgurl.length}}</text>
 			</view>
@@ -47,7 +47,7 @@
 									background: #fff;
 									margin-right: 20rpx;
 									margin-bottom: 10rpx;
-									" :style="[selectSpecs.id==item.id ? {background:'#aa96dac3', color:'#fff'} : {}]"
+									" :style="[selectSpecs.id==item.id ? {background:'#88d8c0c3', color:'#fff'} : {}]"
 							@tap.stop="selectSpecs = item">
 							<text>{{item.name}}</text>
 						</view>
@@ -66,7 +66,7 @@
 					<u-col span="6">
 						<u-row>
 							<u-button shape="circle" plain customStyle="height:60rpx;width:200rpx">关注</u-button>
-							<u-button shape="circle" color="#aa96da"
+							<u-button shape="circle" color="#88d8c0"
 								customStyle="height:60rpx;margin-left:20rpx">更多商品</u-button>
 						</u-row>
 					</u-col>
@@ -80,7 +80,7 @@
 		</view>
 		<view style="position: fixed;bottom: 0;width: 100%;background: white;">
 			<view style="padding: 20rpx 30rpx;">
-				<u-button color="#aa96da" shape="circle" style="box-shadow: 0 0 4px 0 #aa96da;"
+				<u-button color="#88d8c0" shape="circle" style="box-shadow: 0 0 4px 0 #88d8c0;"
 					@click="showSpecs = true">购买</u-button>
 			</view>
 		</view>
@@ -103,7 +103,7 @@
 				<view style="margin-top: 20rpx;">
 					<u-row justify="space-between" @click="showAddress =true">
 						<u-row align="top" style="flex:1">
-							<view style="background: #aa96da;
+							<view style="background: #88d8c0;
 								border-radius: 50rpx;
 								color: white;
 								padding: 8rpx;
@@ -142,7 +142,7 @@
 										background: #fff;
 										margin-right: 20rpx;
 										margin-bottom: 10rpx;
-										" :style="[selectSpecs.id==item.id ? {background:'#aa96dac3', color:'#fff'} : {}]"
+										" :style="[selectSpecs.id==item.id ? {background:'#88d8c0c3', color:'#fff'} : {}]"
 								@tap.stop="selectSpecs = item">
 								<text>{{item.name}}</text>
 							</view>
@@ -150,7 +150,7 @@
 					</u-row>
 				</view>
 				<view style="margin-top: 60rpx;">
-					<u-button color="#aa96da" shape="circle" @click="genOrder()">立即购买</u-button>
+					<u-button color="#88d8c0" shape="circle" @click="genOrder()">立即购买</u-button>
 				</view>
 			</view>
 
@@ -169,7 +169,7 @@
 						<u-form-item :borderBottom="false" prop="region" label="所在地区" label-width="80">
 							<u-input v-model="address && address.region" placeholder="请填写省/市/县">
 								<template slot="suffix">
-									<u-icon name="map" color="#aa96da" size="20" @click="getLocaltion()"></u-icon>
+									<u-icon name="map" color="#88d8c0" size="20" @click="getLocaltion()"></u-icon>
 								</template>
 							</u-input>
 						</u-form-item>
@@ -178,7 +178,7 @@
 								height="40"></u-textarea>
 						</u-form-item>
 					</u-form>
-					<u-button color="#aa96da" style="margin-top: 60rpx;" shape="circle"
+					<u-button color="#88d8c0" style="margin-top: 60rpx;" shape="circle"
 						@click="saveAddress();showAddress=false">保存</u-button>
 				</view>
 			</u-popup>

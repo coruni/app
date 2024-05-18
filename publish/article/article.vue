@@ -88,7 +88,7 @@
 							</swiper-item>
 						</swiper>
 					</block>
-					<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#aa96da"
+					<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#88d8c0"
 						itemStyle="height: 24px;"
 						:activeStyle="{color: '#303133',fontWeight: 'bold',transform: 'scale(1.05)'}"
 						:inactiveStyle="{color: '#606266',transform: 'scale(1)'}" @change="emojiIndex = $event.index"
@@ -147,7 +147,7 @@
 							</u-col>
 							<u-col span="1" customStyle="margin-left:10rpx">
 								<u-icon :name="article.opt.files.length>=2?'minus-circle':'plus-circle'" size="20"
-									color="#aa96da" @click="addFile(index)"></u-icon>
+									color="#88d8c0" @click="addFile(index)"></u-icon>
 							</u-col>
 						</u-row>
 					</block>
@@ -160,12 +160,12 @@
 							<text style="font-size: 32rpx;font-weight: bold;">创作声明</text>
 							<text style="font-size: 26rpx;color: #999;">开启之后文章显示创作声明</text>
 						</u-row>
-						<u-switch size="20" v-model="article.opt.create" activeColor="#aa96da"></u-switch>
+						<u-switch size="20" v-model="article.opt.create" activeColor="#88d8c0"></u-switch>
 					</u-row>
 					<u-gap height="6"></u-gap>
 					<u-row justify="space-between">
 						<text style="font-size: 32rpx;font-weight: bold;">允许评论</text>
-						<u-switch size="20" v-model="article.allowComment" activeColor="#aa96da"></u-switch>
+						<u-switch size="20" v-model="article.allowComment" activeColor="#88d8c0"></u-switch>
 					</u-row>
 					<u-gap height="6"></u-gap>
 					<u-row justify="space-between">
@@ -180,16 +180,31 @@
 
 		<!-- 组件 -->
 		<!-- 分类 -->
-		<u-popup mode="right" :show="showCategory" @close="showCategory = false">
-			<u-gap height="50"></u-gap>
-			<view class="right-category">
-				<block v-for="(item,index) in category" :key="index">
-					<u-row class="category-item" @click="article.category = item;showCategory = false">
-						<image :src="item.imgurl" mode="aspectFill"
-							style="width: 50rpx;height: 50rpx;border-radius: 10rpx;"></image>
-						<text style="margin-left: 20rpx;" class="u-line-1">{{item.name}}</text>
-					</u-row>
-				</block>
+		<u-popup customStyle="border-radius:40rpx 40rpx 0 0;" :show="showCategory" @close="showCategory = false"
+			:closeable="true">
+			<view style="height: 60vh;padding:30rpx;border-radius:40rpx 40rpx 0 0;">
+				<view style="text-align: center;">选择板块</view>
+				<view style="margin-top: 30rpx;">
+					<scroll-view scroll-y style="height: 65vh;">
+						<u-row justify="space-between" style="flex-wrap: wrap;">
+							<block v-for="(item,index) in category" :key="index">
+								<u-col :span="5.8">
+									<u-row style="padding: 20rpx;" align="top"
+										@click="article.category = item;showCategory = false">
+										<image :src="item.imgurl" mode="aspectFill"
+											style="width: 100rpx;height: 100rpx;border-radius: 20rpx;background: #f7f7f7;flex-shrink: 0;">
+										</image>
+										<view style="margin-left: 20rpx;display: flex;flex-direction: column;">
+											<text style="font-Weight: bold;" class="u-line-1">{{item.name}}</text>
+											<text style="font-size: 30rpx;color: #999;"
+												class="u-line-1">{{item.description}}</text>
+										</view>
+									</u-row>
+								</u-col>
+							</block>
+						</u-row>
+					</scroll-view>
+				</view>
 			</view>
 		</u-popup>
 
@@ -206,7 +221,7 @@
 							customStyle="padding:10rpx 6rpx;background:#f7f7f7" border="none"
 							@input="getTags()"></uv-input>
 						<view style="margin-left: 20rpx;">
-							<u-button color="#aa96da" @click="addNewTag()">新增</u-button>
+							<u-button color="#88d8c0" @click="addNewTag()">新增</u-button>
 						</view>
 					</view>
 				</view>
@@ -229,7 +244,7 @@
 									style="width: 50rpx;height: 50rpx;background: #f7f7f7;margin-right: 20rpx;border-radius: 20rpx;">
 								</image>
 								<text
-									:style="{color:article.tags.some(tag=>tag.name == item.name)?'#aa96da':''}">{{item.name}}</text>
+									:style="{color:article.tags.some(tag=>tag.name == item.name)?'#88d8c0':''}">{{item.name}}</text>
 							</u-row>
 						</block>
 					</scroll-view>
@@ -240,13 +255,13 @@
 			@close="showLoading=false;uploadErr.status = false;uploadErr.msg=null;"
 			:closeOnClickOverlay="uploadErr.status" :showConfirmButton="false"
 			:title="uploadErr.status?'上传错误':'上传中...'">
-			<u-line-progress :percentage="percentage" activeColor="#aa96da" :showText="false"
+			<u-line-progress :percentage="percentage" activeColor="#88d8c0" :showText="false"
 				v-if="!uploadErr.status"></u-line-progress>
 			<text v-if="uploadErr.status">错误信息：{{uploadErr.msg}}</text>
 		</u-modal>
 		<uv-modal ref="publish" :closeOnClickOverlay="false" :showConfirmButton="false" :show-cancel-button="false"
 			width="300rpx">
-			<uv-loading-icon text="发布中..." mode="circle" color="#aa96da"></uv-loading-icon>
+			<uv-loading-icon text="发布中..." mode="circle" color="#88d8c0"></uv-loading-icon>
 			<view slot="confirmButton"></view>
 		</uv-modal>
 		<!-- 插入图片 -->
@@ -259,7 +274,7 @@
 						placeholder="http(s)://"></u-input>
 				</view>
 				<view style="margin-top: 30rpx;">
-					<u-button shape="circle" color="#aa96da" @click="insertImages()">插入</u-button>
+					<u-button shape="circle" color="#88d8c0" @click="insertImages()">插入</u-button>
 				</view>
 			</view>
 			<view slot="confirmButton"></view>
@@ -276,7 +291,7 @@
 				<u-input v-model="video.poster" placeholder="封面链接" border="none"
 					style="padding:15rpx;border-radius: 10rpx;background: #f7f7f7;"></u-input>
 				<view style="margin-top: 30rpx;">
-					<u-button shape="circle" color="#aa96da" @click="insertVideo(false)">插入视频</u-button>
+					<u-button shape="circle" color="#88d8c0" @click="insertVideo(false)">插入视频</u-button>
 				</view>
 			</view>
 			<view slot="confirmButton"></view>
@@ -290,7 +305,7 @@
 				<scroll-view style="overflow: scroll;height: 55vh;" scroll-y>
 					<view v-if="draftList">
 						<block v-for="(item,index) in draftList" v-if="item.draftId !=draftId">
-							<view style="padding:30rpx;background:#aa96da0a;border-radius: 20rpx;margin-bottom: 20rpx;"
+							<view style="padding:30rpx;background:#88d8c00a;border-radius: 20rpx;margin-bottom: 20rpx;"
 								@click="insertDraft(item)">
 								<text v-if="item.title">{{item.title}}</text>
 								<u-parse style="overflow: hidden;" :content="item.text" v-if="item.text"
@@ -311,9 +326,9 @@
 					<text>是否取消上传？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showCancelTask = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="cancelTask()">确定</u-button>
 				</u-row>
 			</view>
@@ -355,7 +370,7 @@
 				showLoading: false,
 				showPanel: false,
 				format: {
-					color: ['#aa96da', '#5bd784', '#ffa600', '#0dd0f2', '#fb4f14', '#000000'],
+					color: ['#88d8c0', '#5bd784', '#ffa600', '#0dd0f2', '#fb4f14', '#000000'],
 					method: [{
 						name: '粗体',
 						tool: 'bold',
@@ -419,7 +434,7 @@
 				uploadTask: null,
 				showCancelTask: false,
 				showAddMore: false,
-				
+
 				showInsertVideo: false,
 				actions: [{
 						name: '插入外部图片',
@@ -522,7 +537,7 @@
 				this.showTag = false;
 				this.showPanel = false;
 				this.showAddMore = false;
-				
+
 				this.$refs.insertImage.close();
 				this.$refs.insertLink.close();
 				this.$Router.$lockStatus = false
@@ -1191,7 +1206,7 @@
 	.publish-button {
 		display: flex;
 		align-items: center;
-		background: #aa96da;
+		background: #88d8c0;
 		border-radius: 10rpx;
 		padding: 10rpx;
 		color: white;
@@ -1227,8 +1242,8 @@
 		font-size: 45rpx;
 		border-radius: 50rpx;
 		padding: 10rpx;
-		background-color: #aa96da1e;
-		color: #aa96da;
+		background-color: #88d8c01e;
+		color: #88d8c0;
 	}
 
 	.color {

@@ -357,17 +357,25 @@
 		{
 			"path": "pages/user/setting/about",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "关于"
 			},
 			"name": "about"
 		},
 		{
-			"path" : "pages/user/level",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/user/level",
+			"style": {
+				"navigationBarTitleText": "我的等级"
 			},
-			"name":"level"
+			"name": "level",
+			"perm": "login"
+		},
+		{
+			"path": "pages/user/article",
+			"style": {
+				"navigationBarTitleText": "稿件管理"
+			},
+			"name": "userArticle",
+			"perm": "login"
 		}
 	],
 	"globalStyle": {

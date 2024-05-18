@@ -12,7 +12,7 @@
 				<u-row align="center">
 					<u-row>
 						<text
-							:style="{color:data && data.userInfo&&data.userInfo.isVip?'#aa96da':'',fontSize:30+'rpx',fontWeight:600}">{{data.userInfo.screenName?data.userInfo.screenName:data.userInfo.name}}</text>
+							:style="{color:data && data.userInfo&&data.userInfo.isVip?'#88d8c0':'',fontSize:30+'rpx',fontWeight:600}">{{data.userInfo.screenName?data.userInfo.screenName:data.userInfo.name}}</text>
 						<text
 							:style="{border:`${data.userInfo.level > 8 ? $level[Math.floor(data.userInfo.level/2)-1] : $level[data.userInfo.level-1]} solid 2rpx`,background:data.userInfo.level > 8 ? $level[Math.floor(data.userInfo.level/2)-1] : $level[data.userInfo.level-1] }"
 							style="font-size: 18rpx;padding: 0 16rpx;border-radius: 50rpx;margin-left:20rpx;color: white;"
@@ -67,7 +67,7 @@
 							<u-row style="margin-right: 30rpx;"
 								v-if="$store.state.userInfo.uid == data.userInfo.uid || $store.state.userInfo.group=='administrator' ||$store.state.userInfo.group=='editor'"
 								@click="showDelete = true">
-								<i class="mgc_delete_2_line" style="font-size: 36rpx;color: #aa96da;"></i>
+								<i class="mgc_delete_2_line" style="font-size: 36rpx;color: #88d8c0;"></i>
 								<text style="font-size: 28rpx;margin-left: 10rpx;">删除</text>
 							</u-row>
 							<u-row @click="reply(data)" style="margin-right: 30rpx;">
@@ -92,9 +92,9 @@
 					<text>是否删除该评论？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showDelete = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="deleteComment()">确定</u-button>
 				</u-row>
 			</view>
@@ -202,7 +202,7 @@
 	}
 
 	.subComment {
-		border-left: 6rpx solid #aa96da1e;
+		border-left: 6rpx solid #88d8c01e;
 		padding-left: 15rpx;
 		flex-direction: column;
 		padding-bottom: 5rpx
@@ -211,7 +211,7 @@
 	.moreComment {
 		padding: 8rpx 20rpx;
 		font-size: 26rpx;
-		background: #aa96da1e;
+		background: #88d8c01e;
 		display: flex;
 		align-items: center;
 		width: 180rpx;

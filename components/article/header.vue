@@ -14,10 +14,10 @@
 						<text style="font-size: 30rpx;font-Weight: bold;max-width: 240rpx;" class="u-line-1"
 							:class="{'vipname':data&& data.authorInfo && data.authorInfo.isVip}">{{data.authorInfo.screenName?data.authorInfo.screenName:data.authorInfo.name}}</text>
 						<text
-							:style="{border:`${data.authorInfo.level > 8 ? $level[Math.floor(data.authorInfo.level/2)-1] : $level[data.authorInfo.level-1]} solid 2rpx`,background:data.authorInfo.level > 8 ? $level[Math.floor(data.authorInfo.level/2)-1] : $level[data.authorInfo.level-1] }"
+							:style="{border:`${data.authorInfo.level > 8 ? $level[Math.floor(data.authorInfo.level/2)-2] : $level[data.authorInfo.level-2]} solid 2rpx`,background:data.authorInfo.level > 8 ? $level[Math.floor(data.authorInfo.level/2)-2] : $level[data.authorInfo.level-2] }"
 							style="font-size: 18rpx;padding: 0 16rpx;border-radius: 50rpx;margin:0 20rpx;color: white;"
 							v-if="data.authorInfo.level">
-							Lv.{{data.authorInfo.level}}
+							Lv.{{data.authorInfo.level-1}}
 						</text>
 						<view style="height: 40rpx;"
 							v-if="data.authorInfo && data.authorInfo.opt&& data.authorInfo.opt.rank &&data.authorInfo.opt.rank.type==1">
@@ -39,9 +39,9 @@
 				<view @click.stop="follow(data.authorInfo.uid)">
 					<u-button :plain="data && data.authorInfo&& !data.authorInfo.isFollow" shape="circle"
 						hover-class="button_hover"
-						:color="data && data.authorInfo&& data.authorInfo.isFollow?'#aa96da0f':'#aa96da'"
+						:color="data && data.authorInfo&& data.authorInfo.isFollow?'#88d8c00f':'#88d8c0'"
 						style="font-size:28rpx;height:55rpx;"
-						:style="{color:data && data.authorInfo&& data.authorInfo.isFollow?'':'#aa96da'}"
+						:style="{color:data && data.authorInfo&& data.authorInfo.isFollow?'':'#88d8c0'}"
 						:text="data && data.authorInfo&& data.authorInfo.isFollow?'已关注':'关注'" class="follow"
 						@click="$emit('follow',true)"></u-button>
 

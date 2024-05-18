@@ -20,11 +20,11 @@
 							<u-row style="margin-right:20rpx;"
 								@click="article.authorInfo.isFollow?showFollow = true:follow(article.authorId)">
 								<i class="ess mgc_add_line" style="font-size: 30rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo &&article.authorInfo.isFollow?'':'#aa96da'}"
+									:style="{color:article && article.authorInfo &&article.authorInfo.isFollow?'':'#88d8c0'}"
 									v-if="article && article.authorInfo &&!article.authorInfo.isFollow"></i>
 
 								<text style="font-size: 26rpx;margin-left: 10rpx;padding-right:20rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">
+									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#88d8c0'}">
 									{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}
 								</text>
 							</u-row>
@@ -161,7 +161,7 @@
 					</u-row>
 				</u-col>
 				<view>
-					<u-button shape="circle" color="#aa96da" customStyle="padding:4rpx,6rpx;height:50rpx;"
+					<u-button shape="circle" color="#88d8c0" customStyle="padding:4rpx,6rpx;height:50rpx;"
 						@click="$u.throttle(reply(),2000,true) ">
 						<i class="ess mgc_send_line" style="font-size: 40rpx;"></i>
 						<text>发送</text>
@@ -193,7 +193,7 @@
 						</swiper-item>
 					</swiper>
 				</block>
-				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#aa96da"
+				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#88d8c0"
 					itemStyle="height: 26px;"
 					:activeStyle="{color: '#303133',fontWeight: 'bold',transform: 'scale(1.05)'}"
 					:inactiveStyle="{color: '#606266',transform: 'scale(1)'}" @change="emojiIndex = $event.index"
@@ -243,7 +243,7 @@
 					<text>分享至</text>
 				</view>
 				<view style="margin-top: 50rpx;">
-					<u-row customStyle="border-bottom:1rpx solid #aa96da0a;padding-bottom:30rpx" justify="space-around">
+					<u-row customStyle="border-bottom:1rpx solid #88d8c00a;padding-bottom:30rpx" justify="space-around">
 						<block v-for="(item,index) in share" :key="index">
 							<u-row align="center" customStyle="flex-direction:column" @click="shareWithApi(item)">
 								<view style="padding: 20rpx;border-radius: 100rpx;" :style="{background:item.color}">
@@ -294,9 +294,9 @@
 						<text>是否确定删除？</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showDelete = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="deleteArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -314,9 +314,9 @@
 						<text>是否{{article&& article.status=='publish'?'取消审核':'审核通过'}}</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showPublishAction = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="appArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -327,7 +327,7 @@
 			@close="showLoading=false;uploadErr.status = false;uploadErr.msg=null;"
 			:closeOnClickOverlay="uploadErr.status" :showConfirmButton="false"
 			:title="uploadErr.status?'上传错误':'上传中...'">
-			<u-line-progress :percentage="percentage" activeColor="#aa96da" :showText="false"
+			<u-line-progress :percentage="percentage" activeColor="#88d8c0" :showText="false"
 				v-if="!uploadErr.status"></u-line-progress>
 			<text v-if="uploadErr.status">错误信息：{{uploadErr.msg}}</text>
 			<view slot="confirmButton"></view>
@@ -340,9 +340,9 @@
 					<text>是否确定查看？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showPay = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="buyHide()">确定</u-button>
 				</u-row>
 			</view>
@@ -355,9 +355,9 @@
 					<text>是否取消关注？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showFollow = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="follow(article.authorId)">确定</u-button>
 				</u-row>
 			</view>
@@ -457,7 +457,7 @@
 						icon: 'mgc_palette_line'
 					}
 				],
-				colors: ['#aa96da', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
+				colors: ['#88d8c0', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
 				share: [{
 						name: '微信',
 						icon: 'weixin-fill',
@@ -697,7 +697,7 @@
 							content) => {
 							let html = ''
 
-							html += `<a style="text-decoration:unset;color:#aa96da;border:#aa96da dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
+							html += `<a style="text-decoration:unset;color:#88d8c0;border:#88d8c0 dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
 						隐藏内容，${type}后查看
 						</a>`
 							if (type == "付费") {
@@ -976,7 +976,7 @@
 			display: flex;
 			align-items: center;
 			border-radius: 50rpx;
-			border: 2rpx solid #aa96da32;
+			border: 2rpx solid #88d8c032;
 			padding: 0rpx 16rpx;
 			line-height: 1;
 		}
@@ -1004,7 +1004,7 @@
 
 		&-order {
 			font-size: 30rpx;
-			color: #aa96da;
+			color: #88d8c0;
 			display: flex;
 			flex-direction: column;
 			position: absolute;

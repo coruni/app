@@ -51,7 +51,7 @@
 					</view>
 					<view slot="suffix" v-if="config && config.isEmail">
 						<u-code ref="uCode" @change="codeChange" seconds="120"></u-code>
-						<u-button @tap="getCode" plain color="#aa96da" size="mini">{{tips}}</u-button>
+						<u-button @tap="getCode" plain color="#88d8c0" size="mini">{{tips}}</u-button>
 					</view>
 				</uv-input>
 				<u-gap v-if="config && config.isEmail || config && config.isInvite"></u-gap>
@@ -76,21 +76,21 @@
 			<view style="margin-top:40rpx">
 				<u-row>
 					<u-checkbox-group>
-						<u-checkbox @change="accept=!accept" v-model="accept" activeColor="#aa96da" size="15"
+						<u-checkbox @change="accept=!accept" v-model="accept" activeColor="#88d8c0" size="15"
 							shape="circle"></u-checkbox>
 					</u-checkbox-group>
 					<u-row customStyle="font-size:30rpx">
 						<text>登录及代表你同意</text>
-						<text style="color:#aa96da">《用户协议》</text>
+						<text style="color:#88d8c0">《用户协议》</text>
 						<text>与</text>
-						<text style="color:#aa96da">《隐私政策》</text>
+						<text style="color:#88d8c0">《隐私政策》</text>
 					</u-row>
 				</u-row>
 			</view>
 
 			<view style="margin-top: 60rpx;">
-				<u-button :text="isLogin?'登录':'注册'" shape="circle" :hairline="false" color="#aa96da" size="normal"
-					loading-size="10" customStyle="width:300rpx; height:80rpx;box-shadow:0 0 9rpx 0 #aa96da"
+				<u-button :text="isLogin?'登录':'注册'" shape="circle" :hairline="false" color="#88d8c0" size="normal"
+					loading-size="10" customStyle="width:300rpx; height:80rpx;box-shadow:0 0 9rpx 0 #88d8c0"
 					@click="isLogin?login():register()"></u-button>
 			</view>
 			<!-- 仅APP显示 -->
@@ -131,7 +131,7 @@
 				</view>
 				<view slot="suffix" v-if="config && config.isEmail">
 					<u-code ref="uCode1" @change="codeChange" seconds="120"></u-code>
-					<u-button @tap="getAllCode" plain color="#aa96da" size="mini">{{tips}}</u-button>
+					<u-button @tap="getAllCode" plain color="#88d8c0" size="mini">{{tips}}</u-button>
 				</view>
 			</uv-input>
 
@@ -142,20 +142,20 @@
 			<view style="margin-top:20rpx">
 				<u-row>
 					<u-checkbox-group>
-						<u-checkbox @change="accept=!accept" v-model="accept" activeColor="#aa96da" size="15"
+						<u-checkbox @change="accept=!accept" v-model="accept" activeColor="#88d8c0" size="15"
 							shape="circle"></u-checkbox>
 					</u-checkbox-group>
 					<u-row customStyle="font-size:30rpx">
 						<text>登录及代表你同意</text>
-						<text style="color:#aa96da">《用户协议》</text>
+						<text style="color:#88d8c0">《用户协议》</text>
 						<text>与</text>
-						<text style="color:#aa96da">《隐私政策》</text>
+						<text style="color:#88d8c0">《隐私政策》</text>
 					</u-row>
 				</u-row>
 			</view>
 			<view style="margin-top: 40rpx;">
-				<u-button text="确认" :hairline="false" color="#aa96da" loading-size="10"
-					customStyle="width:300rpx; height:80rpx;border-radius:10rpx;box-shadow:0 0 9rpx 0 #aa96da"
+				<u-button text="确认" :hairline="false" color="#88d8c0" loading-size="10"
+					customStyle="width:300rpx; height:80rpx;border-radius:10rpx;box-shadow:0 0 9rpx 0 #88d8c0"
 					@click="resetPassword()"></u-button>
 			</view>
 		</view>

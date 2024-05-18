@@ -91,8 +91,8 @@
 	}
 	.tag {
 		font-size: 26rpx;
-		background: #aa96da1e;
-		color: #aa96da;
+		background: #88d8c01e;
+		color: #88d8c0;
 		padding: 8rpx 14rpx;
 		min-width: 100rpx;
 		max-width: 160rpx;

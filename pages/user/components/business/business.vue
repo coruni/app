@@ -11,7 +11,7 @@
 								style="font-Weight: bold;margin-left: 20rpx;">{{item.buyerInfo.screenName?item.buyerInfo.screenName:item.buyerInfo.name}}</text>
 						</u-row>
 						<text
-							style="color: #aa96da;">{{item.paid&&!item.isTracking?'待发货':item.paid &&item.isTracking?'待收货':'待支付'}}</text>
+							style="color: #88d8c0;">{{item.paid&&!item.isTracking?'待发货':item.paid &&item.isTracking?'待收货':'待支付'}}</text>
 					</u-row>
 					<u-row align="top">
 						<image :src="item.product_image[0]" mode="aspectFill" style="width: 120rpx;
@@ -38,9 +38,9 @@
 							<text style="font-size: 28rpx;color: #999;">更多</text>
 							<u-col :span="8">
 								<u-row v-if="item.paid" sty>
-									<u-button shape="circle" color="#aa96da" plain
+									<u-button shape="circle" color="#88d8c0" plain
 										style="height: 60rpx;margin-right: 20rpx;">联系买家</u-button>
-									<u-button shape="circle" :color="item.isTracking?'#ccc':'#aa96da'"
+									<u-button shape="circle" :color="item.isTracking?'#ccc':'#88d8c0'"
 										style="height: 60rpx;margin-left: 20rpx;"
 										@click="goOrderDetail(item.id)">{{item.isTracking?'已发货':'去发货'}}</u-button>
 								</u-row>

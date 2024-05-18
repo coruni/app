@@ -19,7 +19,7 @@
 			</u-grid>
 		</view>
 		<view style="margin:30rpx" v-if="$store.state.appInfo&&$store.state.appInfo.announcement">
-			<u-notice-bar :text="$store.state.appInfo.announcement" bgColor="#aa96da3c" color="#aa96da" mode="closable"
+			<u-notice-bar :text="$store.state.appInfo.announcement" bgColor="#88d8c03c" color="#88d8c0" mode="closable"
 				style="border-radius: 20rpx;"></u-notice-bar>
 		</view>
 		<block v-for="(item,index) in content" :key="`${index}_${item.cid}`" v-if="content.length">
@@ -198,7 +198,7 @@
 
 		&-dot {
 			font-size: 24rpx;
-			background: #aa96daa0;
+			background: #88d8c0a0;
 			border-top-left-radius: 10rpx;
 			border-bottom-right-radius: 10rpx;
 			padding: 6rpx 20rpx;

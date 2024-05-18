@@ -5,7 +5,7 @@
 				<i class="ess mgc_left_line" style="font-size: 60rpx;"></i>
 			</view>
 			<view slot="right">
-				<u-button shape="circle" color="#aa96da" style="height: 60rpx;"
+				<u-button shape="circle" color="#88d8c0" style="height: 60rpx;"
 					@click="update?updateArticle():save()">{{update?'更新':'发布'}}</u-button>
 			</view>
 		</u-navbar>
@@ -78,7 +78,7 @@
 								@click="deleteVideo(index)"></i>
 						</u-row>
 					</u-collapse-item>
-					<u-button color="#aa96da" shape="circle" @click="addEP" style="margin-top: 60rpx;">添加分集</u-button>
+					<u-button color="#88d8c0" shape="circle" @click="addEP" style="margin-top: 60rpx;">添加分集</u-button>
 				</u-collapse>
 			</view>
 		</view>
@@ -93,8 +93,8 @@
 							<u-row @click="article.category = item;showCategory = false" style="margin-bottom: 20rpx;">
 								<text v-if="item.isrecommend" style="
 									font-size: 26rpx;
-									color:#aa96da;
-									background: #aa96da3c;
+									color:#88d8c0;
+									background: #88d8c03c;
 									padding:4rpx 14rpx;
 									border-radius: 10rpx;
 									margin-right: 20rpx;">推荐</text>
@@ -102,7 +102,7 @@
 									<u-avatar :src="item.imgurl" size="30" shape="square" v-if="item.imgurl"
 										mode="aspectFill"></u-avatar>
 									<text style="margin-left: 20rpx;"
-										:style="{color:article.category && article.category.mid == item.mid?'#aa96da':''}">{{item.name}}</text>
+										:style="{color:article.category && article.category.mid == item.mid?'#88d8c0':''}">{{item.name}}</text>
 								</u-row>
 							</u-row>
 						</block>

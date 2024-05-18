@@ -28,7 +28,7 @@
 					<u-row>
 						<u-row>
 							<text
-								:style="{color:data.userInfo.isVip?'#aa96da':'',fontSize:30+'rpx',fontWeight:600}">{{data.userInfo.screenName?data.userInfo.screenName:data.userInfo.name}}</text>
+								:style="{color:data.userInfo.isVip?'#88d8c0':'',fontSize:30+'rpx',fontWeight:600}">{{data.userInfo.screenName?data.userInfo.screenName:data.userInfo.name}}</text>
 							<i v-if="data.userInfo.level" :class="`level mgc_lv-${data.userInfo.level}`"
 								style="font-size: 50rpx; margin-left: 10rpx;"
 								:style="{ color: data.userInfo.level > 8 ? $level[Math.floor(data.userInfo.level/2)-1] : $level[data.userInfo.level-1] }">
@@ -87,7 +87,7 @@
 								style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.5);">
 							</view>
 							<view
-								style="font-size: 30rpx;color:#aa96da;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
+								style="font-size: 30rpx;color:#88d8c0;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
 								<block v-for="(item,index) in orderList" :key="index">
 									<text @click.stop="orderTap(item.name);$refs.paging.reload()"
 										style="padding: 15rpx;">{{item.name}}</text>
@@ -117,7 +117,7 @@
 								style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.5);">
 							</view>
 							<view
-								style="font-size: 30rpx;color:#aa96da;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
+								style="font-size: 30rpx;color:#88d8c0;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
 								<block v-for="(item,index) in orderList" :key="index">
 									<text @click.stop="orderTap(item.name);$refs.paging.reload()"
 										style="padding: 15rpx;">{{item.name}}</text>
@@ -147,7 +147,7 @@
 									<u-row>
 										<u-row>
 											<text
-												:style="{color:item.isVip?'#aa96da':'',fontSize:30+'rpx',fontWeight:600}">{{item.userInfo.screenName?item.userInfo.screenName:item.userInfo.name}}</text>
+												:style="{color:item.isVip?'#88d8c0':'',fontSize:30+'rpx',fontWeight:600}">{{item.userInfo.screenName?item.userInfo.screenName:item.userInfo.name}}</text>
 											<text
 												:style="{border:`${item.userInfo.level > 8 ? $level[Math.floor(item.userInfo.level/2)-1] : $level[item.userInfo.level-1]} solid 2rpx`,background:item.userInfo.level > 8 ? $level[Math.floor(item.userInfo.level/2)-1] : $level[item.userInfo.level-1] }"
 												style="font-size: 18rpx;padding: 0 16rpx;border-radius: 50rpx;margin-left:20rpx;color: white;"
@@ -170,7 +170,7 @@
 										v-if="item.parent != data.id&&item.userInfo.uid!=item.parentComment.userInfo.uid"
 										class="u-line-1" style="
 										padding-left:20rpx;
-										border-left: 6rpx #aa96da1e solid;
+										border-left: 6rpx #88d8c01e solid;
 										margin-top: 20rpx;
 										font-size: 28rpx;
 										color: #999;
@@ -192,7 +192,7 @@
 													v-if="$store.state.userInfo.uid == item.userInfo.uid"
 													@click="showDelete = true;deleteId = item.id">
 													<i class="mgc_delete_2_line"
-														style="font-size: 36rpx;color: #aa96da;"></i>
+														style="font-size: 36rpx;color: #88d8c0;"></i>
 													<text style="font-size: 28rpx;margin-left: 10rpx;">删除</text>
 												</u-row>
 												<u-row style="margin-right: 30rpx;"
@@ -244,7 +244,7 @@
 					</u-row>
 				</u-col>
 				<view>
-					<u-button shape="circle" color="#aa96da" customStyle="padding:4rpx,6rpx;height:50rpx;"
+					<u-button shape="circle" color="#88d8c0" customStyle="padding:4rpx,6rpx;height:50rpx;"
 						@click="$u.throttle(reply(),2000,true) ">
 						<i class="ess mgc_send_line" style="font-size: 40rpx;"></i>
 						<text>发送</text>
@@ -276,7 +276,7 @@
 						</swiper-item>
 					</swiper>
 				</block>
-				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#aa96da"
+				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#88d8c0"
 					itemStyle="height: 24px;"
 					:activeStyle="{color: '#303133',fontWeight: 'bold',transform: 'scale(1.05)'}"
 					:inactiveStyle="{color: '#606266',transform: 'scale(1)'}" @change="emojiIndex = $event.index"
@@ -299,7 +299,7 @@
 		<uv-modal ref="upload" :zIndex="10076" @close="uploadErr.status = false;uploadErr.msg=null;"
 			:closeOnClickOverlay="uploadErr.status" :showConfirmButton="false"
 			:title="uploadErr.status?'上传错误':'上传中...'">
-			<u-line-progress :percentage="percentage" activeColor="#aa96da" :showText="false"
+			<u-line-progress :percentage="percentage" activeColor="#88d8c0" :showText="false"
 				v-if="!uploadErr.status"></u-line-progress>
 			<text v-if="uploadErr.status">错误信息：{{uploadErr.msg}}</text>
 			<view slot="confirmButton"></view>
@@ -312,9 +312,9 @@
 					<text>是否删除该评论？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showDelete = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="deleteComment()">确定</u-button>
 				</u-row>
 			</view>
@@ -355,7 +355,7 @@
 						icon: 'mgc_palette_line'
 					}
 				],
-				colors: ['#aa96da', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
+				colors: ['#88d8c0', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
 				orderList: [{
 						name: '全部评论',
 						order: ''

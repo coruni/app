@@ -47,7 +47,7 @@
 					<u-row justify="space-between">
 						<u-button plain shape="circle" style="margin-right: 20rpx;"
 							@click="showChangePassword =false">取消</u-button>
-						<u-button color="#aa96da" shape="circle" style="margin-left: 20rpx;"
+						<u-button color="#88d8c0" shape="circle" style="margin-left: 20rpx;"
 							@click="savePassword()">确定</u-button>
 					</u-row>
 
@@ -70,7 +70,7 @@
 					<u-form-item :borderBottom="false" prop="region" label="所在地区" label-width="80">
 						<u-input v-model="address && address.region" placeholder="请填写省/市/县">
 							<template slot="suffix">
-								<u-icon name="map" color="#aa96da" size="20" @click="getLocaltion()"></u-icon>
+								<u-icon name="map" color="#88d8c0" size="20" @click="getLocaltion()"></u-icon>
 							</template>
 						</u-input>
 					</u-form-item>
@@ -79,7 +79,7 @@
 							height="40"></u-textarea>
 					</u-form-item>
 				</u-form>
-				<u-button color="#aa96da" style="margin-top: 60rpx;" shape="circle"
+				<u-button color="#88d8c0" style="margin-top: 60rpx;" shape="circle"
 					@click="saveAddress();showAddress=false">保存</u-button>
 			</view>
 		</u-popup>

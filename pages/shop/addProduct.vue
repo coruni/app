@@ -5,7 +5,7 @@
 				<i class="ess mgc_left_line" style="font-size: 60rpx;"></i>
 			</view>
 			<view slot="right">
-				<u-button color="#aa96da" shape="circle" style="height: 60rpx;"
+				<u-button color="#88d8c0" shape="circle" style="height: 60rpx;"
 					@click="update?updateProduct():save()">{{update?'更新':'发布'}}</u-button>
 			</view>
 		</u-navbar>
@@ -28,13 +28,13 @@
 				<label>商品参数</label>
 				<u-form ref="form" labelPosition="top">
 					<text style="font-size: 28rpx;">商品主图</text>
-					<uv-scroll-list indicatorActiveColor="#aa96da">
+					<uv-scroll-list indicatorActiveColor="#88d8c0">
 						<block v-for="(image,index) in shop.imgurl" :key="index">
 							<view style="position: relative;margin-right: 20rpx;border-radius: 16rpx;">
 								<u-image :src="image" height="130" width="100" radius="8"
 									@click="previewImg(index)"></u-image>
 								<view @click="deleteImage(index)"
-									style="position: absolute;right: 0;top: 0;background: #aa96da;color: white;border-radius: 0 16rpx 0 16rpx;">
+									style="position: absolute;right: 0;top: 0;background: #88d8c0;color: white;border-radius: 0 16rpx 0 16rpx;">
 									<i class="ess mgc_close_line"></i>
 								</view>
 							</view>
@@ -51,7 +51,7 @@
 						<u-input v-model="shop.price" placeholder="只能是整数" border="none"
 							style="background: #f7f7f7;padding: 8rpx 18rpx;border-radius: 50rpx;"></u-input>
 						<view style="margin-left: 20rpx;">
-							<u-button plain color="#aa96da" style="height: 60rpx;" shape="circle"
+							<u-button plain color="#88d8c0" style="height: 60rpx;" shape="circle"
 								@click="setPrice()">一键设置</u-button>
 						</view>
 					</u-form-item>
@@ -116,7 +116,7 @@
 								</u-swipe-action-item>
 								<view style="text-align: right;margin-top: 20rpx;">
 									<i class="ess mgc_add_line" hover-class="hover"
-										style="color: white;background: #aa96da;padding: 4rpx;border-radius: 50rpx;"
+										style="color: white;background: #88d8c0;padding: 4rpx;border-radius: 50rpx;"
 										@click="specsAdd()"></i>
 								</view>
 							</view>
@@ -170,7 +170,7 @@
 						backgroundColor: 'red'
 					}
 				}],
-				colors: ['#aa96da', '#5bd784', '#ffa600', '#0dd0f2', '#fb4f14', '#000000'],
+				colors: ['#88d8c0', '#5bd784', '#ffa600', '#0dd0f2', '#fb4f14', '#000000'],
 			}
 		},
 		created() {

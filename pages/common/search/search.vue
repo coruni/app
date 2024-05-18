@@ -18,7 +18,7 @@
 			</u-navbar>
 			<view v-if="searchTap">
 				<z-tabs ref="tabs" :list="tabs" :scrollCount="1" :current="tabsIndex" @change="tabsChange"
-					bar-height="6" bar-width="20" active-color="#aa96da" inactive-color="#999"
+					bar-height="6" bar-width="20" active-color="#88d8c0" inactive-color="#999"
 					bgColor="transparent"></z-tabs>
 
 			</view>

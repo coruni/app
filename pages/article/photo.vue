@@ -10,7 +10,7 @@
 						<view style="margin-left: 40rpx;display: flex;align-items: center;"
 							@click="goProfile(article.authorId)" v-show="showNavAvatar" v-if="article">
 							<u-avatar :src="article && article.authorInfo && article.authorInfo.avatar" size="28"
-								customStyle="border:4rpx solid #aa96da32"></u-avatar>
+								customStyle="border:4rpx solid #88d8c032"></u-avatar>
 							<text style="font-Weight: bold;font-size: 30rpx;margin-left: 20rpx;">
 								{{article && article.authorInfo && article.authorInfo.screenName?article.authorInfo.screenName:article.authorInfo.name}}
 							</text>
@@ -18,15 +18,15 @@
 					</view>
 					<view slot="right">
 						<view v-show="showNavAvatar"
-							style="display: flex; align-items: center;border-radius: 50rpx;border:2rpx solid #aa96da32;padding: 0rpx 16rpx;line-height: 1;">
+							style="display: flex; align-items: center;border-radius: 50rpx;border:2rpx solid #88d8c032;padding: 0rpx 16rpx;line-height: 1;">
 							<u-row customStyle="margin-right:20rpx;"
 								@click="article.authorInfo.isFollow?showFollow = true:follow(article.authorId)">
 								<i class="ess mgc_add_line" style="font-size: 30rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo &&article.authorInfo.isFollow?'':'#aa96da'}"
+									:style="{color:article && article.authorInfo &&article.authorInfo.isFollow?'':'#88d8c0'}"
 									v-if="article && article.authorInfo &&!article.authorInfo.isFollow"></i>
 
 								<text style="font-size: 26rpx;margin-left: 10rpx;padding-right:20rpx;font-Weight: bold;"
-									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#aa96da'}">
+									:style="{color:article && article.authorInfo && article.authorInfo.isFollow?'':'#88d8c0'}">
 									{{article && article.authorInfo && article.authorInfo.isFollow?'已关注':'关注'}}
 								</text>
 							</u-row>
@@ -81,9 +81,9 @@
 				<!-- 按钮 -->
 				<view style="margin-top: 40rpx;">
 					<u-row>
-						<u-button color="#aa96da3c" shape="circle" :hairline="false"
+						<u-button color="#88d8c03c" shape="circle" :hairline="false"
 							style="color: black;margin-right: 10rpx;">下载</u-button>
-						<u-button color="#aa96da" shape="circle" :hairline="false" style="margin-left: 10rpx;"
+						<u-button color="#88d8c0" shape="circle" :hairline="false" style="margin-left: 10rpx;"
 							@click="goRead()">阅读</u-button>
 					</u-row>
 				</view>
@@ -91,7 +91,7 @@
 				<!-- 图廊 -->
 				<view style="margin-top: 40rpx;">
 					<text style="font-Weight: bold;">图廊</text>
-					<uv-scroll-list indicatorActiveColor="#aa96da">
+					<uv-scroll-list indicatorActiveColor="#88d8c0">
 						<block v-for="(item,index) in article.images" :key="index" v-if="index<12">
 							<u-image :src="item" height="160" width="100" radius="8"
 								style="margin-right: 20rpx;"></u-image>
@@ -156,7 +156,7 @@
 								style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.5);">
 							</view>
 							<view
-								style="font-size: 30rpx;color:#aa96da;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
+								style="font-size: 30rpx;color:#88d8c0;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
 								<block v-for="(item,index) in orderList" :key="index">
 									<text @click.stop="orderTap(item.name);$refs.comments.reload()"
 										style="padding: 15rpx;">{{item.name}}</text>
@@ -186,7 +186,7 @@
 								style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.5);">
 							</view>
 							<view
-								style="font-size: 30rpx;color:#aa96da;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
+								style="font-size: 30rpx;color:#88d8c0;display: flex;flex-direction: column;position: absolute; top: 100rpx; left: 30rpx; background-color: #fff; padding: 10rpx; border-radius: 20rpx; box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);">
 								<block v-for="(item,index) in orderList" :key="index">
 									<text @click.stop="orderTap(item.name);$refs.comments.reload()"
 										style="padding: 15rpx;">{{item.name}}</text>
@@ -232,7 +232,7 @@
 					</u-row>
 				</u-col>
 				<view>
-					<u-button shape="circle" color="#aa96da" customStyle="padding:4rpx,6rpx;height:50rpx;width:120rpx"
+					<u-button shape="circle" color="#88d8c0" customStyle="padding:4rpx,6rpx;height:50rpx;width:120rpx"
 						text="发送" @click="$u.throttle(reply(),2000,true) "></u-button>
 				</view>
 			</u-row>
@@ -261,7 +261,7 @@
 						</swiper-item>
 					</swiper>
 				</block>
-				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#aa96da"
+				<u-tabs :list="emojiData" :current="emojiIndex" lineHeight="3" lineColor="#88d8c0"
 					itemStyle="height: 24px;"
 					:activeStyle="{color: '#303133',fontWeight: 'bold',transform: 'scale(1.05)'}"
 					:inactiveStyle="{color: '#606266',transform: 'scale(1)'}" @change="emojiIndex = $event.index"
@@ -297,7 +297,7 @@
 					<text>分享至</text>
 				</view>
 				<view style="margin-top: 50rpx;">
-					<u-row customStyle="border-bottom:1rpx solid #aa96da0a;padding-bottom:30rpx" justify="space-around">
+					<u-row customStyle="border-bottom:1rpx solid #88d8c00a;padding-bottom:30rpx" justify="space-around">
 						<block v-for="(item,index) in share" :key="index">
 							<u-row align="center" customStyle="flex-direction:column" @click="shareWithApi(item)">
 								<view style="padding: 20rpx;border-radius: 100rpx;" :style="{background:item.color}">
@@ -349,9 +349,9 @@
 						<text>是否确定删除？</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showDelete = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="deleteArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -369,9 +369,9 @@
 						<text>是否{{article&& article.status=='publish'?'取消审核':'审核通过'}}</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showPublishAction = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="appArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -382,7 +382,7 @@
 			@close="showLoading=false;uploadErr.status = false;uploadErr.msg=null;"
 			:closeOnClickOverlay="uploadErr.status" :showConfirmButton="false"
 			:title="uploadErr.status?'上传错误':'上传中...'">
-			<u-line-progress :percentage="percentage" activeColor="#aa96da" :showText="false"
+			<u-line-progress :percentage="percentage" activeColor="#88d8c0" :showText="false"
 				v-if="!uploadErr.status"></u-line-progress>
 			<text v-if="uploadErr.status">错误信息：{{uploadErr.msg}}</text>
 			<view slot="confirmButton"></view>
@@ -395,9 +395,9 @@
 					<text>是否确定查看？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showPay = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="buyHide()">确定</u-button>
 				</u-row>
 			</view>
@@ -410,9 +410,9 @@
 					<text>是否取消关注？</text>
 				</view>
 				<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-					<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+					<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 						@click="showFollow = false">取消</u-button>
-					<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+					<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 						@click="follow(article.authorId)">确定</u-button>
 				</u-row>
 			</view>
@@ -533,7 +533,7 @@
 						icon: 'mgc_palette_line'
 					}
 				],
-				colors: ['#aa96da', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
+				colors: ['#88d8c0', '#5BD784', '#FFA600', '#0DD0F2', '#FB4F14', '#000000E6'],
 				share: [{
 						name: '微信',
 						icon: 'weixin-fill',
@@ -773,7 +773,7 @@
 						content) => {
 						let html = ''
 
-						html += `<a style="text-decoration:unset;color:#aa96da;border:#aa96da dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
+						html += `<a style="text-decoration:unset;color:#88d8c0;border:#88d8c0 dashed 1px;border-radius:10px;text-align:center;margin:10px 0;display:flex;flex:1;padding:20px;justify-content:center" data-type="${type}">
 						隐藏内容，${type}后查看
 						</a>`
 						if (type == "付费") {
@@ -1104,8 +1104,8 @@
 
 	.tag {
 		font-size: 26rpx;
-		background: #aa96da1e;
-		color: #aa96da;
+		background: #88d8c01e;
+		color: #88d8c0;
 		padding: 8rpx 14rpx;
 		border-radius: 500rpx;
 		margin-right: 10rpx;

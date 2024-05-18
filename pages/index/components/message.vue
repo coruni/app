@@ -16,7 +16,7 @@
 							style="font-size: 45rpx;background: #fb7299;border-radius: 100rpx;color: white;padding: 25rpx;"></i>
 						<text style="margin-left: 20rpx;">财务通知</text>
 					</u-row>
-					<i class="ess mgc_round_fill" style="color: #aa96da;font-size: 18rpx;"
+					<i class="ess mgc_round_fill" style="color: #88d8c0;font-size: 18rpx;"
 						v-if="$store.state.noticeNum.finances"></i>
 				</u-row>
 				<u-gap height="10"></u-gap>
@@ -26,7 +26,7 @@
 							style="font-size: 45rpx;background: #ffb300;border-radius: 100rpx;color: white;padding: 25rpx;"></i>
 						<text style="margin-left: 20rpx;">系统通知</text>
 					</u-row>
-					<i class="ess mgc_round_fill" style="color: #aa96da;font-size: 18rpx;"
+					<i class="ess mgc_round_fill" style="color: #88d8c0;font-size: 18rpx;"
 						v-if="$store.state.noticeNum.systems"></i>
 				</u-row>
 				<u-gap height="10"></u-gap>
@@ -37,7 +37,7 @@
 						<text style="margin-left: 20rpx;">评论通知</text>
 					</u-row>
 
-					<i class="ess mgc_round_fill" style="color: #aa96da;font-size: 18rpx;"
+					<i class="ess mgc_round_fill" style="color: #88d8c0;font-size: 18rpx;"
 						v-if="$store.state.noticeNum.comments"></i>
 				</u-row>
 			</view>

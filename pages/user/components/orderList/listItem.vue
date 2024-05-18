@@ -11,7 +11,7 @@
 								style="font-Weight: bold;margin-left: 20rpx;">{{item.bossInfo.screenName?item.bossInfo.screenName:item.bossInfo.name}}</text>
 						</u-row>
 						<text
-							style="color: #aa96da;">{{item.paid&&!item.isTracking?'待发货':item.paid &&item.isTracking?'待收货':'待支付'}}</text>
+							style="color: #88d8c0;">{{item.paid&&!item.isTracking?'待发货':item.paid &&item.isTracking?'待收货':'待支付'}}</text>
 					</u-row>
 					<u-row align="top">
 						<image :src="item.product_image[0]" mode="aspectFill" style="width: 120rpx;
@@ -37,20 +37,20 @@
 								<u-row v-if="!item.paid">
 									<u-button shape="circle" plain style="height: 60rpx;"
 										@click="$emit('address',item)">修改地址</u-button>
-									<u-button shape="circle" color="#aa96da" style="height: 60rpx;margin-left: 20rpx;"
+									<u-button shape="circle" color="#88d8c0" style="height: 60rpx;margin-left: 20rpx;"
 										@click="$emit('buy',item)">继续支付</u-button>
 								</u-row>
 								<u-row v-if="item.paid && item.isTracking">
 									<u-button shape="circle" plain style="height: 60rpx;">查看物流</u-button>
 									<u-button shape="circle" plain style="height: 60rpx;margin-left: 20rpx;"
 										@click="goPrivate(item.bossInfo)">联系卖家</u-button>
-									<u-button shape="circle" color="#aa96da"
+									<u-button shape="circle" color="#88d8c0"
 										style="height: 60rpx;margin-left: 20rpx;">确认收货</u-button>
 								</u-row>
 								<u-row v-if="item.paid && !item.isTracking">
 									<u-button shape="circle" plain style="height: 60rpx;"
 										@click="goPrivate(item.bossInfo)">联系卖家</u-button>
-									<u-button shape="circle" color="#aa96da"
+									<u-button shape="circle" color="#88d8c0"
 										style="height: 60rpx;margin-left: 20rpx;">再来一单</u-button>
 								</u-row>
 							</view>

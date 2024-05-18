@@ -117,6 +117,7 @@
 				}).then(res => {
 					this.$store.commit('setAppInfo', res.data.data.app)
 					this.$store.commit('setHomepage', res.data.data.appHomepage)
+					this.$store.commit('setLevel', res.data.data.level)
 				})
 			},
 			getUserTasks() {

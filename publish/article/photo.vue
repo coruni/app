@@ -45,12 +45,12 @@
 		<!-- 组件 -->
 		<uv-modal ref="publish" :closeOnClickOverlay="false" :showConfirmButton="false" :show-cancel-button="false"
 			width="300rpx">
-			<uv-loading-icon text="发布中..." mode="circle" color="#aa96da"></uv-loading-icon>
+			<uv-loading-icon text="发布中..." mode="circle" color="#88d8c0"></uv-loading-icon>
 			<view slot="confirmButton"></view>
 		</uv-modal>
 		<u-popup customStyle="border-radius:40rpx 40rpx 0 0;" :show="showCategory" @close="showCategory = false"
 			:closeable="true">
-			<view style="height: 70vh;padding:30rpx;border-radius:40rpx 40rpx 0 0;">
+			<view style="height: 60vh;padding:30rpx;border-radius:40rpx 40rpx 0 0;">
 				<view style="text-align: center;">选择板块</view>
 				<view style="margin-top: 30rpx;">
 					<scroll-view scroll-y style="height: 65vh;">
@@ -88,7 +88,7 @@
 							customStyle="padding:10rpx 6rpx;background:#f7f7f7" border="none"
 							@input="getTags()"></uv-input>
 						<view style="margin-left: 20rpx;">
-							<u-button color="#aa96da" @click="addNewTag()">新增</u-button>
+							<u-button color="#88d8c0" @click="addNewTag()">新增</u-button>
 						</view>
 					</view>
 				</view>
@@ -111,7 +111,7 @@
 									style="width: 50rpx;height: 50rpx;background: #f7f7f7;margin-right: 20rpx;border-radius: 20rpx;">
 								</image>
 								<text
-									:style="{color:article.tags.some(tag=>tag.name == item.name)?'#aa96da':''}">{{item.name}}</text>
+									:style="{color:article.tags.some(tag=>tag.name == item.name)?'#88d8c0':''}">{{item.name}}</text>
 							</u-row>
 						</block>
 					</scroll-view>
@@ -121,7 +121,7 @@
 		<u-modal :show="showLoading" @close="showLoading=false;uploadErr.status = false;uploadErr.msg=null;"
 			:closeOnClickOverlay="uploadErr.status" :showConfirmButton="false"
 			:title="uploadErr.status?'上传错误':'上传中...'">
-			<u-line-progress :percentage="percentage" activeColor="#aa96da" :showText="false"
+			<u-line-progress :percentage="percentage" activeColor="#88d8c0" :showText="false"
 				v-if="!uploadErr.status"></u-line-progress>
 			<text v-if="uploadErr.status">错误信息：{{uploadErr.msg}}</text>
 		</u-modal>
@@ -533,7 +533,7 @@
 	.publish-button {
 		display: flex;
 		align-items: center;
-		background: #aa96da;
+		background: #88d8c0;
 		border-radius: 10rpx;
 		padding: 10rpx;
 		color: white;
@@ -557,8 +557,8 @@
 		font-size: 45rpx;
 		border-radius: 50rpx;
 		padding: 10rpx;
-		background-color: #aa96da1e;
-		color: #aa96da;
+		background-color: #88d8c01e;
+		color: #88d8c0;
 
 	}
 	.select-tag {

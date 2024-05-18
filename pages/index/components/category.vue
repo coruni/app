@@ -164,7 +164,7 @@
 				top: [],
 				categories: [],
 				swiperIndex: 0,
-				color: ['#aa96da', '#ff8800', '#FFCC00'],
+				color: ['#88d8c0', '#ff8800', '#FFCC00'],
 				tags: [],
 				follow: [],
 				content: [],
@@ -385,8 +385,8 @@
 
 	.tag {
 		font-size: 26rpx;
-		background: #aa96da1e;
-		color: #aa96da;
+		background: #88d8c01e;
+		color: #88d8c0;
 		padding: 8rpx 14rpx;
 		min-width: 100rpx;
 		max-width: 160rpx;

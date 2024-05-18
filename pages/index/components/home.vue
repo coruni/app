@@ -18,7 +18,7 @@
 		</template>
 		<!-- 模拟首屏开始 -->
 		<z-tabs ref="tabs" :list="$store.state.homeTabs" :scrollCount="0" :current="topTabIndex" @change="tabsChange"
-			bar-height="6" bar-width="20" active-color="#aa96da" inactive-color="#999" bgColor="transparent"></z-tabs>
+			bar-height="6" bar-width="20" active-color="#88d8c0" inactive-color="#999" bgColor="transparent"></z-tabs>
 		<swiper style="height: 100%;" :current="topTabIndex" @transition="swiperTransition"
 			@animationfinish="swiperAnimationfinish">
 			<swiper-item>

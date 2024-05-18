@@ -35,7 +35,7 @@
 						:show-img-size="false" :show-img-resize="false" :show-img-toolbar="false">
 					</editor>
 					<view style="margin-left: 20rpx;">
-						<u-button color="#aa96da" style="height: 60rpx;" @click="sendMessage()">
+						<u-button color="#88d8c0" style="height: 60rpx;" @click="sendMessage()">
 							<i class="mgc_send_line" style="font-size: 40rpx;"></i>
 						</u-button>
 					</view>

@@ -74,7 +74,7 @@
 					<text>分享至</text>
 				</view>
 				<view style="margin-top: 50rpx;">
-					<u-row customStyle="border-bottom:1rpx solid #aa96da0a;padding-bottom:30rpx" justify="space-around">
+					<u-row customStyle="border-bottom:1rpx solid #88d8c00a;padding-bottom:30rpx" justify="space-around">
 						<block v-for="(item,index) in share" :key="index">
 							<u-row align="center" customStyle="flex-direction:column" @click="shareArticle('api',item)">
 								<view style="padding: 20rpx;border-radius: 100rpx;" :style="{background:item.color}">
@@ -127,9 +127,9 @@
 						<text>是否确定删除？</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showDelete = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="deleteArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -147,9 +147,9 @@
 						<text>是否{{data&& data.status=='publish'?'取消审核':'审核通过'}}</text>
 					</view>
 					<u-row customStyle="margin-top: 60rpx;flex:1;width:100%" justify="space-between">
-						<u-button plain color="#aa96da" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
+						<u-button plain color="#88d8c0" customStyle="height:60rpx;margin-right:10rpx" shape="circle"
 							@click="showPublishAction = false">取消</u-button>
-						<u-button color="#aa96da" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
+						<u-button color="#88d8c0" customStyle="height:60rpx;margin-left:10rpx" shape="circle"
 							@click="appArticle()">确定</u-button>
 					</u-row>
 				</view>
@@ -502,7 +502,7 @@
 		border: 4rpx solid #85a3ff32;
 
 		&_active {
-			border: 4rpx solid #aa96daa0 !important;
+			border: 4rpx solid #88d8c0a0 !important;
 		}
 	}
 

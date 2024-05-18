@@ -6,7 +6,7 @@
 			</view>
 		</u-navbar>
 		<view style="margin: 30rpx;">
-			<u-grid customStyle="background:#aa96da0a;padding:30rpx;border-radius:20rpx">
+			<u-grid customStyle="background:#88d8c00a;padding:30rpx;border-radius:20rpx">
 				<u-grid-item v-for="(item,index) in data" :key="index">
 					<view style="display: flex; flex-direction: column;align-items: center;margin-bottom: 20rpx;">
 						<text>{{item.count}}</text>
@@ -19,7 +19,7 @@
 				<u-row justify="space-between">
 					<u-tabs :list="metasList" :current="metaIndex" @change="metaIndex = $event.index"></u-tabs>
 					<view>
-						<u-button size="mini" color="#aa96da" plain shape="circle"
+						<u-button size="mini" color="#88d8c0" plain shape="circle"
 							@click="$refs.editCategory.open()">{{metaIndex?'创建话题':'创建板块'}}</u-button>
 					</view>
 				</u-row>
@@ -38,7 +38,7 @@
 					<u-tabs :list="articleType" :current="typeIndex" @change="typeIndex = $event.index"></u-tabs>
 					<view>
 						<u-input v-model="articleSearchKey" border="none" placeholder="搜索文章"
-							customStyle="background: #aa96da1e;border-radius: 50rpx;padding: 10rpx 20rpx;">
+							customStyle="background: #88d8c01e;border-radius: 50rpx;padding: 10rpx 20rpx;">
 							<view slot="suffix">
 								<u-icon name="search" size="20"></u-icon>
 							</view>
@@ -73,21 +73,21 @@
 					<u-input v-model="editCategory.description" maxlength="120" placeholder="分类介绍" border="bottom"
 						customStyle="padding: 10rpx 0;" />
 					<u-gap height="10"></u-gap>
-					<view style="background: #aa96da0a;padding: 30rpx;border-radius: 20rpx;">
+					<view style="background: #88d8c00a;padding: 30rpx;border-radius: 20rpx;">
 						<text style="color: #999;">主题色</text>
-						<u-input v-model="editCategory.opt && editCategory.opt.primary" placeholder="#aa96da"
+						<u-input v-model="editCategory.opt && editCategory.opt.primary" placeholder="#88d8c0"
 							border="bottom" customStyle="padding: 10rpx 0;" />
 						<u-gap height="10"></u-gap>
 						<text style="color: #999;">下划线颜色</text>
-						<u-input v-model="editCategory.opt && editCategory.opt.underline" placeholder="#aa96da"
+						<u-input v-model="editCategory.opt && editCategory.opt.underline" placeholder="#88d8c0"
 							border="bottom" customStyle="padding: 10rpx 0;" />
 						<u-gap height="10"></u-gap>
 						<text style="color: #999;">字体颜色</text>
-						<u-input v-model="editCategory.opt && editCategory.opt.color" placeholder="#aa96da"
+						<u-input v-model="editCategory.opt && editCategory.opt.color" placeholder="#88d8c0"
 							border="bottom" customStyle="padding: 10rpx 0;" />
 					</view>
 				</view>
-				<u-button color="#aa96da" shape="circle" customStyle="margin-top: 30rpx;"
+				<u-button color="#88d8c0" shape="circle" customStyle="margin-top: 30rpx;"
 					@click="editCategory.mid?saveCategory(false):addCategory()">保存</u-button>
 			</view>
 			<view slot="confirmButton"></view>
@@ -97,7 +97,7 @@
 			<view style="width: 100%;" v-if="editArticle">
 				<text style="font-Weight: bold;font-size: 36rpx;">{{editArticle.title}}</text>
 				<view style="margin: 10rpx 0;">
-					<u-button color="#aa96da" shape="circle" @click="getContentInfo(editArticle.cid)">查看内容</u-button>
+					<u-button color="#88d8c0" shape="circle" @click="getContentInfo(editArticle.cid)">查看内容</u-button>
 				</view>
 
 				<view style="margin-top: 20rpx;">
@@ -131,7 +131,7 @@
 					</u-row>
 				</view>
 				<view style="margin-top: 50rpx;">
-					<u-button color="#aa96da" shape="circle" @click="saveArticle()">保存</u-button>
+					<u-button color="#88d8c0" shape="circle" @click="saveArticle()">保存</u-button>
 				</view>
 			</view>
 			<view slot="confirmButton"></view>

@@ -173,7 +173,7 @@
 
 		&-dot {
 			font-size: 24rpx;
-			background: #aa96daa0;
+			background: #88d8c0a0;
 			border-top-left-radius: 10rpx;
 			padding: 6rpx 20rpx;
 			position: absolute;

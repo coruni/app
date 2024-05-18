@@ -192,10 +192,10 @@
 		justify-content: center;
 		align-items: center;
 		font-size: 26rpx;
-		background: #aa96da1e;
-		color: #aa96da;
+		background: #88d8c01e;
+		color: #88d8c0;
 		padding: 8rpx 14rpx;
-		border-radius: 500rpx;
+		border-radius: 8rpx;
 		margin-right: 20rpx;
 		margin-bottom: 10rpx;
 		font-size: 24rpx;

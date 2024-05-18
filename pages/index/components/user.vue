@@ -60,12 +60,12 @@
 		<view class="creator">
 			<text>创作中心</text>
 			<view class="creator-inner-container">
-				<view class="creator-item">
+				<view class="creator-item" @click="goPage('userArticle')">
 					<i class="mgc_edit_4_line"></i>
 					<u-gap height="1"></u-gap>
 					<text>稿件管理</text>
 				</view>
-				<view class="creator-item">
+				<view class="creator-item" @click="$u.toast('开发中...')">
 					<i class="mgc_firework_line"></i>
 					<u-gap height="1"></u-gap>
 					<text>精彩活动</text>
@@ -258,7 +258,7 @@
 				// 计算百分比
 				const percentage = Math.floor((this.userInfo.experience || 0 / this.userInfo.nextExp || 0) * 100);
 				// 根据百分比返回填充样式
-				return `conic-gradient(#aa96da ${percentage}%, transparent ${percentage}% 100%)`;
+				return `conic-gradient(#88d8c0 ${percentage}%, transparent ${percentage}% 100%)`;
 			},
 		},
 		created() {

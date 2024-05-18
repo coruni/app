@@ -8,14 +8,14 @@
 				<u-row>
 					<block v-for="(item,index) in users" :key="index">
 						<view
-							style="display: flex;flex-direction: column;align-items: center;border-radius: 10rpx;background-color: #aa96da0a;padding: 20rpx;margin-right: 20rpx;flex-shrink: 0;width: 160rpx;">
+							style="display: flex;flex-direction: column;align-items: center;border-radius: 10rpx;background-color: #88d8c00a;padding: 20rpx;margin-right: 20rpx;flex-shrink: 0;width: 160rpx;">
 							<view style="position: relative;">
 								<u-avatar :src="item.avatar"></u-avatar>
 							</view>
 							<view class="u-line-1">
 								<text style="margin-top: 20rpx;">{{item.screenName?item.screenName:item.name}}</text>
 							</view>
-							<u-button style="height: 60rpx;margin-top:20rpx" color="#aa96da" shape="circle"
+							<u-button style="height: 60rpx;margin-top:20rpx" color="#88d8c0" shape="circle"
 								@click="follow(item.uid,index)">关注</u-button>
 						</view>
 					</block>
@@ -23,13 +23,13 @@
 			</scroll-view>
 		</view>
 		<view style="
-		border: #aa96da 1rpx solid;
+		border: #88d8c0 1rpx solid;
 		border-radius: 20rpx;
 		padding: 30rpx;
 		margin: 30rpx;
 		margin-top: 0;
 		text-align: center;
-		color: #aa96da;
+		color: #88d8c0;
 		" v-show="!$store.state.hasLogin" @click="goLogin()">
 			<text>登录查看关注的帖子</text>
 		</view>

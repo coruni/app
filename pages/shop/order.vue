@@ -113,10 +113,10 @@
 
 				<view style="margin-top: 30rpx;">
 					<u-row justify="space-between">
-						<u-button shape="circle" plain color="#aa96da" style="margin-right: 40rpx;"
+						<u-button shape="circle" plain color="#88d8c0" style="margin-right: 40rpx;"
 							@click="isTracking(0)">保存订单</u-button>
 						<u-button shape="circle" @click="isTracking(info.isTracking?0:1)"
-							:color="info.isTracking?'#ccc':'#aa96da'">{{info.isTracking?'已发货':'发货'}}</u-button>
+							:color="info.isTracking?'#ccc':'#88d8c0'">{{info.isTracking?'已发货':'发货'}}</u-button>
 					</u-row>
 				</view>
 			</view>
@@ -128,7 +128,7 @@
 					<i class="ess mgc_headphone_line" style="font-size: 40rpx;"></i>
 				</view>
 				<view>
-					<u-button shape="circle" style="width: 200rpx;" :color="info.paid?'#ccc':'#aa96da'"
+					<u-button shape="circle" style="width: 200rpx;" :color="info.paid?'#ccc':'#88d8c0'"
 						@click="!info.paid?$refs.payMent.open():''">{{info.paid?'该订单已支付':'立即支付'}}</u-button>
 				</view>
 			</u-row>
@@ -142,7 +142,7 @@
 					<u-row>
 						<u-button plain shape="circle" style="margin-right: 10rpx;"
 							@click="$refs.payMent.close()">取消</u-button>
-						<u-button shape="circle" color="#aa96da" style="margin-left: 10rpx;"
+						<u-button shape="circle" color="#88d8c0" style="margin-left: 10rpx;"
 							@click="buy()">确定</u-button>
 					</u-row>
 				</view>
@@ -164,7 +164,7 @@
 					<u-form-item :borderBottom="false" prop="region" label="所在地区" label-width="80">
 						<u-input v-model="address && address.region" placeholder="请填写省/市/县">
 							<template slot="suffix">
-								<u-icon name="map" color="#aa96da" size="20" @click="getLocaltion()"></u-icon>
+								<u-icon name="map" color="#88d8c0" size="20" @click="getLocaltion()"></u-icon>
 							</template>
 						</u-input>
 					</u-form-item>
@@ -173,7 +173,7 @@
 							height="40"></u-textarea>
 					</u-form-item>
 				</u-form>
-				<u-button color="#aa96da" style="margin-top: 60rpx;" shape="circle"
+				<u-button color="#88d8c0" style="margin-top: 60rpx;" shape="circle"
 					@click="saveAddress();showAddress=false">保存</u-button>
 			</view>
 		</u-popup>

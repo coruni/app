@@ -21,6 +21,7 @@ const store = new Vuex.Store({
 		swiper: [],
 		homeTabs: [],
 		history: [],
+		level: [],
 	},
 	mutations: {
 		setToken(state, payload) {
@@ -56,6 +57,13 @@ const store = new Vuex.Store({
 			state.homepage = payload
 			uni.setStorage({
 				key: 'appHomepage',
+				data: payload
+			})
+		},
+		setLevel(state, payload) {
+			state.level = payload
+			uni.setStorage({
+				key: 'level',
 				data: payload
 			})
 		},

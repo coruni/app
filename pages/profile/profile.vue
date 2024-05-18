@@ -16,9 +16,9 @@
 							</u-row>
 						</u-row>
 					</view>
-					<u-button :plain="!info.isFollow" :color="!info.isFollow?'#aa96da':'#aa96da0f'" shape="circle"
+					<u-button :plain="!info.isFollow" :color="!info.isFollow?'#88d8c0':'#88d8c00f'" shape="circle"
 						customStyle="height:60rpx;width:160rpx" v-show="opacity>=1" slot="right">
-						<text :style="{color:info.isFollow?'black':'#aa96da'}">{{info.isFollow?'已关注':'关注'}}</text>
+						<text :style="{color:info.isFollow?'black':'#88d8c0'}">{{info.isFollow?'已关注':'关注'}}</text>
 					</u-button>
 				</u-navbar>
 			</template>
@@ -55,12 +55,12 @@
 						</u-row>
 					</view>
 					<view style="display: flex;justify-content: center;" v-if="info.uid != $store.state.userInfo.uid">
-						<u-button customStyle="height:60rpx;width:120rpx;margin-right:20rpx" color="#aa96da"
+						<u-button customStyle="height:60rpx;width:120rpx;margin-right:20rpx" color="#88d8c0"
 							shape="circle" @click="goPrivate(info)">私信</u-button>
-						<u-button :plain="!info.isFollow" :color="!info.isFollow?'#aa96da':'#aa96da0f'" shape="circle"
+						<u-button :plain="!info.isFollow" :color="!info.isFollow?'#88d8c0':'#88d8c00f'" shape="circle"
 							customStyle="height:60rpx;width:160rpx"
 							@click="!info.isFollow?follow(info.uid):$refs.follow.open()">
-							<text :style="{color:info.isFollow?'black':'#aa96da'}">{{info.isFollow?'已关注':'关注'}}</text>
+							<text :style="{color:info.isFollow?'black':'#88d8c0'}">{{info.isFollow?'已关注':'关注'}}</text>
 						</u-button>
 					</view>
 				</u-row>
@@ -89,14 +89,14 @@
 					<!-- #ifndef APP -->
 					<u-sticky bgColor="#fff">
 						<z-tabs ref="tabs" :list="tabs" :scrollCount="1" :current="tabsIndex" @change="tabsChange"
-							bar-height="6" bar-width="20" active-color="#aa96da" inactive-color="#999"
+							bar-height="6" bar-width="20" active-color="#88d8c0" inactive-color="#999"
 							bgColor="transparent"></z-tabs>
 					</u-sticky>
 					<!-- #endif -->
 					<!-- #ifdef APP -->
 					<u-sticky bgColor="#fff" :offsetTop="sticky">
 						<z-tabs ref="tabs" :list="tabs" :scrollCount="1" :current="tabsIndex" @change="tabsChange"
-							bar-height="6" bar-width="20" active-color="#aa96da" inactive-color="#999"
+							bar-height="6" bar-width="20" active-color="#88d8c0" inactive-color="#999"
 							bgColor="transparent"></z-tabs>
 					</u-sticky>
 					<!-- #endif -->
@@ -121,7 +121,7 @@
 					<u-row>
 						<u-button plain shape="circle" style="margin-right: 10rpx;"
 							@click="$refs.payMent.close()">取消</u-button>
-						<u-button shape="circle" color="#aa96da" style="margin-left: 10rpx;"
+						<u-button shape="circle" color="#88d8c0" style="margin-left: 10rpx;"
 							@click="follow(info.uid)">确定</u-button>
 					</u-row>
 				</view>
@@ -311,7 +311,7 @@
 	}
 
 	.u-button::before {
-		background: #aa96da;
+		background: #88d8c0;
 	}
 
 	.backCover {
