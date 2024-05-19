@@ -7,7 +7,7 @@
 					<view style="flex: 1;">
 						<uv-search placeholder="搜索你感兴趣的圈子" :showAction="false"></uv-search>
 					</view>
-					<u-row style="margin-left: 20rpx;font-size: 28rpx;">
+					<u-row style="margin-left: 20rpx;font-size: 28rpx;" @click="goCreate()">
 						<i class="mgc_add_line"></i>
 						<text>创建圈子</text>
 					</u-row>
@@ -16,30 +16,22 @@
 		</template>
 		<u-gap height="6" class="article-gap" bgColor="#f7f7f7"></u-gap>
 		<!-- 我的关注 -->
-		<view style="padding: 20rpx 30rpx;min-height: 300rpx;display: flex;flex-direction: column;">
+		<view style="padding: 20rpx 30rpx;">
 			<u-row>
 				<i class="mgc_star_2_line"></i>
 				<text style="margin-left: 10rpx;">我关注的</text>
 			</u-row>
-
 			<u-gap height="6"></u-gap>
 			<scroll-view scroll-x class="scroll" v-if="follow.length!=0">
-				<view style="display: flex;">
-					<block v-for="(item, index) in uniqueFollow1" :key="index">
+				<block v-for="(item, index) in follow" :key="index">
+					<view style="display: inline-block;">
 						<view class="category-item" @tap="goCategory(item.mid)">
 							<u-image :src="item.imgurl" width="50" height="50" radius="5"></u-image>
 							<text style="font-size: 28rpx; margin-top: 10rpx;">{{item.name}}</text>
 						</view>
-					</block>
-				</view>
-				<view style="display: flex;">
-					<block v-for="(item, index) in uniqueFollow2" :key="index">
-						<view class="category-item" @tap="goCategory(item.mid)">
-							<u-image :src="item.imgurl" width="50" height="50" radius="5"></u-image>
-							<text style="font-size: 28rpx; margin-top: 10rpx;">{{item.name}}</text>
-						</view>
-					</block>
-				</view>
+					</view>
+
+				</block>
 			</scroll-view>
 			<view v-else
 				style="flex: 1;display: flex;align-items: center;justify-content: center;color: 26rpx;color: #999;">
@@ -179,12 +171,6 @@
 			}
 		},
 		computed: {
-			uniqueFollow1() {
-				return this.follow.filter((item, index) => index % 2 === 0);
-			},
-			uniqueFollow2() {
-				return this.follow.filter((item, index) => index % 2 === 1);
-			},
 			imageStyle(item) {
 				return item => {
 					const v = uni.upx2px(750) - this.leftGap - this.rightGap - this.columnGap;
@@ -321,6 +307,11 @@
 			changeList(e) {
 				this[e.name].push(e.value);
 			},
+			goCreate() {
+				this.$Router.push({
+					name: 'createCircle'
+				})
+			}
 		}
 	}
 </script>
@@ -354,7 +345,7 @@
 	}
 
 	.scroll {
-		display: flex;
+		display: inline-block;
 		overflow-y: scroll;
 
 	}

@@ -376,6 +376,14 @@
 			},
 			"name": "userArticle",
 			"perm": "login"
+		},
+		{
+			"path": "pagesA/create/create",
+			"style": {
+				"navigationBarTitleText": "创建圈子"
+			},
+			"name": "createCircle",
+			"perm": "login"
 		}
 	],
 	"globalStyle": {

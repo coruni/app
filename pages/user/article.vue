@@ -67,7 +67,7 @@
 						page,
 						limit,
 						params: {
-							authorId: this.uid
+							authorId: this.$store.state.userInfo.uid
 						},
 						order: 'created desc',
 					}

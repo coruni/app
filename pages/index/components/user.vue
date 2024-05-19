@@ -207,6 +207,11 @@
 						name: "浏览历史",
 						icon: "mgc_time_line",
 						path: "history"
+					},
+					{
+						name: "我的头衔",
+						icon: "mgc_candy_line",
+						path: "rank"
 					}
 				],
 
