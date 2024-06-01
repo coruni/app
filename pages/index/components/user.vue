@@ -522,7 +522,20 @@
 </script>
 
 <style lang="scss">
-	@media(prefers-color-scheme:dark) {}
+	@media(prefers-color-scheme:dark) {
+
+		.creator-inner-container,
+		.other-list,
+		.u-button--info {
+			background-color: #525252 !important;
+			color: white;
+		}
+
+		.user-banner-radius {
+			background-color: #292929 !important;
+		}
+
+	}
 
 	.user-banner {
 		position: relative;
