@@ -95,6 +95,13 @@
 					<text>联系客服</text>
 				</view>
 			</u-grid-item>
+			<u-grid-item @click="goPage('addProduct')" v-if="$store.state.userInfo.group=='administrator'">
+				<view class="creator-item" style="margin-top: 30rpx;">
+					<i class="mgc_shopping_bag_3_line" style="font-size: 50rpx;"></i>
+					<u-gap height="8"></u-gap>
+					<text>发布商品</text>
+				</view>
+			</u-grid-item>
 		</u-grid>
 
 		<!-- 其他控件 -->
@@ -168,6 +175,7 @@
 						this.$nextTick(() => {
 							this.onRefresh();
 						})
+						this.getTodayEndTime()
 					}
 				},
 				immediate: true
@@ -231,7 +239,9 @@
 				theme: '#fff',
 				sticky: 0,
 				hours: 0,
-				system: {}
+				system: {},
+				cachedEndTime: 0,
+
 			}
 		},
 		computed: {
@@ -283,7 +293,7 @@
 		},
 		onShow() {
 			let date = new Date();
-			this.hours = date.getHours()
+			this.hours = date.getHours();
 		},
 
 
@@ -493,6 +503,20 @@
 
 				});
 			},
+			getTodayEndTime() {
+				const now = new Date();
+				const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+				if (uni.getStorageSync('CacheEndTime')) {
+					let time = uni.getStorageSync('CacheEndtime')
+					if (Date.now() > time) {
+						this.checkUp()
+					}
+				} else {
+					uni.setStorageSync('CacheEndTime', endOfDay.getTime())
+					this.checkUp()
+				}
+			},
+
 		}
 	}
 </script>

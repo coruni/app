@@ -214,7 +214,9 @@
 			"style": {
 				"navigationBarTitleText": "添加商品",
 				"enablePullDownRefresh": false
-			}
+			},
+			"name":"addProduct",
+			"perm":"login"
 		},
 		{
 			"path": "pages/shop/order",
@@ -384,6 +386,15 @@
 			},
 			"name": "createCircle",
 			"perm": "login"
+		},
+		{
+			"path" : "pagesA/report/report",
+			"style" : 
+			{
+				"navigationBarTitleText" : "举报"
+			},
+			"name":"report",
+			"perm":"login"
 		}
 	],
 	"globalStyle": {
