@@ -53,9 +53,7 @@
 			search: {
 				handler(e) {
 					this.key = e
-					if (!this.isLoaded) {
-						this.getData(1, 20)
-					}
+					this.getData(1, 20)
 				},
 				immediate: true,
 				deep: true
@@ -63,9 +61,7 @@
 			mid: {
 				handler(e) {
 					this.categoryId = e
-					if (!this.isLoaded) {
-						this.getData(1, 20)
-					}
+					this.getData(1, 20)
 				},
 				deep: true,
 			}

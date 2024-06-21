@@ -10,7 +10,7 @@
 		</view>
 
 		<view class="content">
-			<u-radio-group v-model="value" iconPlacement="right" shape="square" placement="column">
+			<u-radio-group v-model="value" iconPlacement="right" shape="square" placement="column" @change="con">
 				<u-radio label="虚假广告" class="radio" name="广告"></u-radio>
 				<u-radio label="色情暴力" name="色情暴力" class="radio"></u-radio>
 				<u-radio label="辱骂骚扰" name="辱骂骚扰" class="radio"></u-radio>
@@ -22,11 +22,11 @@
 		<view style="margin: 30rpx;">
 			<text>描述</text>
 		</view>
-		<u-textarea placeholder="简单描述" border="none"></u-textarea>
+		<u-textarea placeholder="简单描述" border="none" v-model="text"></u-textarea>
 		<view style="margin: 30rpx;">
-			<u-button class="submit">提交</u-button>
+			<u-button class="submit" @click="submitReport">提交</u-button>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -34,20 +34,21 @@
 	export default {
 		data() {
 			return {
-				type: 0,
+				type: 'user',
 				user_id: 0,
 				article_id: 0,
 				info: {},
 				value: '广告',
+				text: '',
 
 			};
 		},
 		onLoad(params) {
-			console.log(params)
 			this.type = params.type;
 			this.user_id = params.user_id;
 			this.article_id = params.article_id;
-			this.getUser()
+			if (this.user_id != 0 && this.type == 'user') this.getUser();
+
 		},
 		methods: {
 			getUser() {
@@ -58,6 +59,41 @@
 				}).then(res => {
 					this.info = res.data.data
 				})
+			},
+			submitReport() {
+				if (this.type == 'user' && this.user_id == 0) {
+					uni.$u.toast('请确保举报用户正确');
+					return
+				}
+				if (this.type == 'article' && this.article_id == 0) {
+					uni.$u.toast('请确保举报帖子正确');
+					return
+				}
+				if (!this.text) {
+					uni.$u.toast('请填写举报理由')
+					return;
+				}
+				let params = {
+					type: this.type,
+					reported: this.user_id,
+					article_id: this.article_id,
+					reason: `【${this.value}】` + this.text
+				}
+				this.$http.post('/report/add', {
+					...params
+				}).then(res => {
+
+					if (res.data.code == 200) {
+						setTimeout(() => {
+							this.$router.back()
+						}, 800)
+					}
+					uni.$u.toast(res.data.msg)
+				})
+
+			},
+			con(e) {
+				console.log(e);
 			}
 		}
 	}

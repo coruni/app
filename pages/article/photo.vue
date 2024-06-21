@@ -308,7 +308,7 @@
 						</block>
 					</u-row>
 					<view style="display: flex;flex-direction: column;margin-top: 50rpx;">
-						<u-row customStyle="margin-bottom:30rpx">
+						<u-row customStyle="margin-bottom:30rpx" @click="goReport(article.authorId,article.cid,'article')">
 							<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">举报</text>
 						</u-row>
@@ -1035,6 +1035,17 @@
 					uni.$u.toast(res.data.msg)
 				})
 			},
+			goReport(user_id, article_id, type) {
+				this.showMore = false
+				this.$Router.push({
+					path: '/pagesA/report/report',
+					query: {
+						user_id,
+						article_id,
+						type
+					}
+				})
+			}
 		}
 	}
 </script>

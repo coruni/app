@@ -1,6 +1,7 @@
 <template>
 	<view style="margin-top: 10rpx;">
-		<view v-if="data.opt!=null &&data.opt.hasOwnProperty('files') && data.opt.files[0].hasOwnProperty('link')" style="margin-top: 20rpx;">
+		<view v-if="data.opt!=null &&data.opt.hasOwnProperty('files') && data.opt.files[0].hasOwnProperty('link')"
+			style="margin-top: 20rpx;">
 			<view class="download-content">
 				<view style="margin-bottom: 10rpx;">
 					<i class="ess mgc_download_line" style="color: #88d8c0;font-size: 34rpx;"></i>
@@ -113,17 +114,18 @@
 		border-radius: 20rpx;
 		padding: 20rpx;
 	}
-	.tag{
-		font-size: 26rpx;
-		background:#88d8c01e;
-		color: #88d8c0;
-		padding:8rpx 14rpx;
-		border-radius: 500rpx;
-		margin-right: 10rpx;
-		margin-top: 10rpx;
-		font-size: 26rpx;
+
+	.tag {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		font-size: 26rpx;
+		background: #88d8c01e;
+		color: #88d8c0;
+		padding: 8rpx 14rpx;
+		border-radius: 8rpx;
+		margin-right: 20rpx;
+		margin-bottom: 10rpx;
+		font-size: 24rpx;
 	}
 </style>

@@ -5,7 +5,7 @@
 				<u-navbar :bgColor="$u.colorToRgba(theme, opacity)" id="navbar">
 					<view slot="left">
 						<u-row>
-							<i class="ess mgc_left_line" style="font-size: 60rpx;"
+							<i class="mgc_left_line" style="font-size: 60rpx;"
 								:style="{color: opacity >= 0.5 ? (theme === '#292929' ? '#fff' : 'black') : 'white'}"
 								@click="$Router.back()"></i>
 							<u-row customStyle="margin-left:20rpx" v-show="opacity>=1"
@@ -20,6 +20,11 @@
 						customStyle="height:60rpx;width:160rpx" v-show="opacity>=1" slot="right">
 						<text :style="{color:info.isFollow?'black':'#88d8c0'}">{{info.isFollow?'已关注':'关注'}}</text>
 					</u-button>
+					<view slot="right">
+						<i class="mgc_more_1_line" style="font-size: 60rpx;"
+							:style="{color: opacity >= 0.5 ? (theme === '#292929' ? '#fff' : 'black') : 'white'}"
+							@click="showMore= true"></i>
+					</view>
 				</u-navbar>
 			</template>
 			<image :src="info && info.userBg?info.userBg:'/static/login.jpg'" mode="aspectFill"
@@ -54,6 +59,7 @@
 							<text>{{info.introduce?info.introduce:'系统默认签名~'}}</text>
 						</u-row>
 					</view>
+
 					<view style="display: flex;justify-content: center;" v-if="info.uid != $store.state.userInfo.uid">
 						<u-button customStyle="height:60rpx;width:120rpx;margin-right:20rpx" color="#88d8c0"
 							shape="circle" @click="goPrivate(info)">私信</u-button>
@@ -65,6 +71,14 @@
 					</view>
 				</u-row>
 
+				<!-- ban Tips -->
+				<view class="banTips" v-if="info.isBan">
+					<u-row style="font-size: 28rpx;">
+						<i class="mgc_alert_line" style="font-size: 32rpx;"></i>
+						<text>该用户已被封禁</text>
+						<text style="margin-left: 10rpx;">{{$u.timeFormat(info.bantime, 'yyyy年mm月dd日 hh:MM')}}</text>
+					</u-row>
+				</view>
 				<u-row justify="space-around" customStyle="margin-top:40rpx">
 					<view class="userMate">
 						<text style="font-size: 34rpx;font-Weight: bold;">{{info &&info.articles}}</text>
@@ -128,6 +142,21 @@
 			</view>
 			<view slot="confirmButton"></view>
 		</uv-modal>
+		<u-popup :show="showMore" mode="bottom" round="10">
+			<view style="padding: 30rpx;">
+				<u-row@click="goReport(info.uid,0,'user')">
+					<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
+					<text style="margin-left:20rpx">举报</text>
+					</u-row>
+					<!-- #ifdef APP -->
+					<u-row customStyle="margin-top: 30rpx;">
+						<i class="ess mgc_share_forward_line" style="font-size: 40rpx;"></i>
+						<text style="margin-left:20rpx" @click="shareWithSystem()">通过系统分享</text>
+					</u-row>
+					<!-- #endif -->
+			</view>
+
+		</u-popup>
 	</view>
 </template>
 
@@ -173,7 +202,8 @@
 				elementHeight: 0,
 				navbarHeight: 0,
 				sticky: 0,
-				theme: '#ffffff'
+				theme: '#ffffff',
+				showMore: false,
 			};
 		},
 		onLoad(params) {
@@ -280,6 +310,17 @@
 				this.tabsIndex = e.detail.current;
 				this.$refs.tabs.unlockDx();
 			},
+			goReport(user_id, article_id, type) {
+				this.showMore = false
+				this.$Router.push({
+					path: '/pagesA/report/report',
+					query: {
+						user_id,
+						article_id,
+						type
+					}
+				})
+			}
 
 		}
 	}
@@ -328,5 +369,14 @@
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.banTips {
+		margin-top: 40rpx;
+		color: white;
+		background-color: #ed1c24a1;
+		padding: 15rpx;
+		border-radius: 10rpx;
+
 	}
 </style>

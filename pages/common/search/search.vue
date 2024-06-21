@@ -16,15 +16,17 @@
 
 				</view>
 			</u-navbar>
-			<view v-if="searchTap">
+			<view v-if="searchTap && search!=''">
 				<z-tabs ref="tabs" :list="tabs" :scrollCount="1" :current="tabsIndex" @change="tabsChange"
 					bar-height="6" bar-width="20" active-color="#88d8c0" inactive-color="#999"
 					bgColor="transparent"></z-tabs>
-
 			</view>
 		</template>
+		<view v-if="search==''" class="history">
+			<text>搜索历史</text>
+		</view>
 		<swiper style="height: 100%;" @transition="swiperTransition" @animationfinish="swiperAnimationfinish"
-			:current="tabsIndex" v-show="searchTap">
+			:current="tabsIndex" v-show="searchTap && search!=''">
 			<swiper-item>
 				<allArticle ref="allarticle" :search="search">
 				</allArticle>
@@ -99,5 +101,8 @@
 <style lang="scss">
 	page {
 		background: #f7f7f7;
+	}
+	.history{
+		padding: 30rpx;
 	}
 </style>

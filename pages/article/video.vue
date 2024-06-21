@@ -283,7 +283,7 @@
 						</block>
 					</u-row>
 					<view style="display: flex;flex-direction: column;margin-top: 50rpx;">
-						<u-row customStyle="margin-bottom:30rpx">
+						<u-row customStyle="margin-bottom:30rpx" @click="goReport(article.authorId,article.cid,'article')">
 							<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">举报</text>
 						</u-row>
@@ -367,14 +367,14 @@
 					<text style="font-size: 28rpx;">10</text>
 				</view>
 			</u-row>
-		
+
 			<view
 				style="margin-top: 100rpx;color: white;font-size: 28rpx;border-radius: 10rpx;display: flex;flex-direction: column;align-items: center;"
 				v-if="$store.state.hasLogin">
 				<text>剩余{{$store.state.appInfo.currencyName}}：{{$store.state.userInfo.assets}}</text>
 				<text>点击图标赠送</text>
 			</view>
-		
+
 		</u-popup>
 	</z-paging-swiper>
 </template>
@@ -397,7 +397,7 @@
 				articleList: [],
 				comments: [],
 				showComment: false,
-				showPublishAction:false,
+				showPublishAction: false,
 				pid: 0,
 				id: 0,
 				article: {},
@@ -1086,6 +1086,17 @@
 					uni.$u.toast(res.data.msg)
 				})
 			},
+			goReport(user_id, article_id, type) {
+				this.showMore = false
+				this.$Router.push({
+					path: '/pagesA/report/report',
+					query: {
+						user_id,
+						article_id,
+						type
+					}
+				})
+			}
 		},
 	}
 </script>
@@ -1301,11 +1312,12 @@
 		color: $c-primary;
 		transition: all 0.3s;
 	}
+
 	.reward-container {
 		display: inline-block;
 		text-align: center;
 		transition: all 0.5s ease;
-	
+
 		&-coin {
 			display: flex;
 			flex-direction: column;

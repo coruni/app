@@ -254,7 +254,7 @@
 						</block>
 					</u-row>
 					<view style="display: flex;flex-direction: column;margin-top: 50rpx;">
-						<u-row customStyle="margin-bottom:30rpx" @click="goReport(article.authorId,article.cid)">
+						<u-row customStyle="margin-bottom:30rpx" @click="goReport(article.authorId,article.cid,'article')">
 							<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">举报</text>
 						</u-row>
@@ -960,6 +960,7 @@
 </script>
 
 <style lang="scss">
+	
 	.ql-container ::v-deep .ql-blank::before {
 		min-height: 60rpx;
 		height: 60rpx;

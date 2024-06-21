@@ -51,7 +51,16 @@
 					</view>
 				</u-row>
 			</view>
+			<!-- ban Tips -->
+			<view class="banTips" v-if="userInfo.isBan">
+				<u-row style="font-size: 28rpx;">
+					<i class="mgc_alert_line" style="font-size: 32rpx;"></i>
+					<text>你已被封禁</text>
+					<text style="margin-left: 10rpx;">{{$u.timeFormat(userInfo.bantime, 'yyyy年mm月dd日 hh:MM')}}</text>
+				</u-row>
+			</view>
 		</view>
+
 		<view v-else class="user-info" @click="goLogin()">
 			<text class="user-info-nickname">登录解锁更多精彩</text>
 		</view>
@@ -106,6 +115,7 @@
 
 		<!-- 其他控件 -->
 		<view class="other-list">
+			<!-- #ifdef APP -->
 			<u-row justify="space-between">
 				<u-row>
 					<i class="mgc_align_arrow_up_line other-list-icon"></i>
@@ -113,7 +123,7 @@
 				</u-row>
 				<text class="other-list-right" style="font-size: unset;">{{system.appVersion}}</text>
 			</u-row>
-			<!-- #ifdef APP -->
+
 			<u-gap height="15"></u-gap>
 			<u-row justify="space-between" @click="getUpdate()">
 				<u-row>
@@ -122,9 +132,8 @@
 				</u-row>
 				<i class="mgc_right_line other-list-right"></i>
 			</u-row>
-			<!-- #endif -->
-
 			<u-gap height="15"></u-gap>
+			<!-- #endif -->
 			<u-row justify="space-between" @click="goPage('setting')">
 				<u-row>
 					<i class="mgc_settings_1_line other-list-icon"></i>
@@ -676,5 +685,13 @@
 			font-size: 40rpx;
 			color: #999;
 		}
+	}
+
+	.banTips {
+		margin-top: 40rpx;
+		color: white;
+		background-color: #ed1c24a1;
+		padding: 15rpx;
+		border-radius: 10rpx;
 	}
 </style>

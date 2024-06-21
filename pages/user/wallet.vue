@@ -407,7 +407,7 @@
 								plus.runtime.openURL(url)
 								// #endif
 								// #ifndef APP
-								window.open(url)
+								window.open(res.data.order)
 								// #endif
 							}
 						}).catch(err => {
