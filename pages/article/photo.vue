@@ -210,7 +210,8 @@
 			<template #bottom>
 				<u-row class="u-info comment-box" @click="showComment = true">
 					<u-icon name="edit-pen" size="20"></u-icon>
-					<text style="margin-left:10rpx;font-size: 28rpx;">说点什么</text>
+					<text style="margin-left:10rpx;font-size: 28rpx;">
+						{{article.status=='lock'?'帖子已被锁定！':'说点什么'}}</text>
 				</u-row>
 			</template>
 		</z-paging>

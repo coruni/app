@@ -114,7 +114,8 @@
 					<u-col span="6">
 						<u-row class="u-info comment-box" @click="showComment = true">
 							<u-icon name="edit-pen" size="20"></u-icon>
-							<text style="margin-left:10rpx;font-size: 28rpx;">说点什么</text>
+							<text style="margin-left:10rpx;font-size: 28rpx;">
+								{{article.status=='lock'?'帖子已被锁定！':'说点什么'}}</text>
 						</u-row>
 					</u-col>
 					<u-col span="5">
@@ -254,7 +255,8 @@
 						</block>
 					</u-row>
 					<view style="display: flex;flex-direction: column;margin-top: 50rpx;">
-						<u-row customStyle="margin-bottom:30rpx" @click="goReport(article.authorId,article.cid,'article')">
+						<u-row customStyle="margin-bottom:30rpx"
+							@click="goReport(article.authorId,article.cid,'article')">
 							<i class="ess mgc_alert_line" style="font-size: 40rpx;"></i>
 							<text style="margin-left:20rpx">举报</text>
 						</u-row>
@@ -514,7 +516,7 @@
 
 		},
 		beforeRouteLeave(to, from, next) {
-			
+
 			if (this.showComment || this.showMore || this.showSub) {
 				this.showComment = false;
 				this.showSub = false;
@@ -944,7 +946,7 @@
 					uni.$u.toast(res.data.msg)
 				})
 			},
-			goReport(user_id, article_id,type) {
+			goReport(user_id, article_id, type) {
 				this.showMore = false
 				this.$Router.push({
 					path: '/pagesA/report/report',
@@ -960,7 +962,6 @@
 </script>
 
 <style lang="scss">
-	
 	.ql-container ::v-deep .ql-blank::before {
 		min-height: 60rpx;
 		height: 60rpx;

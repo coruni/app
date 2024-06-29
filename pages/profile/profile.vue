@@ -377,6 +377,5 @@
 		background-color: #ed1c24a1;
 		padding: 15rpx;
 		border-radius: 10rpx;
-
 	}
 </style>

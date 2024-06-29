@@ -37,11 +37,11 @@
 			</u-row>
 			<view style="margin-top: 40rpx;">
 				<u-row>
-					<view>
+					<view @click="goFans(1)">
 						<text class="user-info-detail">{{userInfo.fans}}</text>
 						<text class="user-info-detail-noti">粉丝</text>
 					</view>
-					<view style="margin-left: 30rpx;">
+					<view style="margin-left: 30rpx;" @click="goFans(0)">
 						<text class="user-info-detail">{{userInfo.follows}}</text>
 						<text class="user-info-detail-noti">关注</text>
 					</view>
@@ -525,6 +525,14 @@
 					this.checkUp()
 				}
 			},
+			goFans(type) {
+				this.$Router.push({
+					path: '/pages/user/fans/fans',
+					query: {
+						type
+					}
+				})
+			}
 
 		}
 	}

@@ -36,8 +36,7 @@
 		</template>
 
 		<view style="padding: 30rpx;">
-			<text style="font-size: 32rpx;">头衔列表</text>
-			<u-grid :col="4">
+			<u-grid :col="3">
 				<u-grid-item v-for="(item,index) in ranks" :key="index" class="rank-item" @click="setRank(item.id)">
 					<view class="rank-item-content" v-if="item.type">
 						<u-image :src="item.image" height="100%" width="100%" mode="widthFix"></u-image>
@@ -75,18 +74,12 @@
 				limit: 15,
 			};
 		},
-		onLoad() {
-			this.getData()
-		},
 		methods: {
-			getData() {
-				let params = {
-					page: this.page,
-					limit: this.limit,
-				}
+			getData(page, limit) {
 				this.$http.get('/rank/list', {
 					params: {
-						params
+						page,
+						limit,
 					}
 				}).then(res => {
 					if (res.data.code == 200) {
