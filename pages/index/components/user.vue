@@ -2,7 +2,7 @@
 	<view style="overflow: scroll;">
 		<!-- 用户banner -->
 		<view class="user-banner">
-			<u-image :src="userInfo.userBg?userInfo.userBg:'/static/login.jpg'" height="440rpx" width="100%"></u-image>
+			<u-image :src="userInfo.userBg?userInfo.userBg:'/static/login.jpg'" @click="chooseBackImg()" height="440rpx" width="100%"></u-image>
 			<view class="user-banner-radius"></view>
 			<view class="user-banner-avatar_contaniner">
 				<view class="user-banner-avatar_contaniner-avatar">
